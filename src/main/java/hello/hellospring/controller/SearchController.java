@@ -51,7 +51,7 @@ public class SearchController {
         System.out.println(responseBody);
         model.addAttribute("jsonbody",responseBody);
 
-        return "search";
+        return "search"; //
     }
 
 
