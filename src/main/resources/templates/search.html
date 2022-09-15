@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Hello</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+
+<form action="send1" method="GET">
+<input type="text" name="moviename" >
+<button type="submit">검색</button>
+</form>
+<p th:text="'서버로부터 받은 데이터 ' + ${name}" ></p>
+<p th:text=" ${jsonbody}" ></p>
+
+</body>
+</html>
