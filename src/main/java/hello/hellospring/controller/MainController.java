@@ -12,8 +12,6 @@ public class MainController {
     public String main(Model model) {
         model.addAttribute("data","main");
         return "main";
-
-
     }
 
 
