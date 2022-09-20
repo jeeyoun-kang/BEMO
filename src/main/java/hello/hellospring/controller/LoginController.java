@@ -6,9 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class LoginController {
-    @RequestMapping(value="/login")
-    public String login(Model model) {
-        model.addAttribute("data", "login");
-        return "login";
+    @RequestMapping(value = "/naverLogin")
+    public String nLogin(Model model){
+        return "naverLogin";
     }
 }
