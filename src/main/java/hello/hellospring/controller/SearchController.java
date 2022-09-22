@@ -1,6 +1,10 @@
 package hello.hellospring.controller;
 
 
+
+
+
+import org.json.JSONArray;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,16 +19,23 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import org.json.JSONObject;
+
+
+
 
 @Controller
+
 public class SearchController {
 
     @GetMapping("search")
     public String ticket(Model model) {
         model.addAttribute("data", "search");
-        return "search";
+        return "search";//
     }
 
     @RequestMapping("/send1")
@@ -33,6 +44,7 @@ public class SearchController {
 
         String clientId = "TP8GiRPSMSd67q5Ioip1"; //애플리케이션 클라이언트 아이디값"
         String clientSecret = "AS7oKyBvW4"; //애플리케이션 클라이언트 시크릿값"
+
 
 
         String text = null;
@@ -50,6 +62,35 @@ public class SearchController {
 
         System.out.println(responseBody);
         model.addAttribute("jsonbody",responseBody);
+
+        // 가장 큰 JSONObject를 가져옵니다.
+        JSONObject jObject = new JSONObject(responseBody);
+        // 배열을 가져옵니다.
+        JSONArray jArray = jObject.getJSONArray("items");
+
+        List<String> jsonlisttitle = new ArrayList<String>();
+        List<String> jsonlistimage = new ArrayList<String>();
+        List<String> jsonlistresult = new ArrayList<String>();
+        // 배열의 모든 아이템을 출력합니다.
+        for (int i = 0; i < jArray.length(); i++) {
+            JSONObject obj = jArray.getJSONObject(i);
+            String title = obj.getString("title");
+            title = title.replaceAll("\\<.*?>","");
+            title = title.replaceAll("&amp;","&");
+            String image = obj.getString("image");
+//            boolean draft = obj.getBoolean("draft");
+            System.out.println("title(" + i + "): " + title);
+            System.out.println("image(" + i + "): " + image);
+//            System.out.println("draft(" + i + "): " + draft);
+            jsonlisttitle.add(title);
+
+            jsonlistimage.add(image);
+            System.out.println();
+        }
+        //System.out.println(jsonlisttitle.get(1));
+        model.addAttribute("title",jsonlisttitle.get(0));
+        model.addAttribute("image",jsonlistimage.get(0));
+
 
         return "search"; //
     }
