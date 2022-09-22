@@ -1,0 +1,97 @@
+
+
+/*로그인 팝업 관련 css*/
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.3);
+
+    /* 숨기기 */
+    z-index: -1;
+    opacity: 0;
+}
+
+.show {
+    opacity: 1;
+    z-index: 1000;
+    transition: all .5s;
+}
+
+.window {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.popup {
+    position: absolute;
+    top: 17%;
+    left: 40%;
+    background-color: white;
+    box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
+
+    /* 임시 지정 */
+    width: 400px;
+    height: 480px;
+}
+
+/*로그인 화면 관련 css*/
+.loginHeader{
+    display: flex;
+    height:10%;
+    background-color: rebeccapurple;
+    color: white;
+    font-family: "맑은 고딕";
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    padding-left:20px;
+    padding-right:20px;
+}
+#close{
+    font-size:20px;
+    color: white;
+    background-color: rebeccapurple;
+    border:0;
+    outline:0;
+}
+
+.loginMain{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin: 30px 20px 20px 10px;
+}
+#loginId{
+    width:100%;
+    height:40px;
+    border-width: thin;
+    border-color: whitesmoke #CCCCCC #CCCCCC whitesmoke;
+}
+#loginPw{
+    width:100%;
+    height:40px;
+    margin-top:20px;
+    margin-bottom: 20px;
+    border-width: thin;
+    border-color: whitesmoke #CCCCCC #CCCCCC whitesmoke;
+}
+#loginBt{
+    width:100%;
+    height:40px;
+    margin:40px 0px 40px 0px;
+    justify-content: center;
+    color: #444444;
+    background-color:lightgray;
+    border-radius: 5px;
+    border-style:none;
+}
+
+.loginFooter{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

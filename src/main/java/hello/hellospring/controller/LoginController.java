@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class LoginController {
     @RequestMapping(value = "/naverLogin")
     public String nLogin(Model model){
-        return "naverLogin";
+        return "main";
     }
 }
