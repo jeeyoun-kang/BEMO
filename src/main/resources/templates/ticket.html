@@ -3,12 +3,54 @@
 <head>
     <title>Hello</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <style>
+        .div2 {
+            border: 1px solid;
+            width: 100px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+        }
+        .div3{
+            float:left;
+            margin-right: 100px;
+        }
+        .div1{
+            float:left;
+            margin-right: 100px;
+        }
+        .div4 {
+
+            border: 1px solid;
+            width: 100px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+
+        }
+        .theater{
+            width: 100px;
+            height: 50px;
+            float:left;
+        }
+
+        .clicked {
+            color: blue;
+        }
+    </style>
 </head>
 
 <body>
-<form action="send2" method="GET">
+
+<form action="/send2" name="ex_form" method="GET" onclick="toggleBtn1()">
     <input type="date" name="startday" id="Date">
-    <button type="submit">검색</button>
+    <button type="submit" onclick="toggleBtn1()" >검색</button>
+    <!--<input type="button" name="target_name" value="">-->
 </form>
 <script>
     var now_utc = Date.now()
@@ -18,6 +60,413 @@
     document.getElementById("Date").setAttribute("min", today);
 
 </script>
-<p th:text = "${jsonbody}"/>
+
+
+<!--<script th:inline="javascript">-->
+<!--    /*<![CDATA[*/-->
+<!--    var titlelist =[[${title}]];-->
+<!--    for (var i=0; i< titlelist.length;i+=1){-->
+<!--        document.ex_form.target_name.value= titlelist[i];-->
+<!--    }-->
+<!--    /*]]>*/-->
+<!--</script>-->
+</br>
+<div class="div1">영화
+    <button class="div2" th:text="${title.get(0)}" /></br>
+    <button class="div2" th:text="${title.get(1)}" /></br>
+    <button class="div2" th:text="${title.get(2)}" /></br>
+    <button class="div2" th:text="${title.get(3)}" /></br>
+    <button class="div2" th:text="${title.get(4)}" /></br>
+    <button class="div2" th:text="${title.get(5)}" /></br>
+    <button class="div2" th:text="${title.get(6)}" /></br>
+    <button class="div2" th:text="${title.get(7)}" /></br>
+    <button class="div2" th:text="${title.get(8)}" /></br>
+    <button class="div2" th:text="${title.get(9)}" />
+</div>
+</br>
+<div class="div3">극장
+    <button class="div4" id="btn1" onclick="toggleBtn1()" >서울</br>
+        <button class="div4" id="btn2" onclick="toggleBtn2()">경기</br>
+            <button class="div4" id="btn3" onclick="toggleBtn3()" >인천</br>
+                <button class="div4" id="btn4" onclick="toggleBtn4()">대전/충청/세종</br>
+                    <button class="div4" id="btn5" onclick="toggleBtn5()">부산/대구/경상</br>
+                        <button class="div4" id="btn6" onclick="toggleBtn6()">광주/전라</br>
+                            <button class="div4" id="btn7" onclick="toggleBtn7()">강원
+
+
+</div>
+<div class="theater">
+    <p type="text" id = "theater1" style="display:none;" >
+        <button >강남</button></br>
+        <button >강남대로(씨티)</button></br>
+        <button >강동</button></br>
+        <button >군자</button></br>
+        <button >동대문</button></br>
+        <button >마곡</button></br>
+        <button >목동</button></br>
+        <button >상봉</button></br>
+        <button >상암월드컵경기장</button></br>
+        <button >성수</button></br>
+        <button >센트럴</button></br>
+        <button >송파파크하비오</button></br>
+        <button >신촌</button></br>
+        <button >이수</button></br>
+        <button >창동</button></br>
+        <button >코엑스</button></br>
+        <button >홍대</button></br>
+        <button >화곡</button></br>
+        <button >ARTNINE</button></br>
+    </p>
+
+
+    <p type="text" id = "theater2" style="display:none;">
+        <button>고양스타필드</button></br>
+        <button>광명AK플라자</button></br>
+        <button>광명소하</button></br>
+        <button>금정AK플라자</button></br>
+        <button>김포한강신도시</button></br>
+        <button>남양주</button></br>
+        <button>남양주현대아울렛 </button></br>
+        <button>스페이스원</button></br>
+        <button>동탄</button></br>
+        <button>미사강변</button></br>
+        <button>백석</button></br>
+        <button>별내</button></br>
+        <button>부천스타필드시티</button></br>
+        <button>분당</button></br>
+        <button>수원</button></br>
+        <button>수원남문</button></br>
+        <button>시흥배곧</button></br>
+        <button>안산중앙</button></br>
+        <button>안성스타필드</button></br>
+        <button>양주</button></br>
+        <button>영통</button></br>
+        <button>용인기흥</button></br>
+        <button>용인테크노밸리</button></br>
+        <button>의정부민락</button></br>
+        <button>일산</button></br>
+        <button>일산벨라시타</button></br>
+        <button>킨텍스</button></br>
+        <button>파주금촌</button></br>
+        <button>파주운정</button></br>
+        <button>파주출판도시</button></br>
+        <button>하남스타필드</button></br>
+        <button>호매실</button></br>
+    </p>
+
+    <p type="text" id = "theater3" style="display:none;" >
+        검단
+        송도
+        영종
+        인천논현
+        청라지젤
+    </p>
+    <p type="text" id = "theater4" style="display:none;" >
+        공주
+        논산
+        대전
+        대전신세계 아트앤사이언스
+        대전유성
+        대전중앙로
+        대전현대아울렛
+        세종(조치원)
+        세종나성
+        세종청사
+        오창
+        제천
+        진천
+        천안
+        청주사창
+        충주
+        홍성내포
+    </p>
+    <p type="text" id = "theater5" style="display:none;" >
+        경북도청
+        경산하양
+        구미강동
+        김천
+        남포항
+        대구신세계(동대구)
+        대구이시아
+        덕천
+        마산
+        문경
+        부산극장
+        부산대
+        북대구(칠곡)
+        사상
+        삼천포
+        양산
+        양산라피에스타
+        울산
+        정관
+        창원
+        창원내서
+        해운대(장산)
+    </p>
+    <p type="text" id = "theater6" style="display:none;" >
+        광주상무
+        광주하남
+        목포하당(포르모)
+        송천
+        순천
+        여수웅천
+        전대(광주)
+        전주혁신
+        첨단
+    </p>
+    <p type="text" id = "theater7" style="display:none;" >
+        남춘천
+        속초
+        원주
+        원주센트럴
+        춘천석사
+    </p>
+</div>
+
+<script>
+    function toggleBtn1() {
+
+        // 토글 할 버튼 선택 (btn1)
+
+        const theater1 = document.getElementById('theater1');
+        const theater2 = document.getElementById('theater2');
+        const theater3 = document.getElementById('theater3');
+        const theater4 = document.getElementById('theater4');
+        const theater5 = document.getElementById('theater5');
+        const theater6 = document.getElementById('theater6');
+        const theater7 = document.getElementById('theater7');
+
+
+        // btn1 숨기기 (display: none)
+        theater1.style.display='block';
+        theater2.style.display = 'none';
+        theater3.style.display = 'none';
+        theater4.style.display = 'none';
+        theater5.style.display = 'none';
+        theater6.style.display = 'none';
+        theater7.style.display = 'none';
+
+
+
+
+        // btn` 보이기 (display: block)
+
+
+
+
+    }
+    function toggleBtn2() {
+
+        // 토글 할 버튼 선택 (btn1)
+        const btn2= document.getElementById('btn2');
+        const theater1 = document.getElementById('theater1');
+        const theater2 = document.getElementById('theater2');
+        const theater3 = document.getElementById('theater3');
+        const theater4 = document.getElementById('theater4');
+        const theater5 = document.getElementById('theater5');
+        const theater6 = document.getElementById('theater6');
+        const theater7 = document.getElementById('theater7');
+
+
+        // btn1 숨기기 (display: none)
+        theater1.style.display='none';
+        theater2.style.display = 'block';
+        theater3.style.display = 'none';
+        theater4.style.display = 'none';
+        theater5.style.display = 'none';
+        theater6.style.display = 'none';
+        theater7.style.display = 'none';
+
+
+    }
+
+    function toggleBtn3() {
+
+        // 토글 할 버튼 선택 (btn1)
+
+        const theater1 = document.getElementById('theater1');
+        const theater2 = document.getElementById('theater2');
+        const theater3 = document.getElementById('theater3');
+        const theater4 = document.getElementById('theater4');
+        const theater5 = document.getElementById('theater5');
+        const theater6 = document.getElementById('theater6');
+        const theater7 = document.getElementById('theater7');
+
+
+        // btn1 숨기기 (display: none)
+        theater1.style.display='none';
+        theater2.style.display = 'none';
+        theater3.style.display = 'block';
+        theater4.style.display = 'none';
+        theater5.style.display = 'none';
+        theater6.style.display = 'none';
+        theater7.style.display = 'none';
+
+
+    }
+
+    function toggleBtn4() {
+
+        // 토글 할 버튼 선택 (btn1)
+
+        const theater1 = document.getElementById('theater1');
+        const theater2 = document.getElementById('theater2');
+        const theater3 = document.getElementById('theater3');
+        const theater4 = document.getElementById('theater4');
+        const theater5 = document.getElementById('theater5');
+        const theater6 = document.getElementById('theater6');
+        const theater7 = document.getElementById('theater7');
+
+
+        // btn1 숨기기 (display: none)
+        theater1.style.display='none';
+        theater2.style.display = 'none';
+        theater3.style.display = 'none';
+        theater4.style.display = 'block';
+        theater5.style.display = 'none';
+        theater6.style.display = 'none';
+        theater7.style.display = 'none';
+
+
+    }
+
+    function toggleBtn5() {
+
+        // 토글 할 버튼 선택 (btn1)
+
+        const theater1 = document.getElementById('theater1');
+        const theater2 = document.getElementById('theater2');
+        const theater3 = document.getElementById('theater3');
+        const theater4 = document.getElementById('theater4');
+        const theater5 = document.getElementById('theater5');
+        const theater6 = document.getElementById('theater6');
+        const theater7 = document.getElementById('theater7');
+
+
+        // btn1 숨기기 (display: none)
+        theater1.style.display='none';
+        theater2.style.display = 'none';
+        theater3.style.display = 'none';
+        theater4.style.display = 'none';
+        theater5.style.display = 'block';
+        theater6.style.display = 'none';
+        theater7.style.display = 'none';
+
+
+    }
+
+    function toggleBtn6() {
+
+        // 토글 할 버튼 선택 (btn1)
+
+        const theater1 = document.getElementById('theater1');
+        const theater2 = document.getElementById('theater2');
+        const theater3 = document.getElementById('theater3');
+        const theater4 = document.getElementById('theater4');
+        const theater5 = document.getElementById('theater5');
+        const theater6 = document.getElementById('theater6');
+        const theater7 = document.getElementById('theater7');
+
+
+        // btn1 숨기기 (display: none)
+        theater1.style.display='none';
+        theater2.style.display = 'none';
+        theater3.style.display = 'none';
+        theater4.style.display = 'none';
+        theater5.style.display = 'none';
+        theater6.style.display = 'block';
+        theater7.style.display = 'none';
+
+
+    }
+
+    function toggleBtn7() {
+
+        // 토글 할 버튼 선택 (btn1)
+
+        const theater1 = document.getElementById('theater1');
+        const theater2 = document.getElementById('theater2');
+        const theater3 = document.getElementById('theater3');
+        const theater4 = document.getElementById('theater4');
+        const theater5 = document.getElementById('theater5');
+        const theater6 = document.getElementById('theater6');
+        const theater7 = document.getElementById('theater7');
+
+
+        // btn1 숨기기 (display: none)
+        theater1.style.display='none';
+        theater2.style.display = 'none';
+        theater3.style.display = 'none';
+        theater4.style.display = 'none';
+        theater5.style.display = 'none';
+        theater6.style.display = 'none';
+        theater7.style.display = 'block';
+
+
+    }
+
+
+
+</script>
+<script>
+    var div2 = document.getElementsByClassName("div2");
+
+    function handleClick(event) {
+        console.log(event.target);
+        // console.log(this);
+        // 콘솔창을 보면 둘다 동일한 값이 나온다
+
+        console.log(event.target.classList);
+
+        if (event.target.classList[1] === "clicked") {
+            event.target.classList.remove("clicked");
+        } else {
+            for (var i = 0; i < div2.length; i++) {
+                div2[i].classList.remove("clicked");
+            }
+
+            event.target.classList.add("clicked");
+        }
+    }
+
+    function init() {
+        for (var i = 0; i < div2.length; i++) {
+            div2[i].addEventListener("click", handleClick);
+        }
+    }
+
+    init();
+</script>
+<script>
+    var div4 = document.getElementsByClassName("div4");
+
+    function handleClick(event) {
+        console.log(event.target);
+        // console.log(this);
+        // 콘솔창을 보면 둘다 동일한 값이 나온다
+
+        console.log(event.target.classList);
+
+        if (event.target.classList[1] === "clicked") {
+            event.target.classList.remove("clicked");
+        } else {
+            for (var i = 0; i < div4.length; i++) {
+                div4[i].classList.remove("clicked");
+            }
+
+            event.target.classList.add("clicked");
+        }
+    }
+
+    function init() {
+        for (var i = 0; i < div4.length; i++) {
+            div4[i].addEventListener("click", handleClick);
+        }
+    }
+
+    init();
+</script>
+
 </body>
 </html>

@@ -1,6 +1,7 @@
 package hello.hellospring.controller;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +21,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import java.util.stream.IntStream;
 
 
 @Controller
@@ -29,12 +30,12 @@ public class TicketController {
     @GetMapping("ticket")
     public String ticket(Model model) {
         model.addAttribute("data", "ticket");
-        return "ticket";
+        return "ticketmain";
     }
 
     @RequestMapping("/send2")
     public String send2(String startday,Model model){
-
+        //model.addAttribute("day",startday);
 
         String clientId = "TP8GiRPSMSd67q5Ioip1"; //애플리케이션 클라이언트 아이디값"
         String clientSecret = "AS7oKyBvW4"; //애플리케이션 클라이언트 시크릿값"
@@ -43,15 +44,16 @@ public class TicketController {
 
         String text = null;
 
+
         text = URLEncoder.encode(startday, StandardCharsets.UTF_8);
         text = text.replaceAll("-","");
         int to = Integer.parseInt(text);
         to = to -7;
         String textresult = Integer.toString(to);
-        System.out.println(text); //
 
 
-        String apiURL = "http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt=" + textresult;    // json 결과
+
+        String apiURL = "https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt=" + textresult;    // json 결과
         //String apiURL = "https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchWeeklyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt=" + text;
 
 
@@ -63,33 +65,25 @@ public class TicketController {
         System.out.println(responseBody);
         model.addAttribute("jsonbody",responseBody);
 
-        // 가장 큰 JSONObject를 가져옵니다.
-//        JSONObject jObject = new JSONObject(responseBody);
-//        // 배열을 가져옵니다.
-//        JSONArray jArray = jObject.getJSONArray("items");
-//
-//        List<String> jsonlisttitle = new ArrayList<String>();
-//        List<String> jsonlistimage = new ArrayList<String>();
-//        List<String> jsonlistresult = new ArrayList<String>();
-//        // 배열의 모든 아이템을 출력합니다.
-//        for (int i = 0; i < jArray.length(); i++) {
-//            JSONObject obj = jArray.getJSONObject(i);
-//            String title = obj.getString("title");
-//            title = title.replaceAll("\\<.*?>","");
-//            title = title.replaceAll("&amp;","&");
-//            String image = obj.getString("image");
-////            boolean draft = obj.getBoolean("draft");
-//            System.out.println("title(" + i + "): " + title);
-//            System.out.println("image(" + i + "): " + image);
-////            System.out.println("draft(" + i + "): " + draft);
-//            jsonlisttitle.add(title);
-//
-//            jsonlistimage.add(image);
-//            System.out.println();
-//        }
-//        //System.out.println(jsonlisttitle.get(1));
-//        model.addAttribute("title",jsonlisttitle);
-//        model.addAttribute("image",jsonlistimage);
+        List<String> jsonlisttitle = new ArrayList<String>();
+        //가장 큰 JSONObject를 가져옵니다.
+        JSONObject jObject = new JSONObject(responseBody);
+
+        JSONObject batters = jObject.getJSONObject("boxOfficeResult");
+        JSONArray batter = batters.getJSONArray("dailyBoxOfficeList");
+
+        for(int i=0; i < batter.length();i++){
+            JSONObject obj = batter.getJSONObject(i);
+            String title = obj.getString("movieNm");
+            System.out.println("title(" + i + "): " + title);
+            jsonlisttitle.add(title);
+        }
+
+
+
+
+        model.addAttribute("title",jsonlisttitle);
+
 
 
         return "ticket"; //
