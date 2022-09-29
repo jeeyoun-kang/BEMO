@@ -40,7 +40,7 @@ public class SearchController {
 
     @RequestMapping("/send1")
     public String send1(String moviename,Model model){
-        model.addAttribute("name",moviename);
+        //model.addAttribute("name",moviename);
 
         String clientId = "******"; //애플리케이션 클라이언트 아이디값"
         String clientSecret = "******"; //애플리케이션 클라이언트 시크릿값"
