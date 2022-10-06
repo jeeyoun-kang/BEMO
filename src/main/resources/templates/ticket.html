@@ -53,11 +53,21 @@
     <!--<input type="button" name="target_name" value="">-->
 </form>
 <script>
+    function AddDays(date) {
+        // date는 문자열로 받는다 ex, '2020-10-15'
+        var result = new Date(date);
+        result.setDate(result.getDate() + 7);
+        return result;
+    }
+
     var now_utc = Date.now()
+
 
     var timeOff = new Date().getTimezoneOffset()*60000;
     var today = new Date(now_utc-timeOff).toISOString().split("T")[0];
+
     document.getElementById("Date").setAttribute("min", today);
+    //document.getElementById("Date").setAttribute("max", seven);
 
 </script>
 
