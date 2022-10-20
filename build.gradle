@@ -17,9 +17,17 @@ dependencies {
 	implementation 'org.json:json:20200518'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	// db 종속성
+	// db dependencies
 	implementation 'mysql:mysql-connector-java'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	// lombok dependencies
+	annotationProcessor 'org.projectlombok:lombok'
+	testAnnotationProcessor 'org.projectlombok:lombok'
+	compileOnly 'org.projectlombok:lombok'
+
+	// security dependencies
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
