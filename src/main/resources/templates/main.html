@@ -1,16 +1,31 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Hello</title>
+    <title>JAVA MOVIE PROJECT</title>
     <link href="css/main.css" rel="stylesheet" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
+<style>
+    p{
+        float: left;
+    }
+</style>
 <body>
-<p th:text="'메인페이지 ' + ${data}" ></p>
+<h3>박스오피스</h3>
+<div class="left">
 
+<img th:src = "${boximage1}"/>
+
+<img th:src = "${boximage2}"/>
+
+<img th:src = "${boximage3}"/>
+
+<img th:src = "${boximage4}"/>
+</div>
 <button type="submit" onclick="location.href='./ticket'">티켓페이지</button>
 <button type="submit" onclick="location.href='./search'">검색</button>
-
+<button type="submit" onclick="location.href='./review'">리뷰</button>
+<button type="submit" onclick="location.href='./suggest'">추천</button>
 <button id="show">로그인</button>
 <div class="background">
     <div class="window">
