@@ -15,19 +15,20 @@
 </form>
 <script >
 
-    function AddDays(date) {
-        // date는 문자열로 받는다 ex, '2020-10-15'
-        var result = new Date(date);
-        result.setDate(result.getDate() + 7);
-        return result;
-    }
+
 
     var now_utc = Date.now()
 
 
     var timeOff = new Date().getTimezoneOffset()*60000;
     var today = new Date(now_utc-timeOff).toISOString().split("T")[0];
-    var seven = AddDays(today);
+    var arr1 = today.split('-');
+    var dat1 = new Date(arr1[0],arr1[1],arr1[2]);
+    var seven = dat1.getFullYear()+"-"+dat1.getMonth()+"-"+(dat1.getDate()+7);
+
+
+
+
     document.getElementById("Date").setAttribute("min", today);
     document.getElementById("Date").setAttribute("max", seven);
 </script>
