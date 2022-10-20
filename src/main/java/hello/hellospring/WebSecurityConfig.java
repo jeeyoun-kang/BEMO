@@ -1,7 +1,8 @@
 package hello.hellospring;
 
-import hello.hellospring.service.MemberService;
+import hello.hellospring.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -19,8 +20,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity // spring security 활성화
 @Configuration
 public class WebSecurityConfig {
-    private final MemberService memberService; // 3
-
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
         return (web) -> web.ignoring().antMatchers("/css/**", "/js/**", "/img/**");

@@ -14,7 +14,6 @@ import java.util.Set;
 @Getter
 @ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@EqualsAndHashCode(of = "user_no")
 @Table(name="user")
 @Entity
 public class User implements UserDetails {
