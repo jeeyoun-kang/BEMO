@@ -25,39 +25,39 @@ public class Authentication {
     @Column(name="cell_phone", nullable = false)
     private String cell_phone;
 
-    @Column(name = "email", nullable = false)
-    private String email;
+//    @Column(name = "email", nullable = false)
+//    private String email;
 
     @Column(name="birthday")
     private String birthday;
 
-    @Column(name="sex")
-    private int sex;
 
-    @Column(name="nation")
-    private int nation;
+//    @Column(name="sex")
+//    private int sex;
+//
+//    @Column(name="nation")
+//    private int nation;
 
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name="auth_date")
     private Date auth_date;
 
-    @OneToOne(mappedBy="authentication")
+    @OneToOne(mappedBy="auth")
     private User user;
 
+
+
     @Builder
-    public Authentication(String cell_phone, String email){
+    public Authentication(String cell_phone){
         Assert.notNull(cell_phone, "cell_phone must be not null");
-        Assert.notNull(email, "email must be not null");
         this.cell_phone=cell_phone;
-        this.email=email;
+
     }
 
-    public Authentication update(String cell_phone, String email){
+    public Authentication update(String cell_phone){
         Assert.notNull(cell_phone, "cell_phone must be not null");
-        Assert.notNull(email, "email must be not null");
         this.cell_phone=cell_phone;
-        this.email=email;
         return this;
     }
 
