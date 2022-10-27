@@ -97,3 +97,79 @@
     justify-content: center;
     align-items: center;
 }
+
+h4{
+    padding : 50px 50px 50px 50px;
+    font-size: 15px;
+    color:white;
+
+}
+/*이미지크기 동일화*/
+img {
+    width:200px;
+    height:200px;
+}
+.jb-a {
+    float:left;
+    width: 200px;
+    position: relative
+}
+.jb-c1 {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    opacity: 0;
+    transition: opacity 0.5s linear;
+}
+.jb-a:hover .jb-c1 {
+    opacity: 1;
+
+}
+.jb-c2 {
+
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    opacity: 0;
+    transition: opacity 0.5s linear;
+}
+.jb-a:hover .jb-c2 {
+    opacity: 1;
+
+}
+.jb-c3 {
+
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    opacity: 0;
+    transition: opacity 0.5s linear;
+}
+.jb-a:hover .jb-c3 {
+    opacity: 1;
+
+}
+.jb-c4 {
+
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    opacity: 0;
+    transition: opacity 0.5s linear;
+}
+.jb-a:hover .jb-c4 {
+    opacity: 1;
+
+}
+.jb-a:hover .jb-b1{
+    filter: brightness(70%);
+}
+.jb-a:hover .jb-b2{
+    filter: brightness(70%);
+}
+.jb-a:hover .jb-b3{
+    filter: brightness(70%);
+}
+.jb-a:hover .jb-b4{
+    filter: brightness(70%);
+}
