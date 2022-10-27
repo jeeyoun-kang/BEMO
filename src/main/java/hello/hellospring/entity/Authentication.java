@@ -10,13 +10,14 @@ import java.util.Date;
 @Getter
 @ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@EqualsAndHashCode(of = "authentication_id")
+@EqualsAndHashCode(of = "auth_id")
 @Table(name="authentication")
 @Entity
 public class Authentication {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long authentication_id;
+    @Column(name = "auth_id")
+    private long auth_id;
 
     @Column(name = "auth")
     private String auth;
@@ -40,6 +41,9 @@ public class Authentication {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name="auth_date")
     private Date auth_date;
+
+    @OneToOne(mappedBy="authentication")
+    private User user;
 
     @Builder
     public Authentication(String cell_phone, String email){

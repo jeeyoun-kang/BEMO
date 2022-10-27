@@ -28,8 +28,8 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
-                .authorizeRequests() // 6
-                .antMatchers("/login", "/signup", "/", "/review", "/search", "/ticket", "/ticketmain", "/suggest", "/send1", "/send2").permitAll()
+                .authorizeRequests()
+                .antMatchers("/login", "/signup", "/", "/review", "/search", "/ticket", "/ticketmain", "/suggest", "/send1", "/send2").permitAll() // 누구나 접근 허용
                 .antMatchers("/user").hasRole("USER") // USER, ADMIN만 접근 가능
                 .antMatchers("/admin").hasRole("ADMIN") // ADMIN만 접근 가능
                 .anyRequest().authenticated() // 나머지 요청들은 권한의 종류에 상관 없이 권한이 있어야 접근 가능
@@ -38,7 +38,7 @@ public class WebSecurityConfig {
                 .addHeaderWriter(new XFrameOptionsHeaderWriter(
                         XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN))
                 .and()
-                .formLogin() // 7
+                .formLogin()
                 .loginPage("/") // 로그인 페이지 링크
                 .defaultSuccessUrl("/") // 로그인 성공 후 리다이렉트 주소
                 .and()

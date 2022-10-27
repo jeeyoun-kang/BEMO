@@ -4,7 +4,6 @@ import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.util.Assert;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -20,37 +19,41 @@ public class User implements UserDetails {
     @Id
     @Column(name = "user_no")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long userno;
+    private long userNo;
 
-    @Column(name = "user_name", nullable = false)
-    private String username;
+    @Column(name = "userName", nullable = false)
+    private String userName;
 
-    @Column(name="login_type", nullable = false)
-    private int logintype;
+    @Column(name="loginType", nullable = false)
+    private int loginType;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinTable(name = "authentication", joinColumns = @JoinColumn(name = "user_no"),
-            inverseJoinColumns = @JoinColumn(name = "auth"))
+    @OneToOne
+    @JoinColumn(name="auth_id")
     private Authentication auth;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinTable(name = "password", joinColumns = @JoinColumn(name = "user_no"),
-            inverseJoinColumns = @JoinColumn(name = "password"))
+    @OneToOne
+    @JoinColumn(name="pass_id")
     private Password password;
 
+    @OneToOne
+    @JoinColumn(name="social_id")
+    private SocialLogin social;
 
     @Builder
-    public User(String user_name,  String password){
-        this.password.updatePassword(password);
-        this.username=user_name;
+    public User(String userName, int loginType, Authentication auth, Password password, SocialLogin social){
+        this.userName = userName;
+        this.loginType = loginType;
+        this.auth = auth;
+        this.password = password;
+        this.social = social;
     }
 
-    public User update(String user_name, int login_type){
-        Assert.notNull(user_name, "user_name must be not null");
-        Assert.notNull(login_type, "login_type must be not null");
-        this.username=user_name;
-        this.logintype=login_type;
-        return this;
+    public void update(String userName, int loginType, Authentication auth, Password password, SocialLogin social){
+       this.userName = userName;
+       this.loginType = loginType;
+       this.auth = auth;
+       this.password = password;
+       this.social = social;
     }
 
     @Override
@@ -67,7 +70,7 @@ public class User implements UserDetails {
     }
     @Override
     public String getUsername() {
-        return username;
+        return userName;
     }
     @Override
     public boolean isAccountNonExpired() {

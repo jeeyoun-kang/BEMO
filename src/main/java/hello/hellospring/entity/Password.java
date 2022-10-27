@@ -9,13 +9,14 @@ import java.util.Date;
 @Getter
 @ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@EqualsAndHashCode(of = "password_id")
+@EqualsAndHashCode(of = "pass_id")
 @Table(name="password")
 @Entity
 public class Password {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long password_id;
+    @Column(name = "pass_id")
+    private long pass_id;
 
     @Column(name = "salt")
     private String salt;
@@ -27,6 +28,9 @@ public class Password {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name="update_date")
     private Date update_date;
+
+    @OneToOne(mappedBy="password")
+    private User user;
 
     @Builder
     public Password(String password){

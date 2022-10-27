@@ -5,23 +5,7 @@
     <link href="css/main.css" rel="stylesheet" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
-<style>
-    p{
-        float: left;
-    }
-</style>
 <body>
-<h3>박스오피스</h3>
-<div class="left">
-
-<img th:src = "${boximage1}"/>
-
-<img th:src = "${boximage2}"/>
-
-<img th:src = "${boximage3}"/>
-
-<img th:src = "${boximage4}"/>
-</div>
 <button type="submit" onclick="location.href='./ticket'">티켓페이지</button>
 <button type="submit" onclick="location.href='./search'">검색</button>
 <button type="submit" onclick="location.href='./review'">리뷰</button>
@@ -43,8 +27,31 @@
         </div>
     </div>
 </div>
+
 <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js"
         charSet="utf-8"></script>
 <script type="text/javascript" src="js/main.js"></script>
+
+<h3>박스오피스</h3>
+
+<div class="jb-a">
+    <img class="jb-b1" th:src = "${boximage1}"/>
+    <h4 class="jb-c1" th:text = "${boxtitle1}"/>
+
+</div>
+<div class="jb-a">
+    <img class="jb-b2" th:src = "${boximage2}"/>
+    <h4 class="jb-c2" th:text = "${boxtitle2}"/>
+
+</div>
+<div class="jb-a">
+    <img class="jb-b3" th:src = "${boximage3}"/>
+    <h4 class="jb-c3" th:text = "${boxtitle3}"/>
+
+</div>
+<div class="jb-a">
+    <img class="jb-b4" th:src = "${boximage4}"/>
+    <h4 class="jb-c4" th:text = "${boxtitle4}"/>
+</div>
 </body>
 </html>
