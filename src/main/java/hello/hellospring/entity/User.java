@@ -31,6 +31,7 @@ public class User implements UserDetails {
     @JoinColumn(name="auth_id")
     private Authentication auth;
 
+
     @OneToOne
     @JoinColumn(name="pass_id")
     private Password password;

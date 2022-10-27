@@ -31,7 +31,7 @@ public class SocialLogin {
     @Column(name="updateDate")
     private Date updateDate;
 
-    @OneToOne(mappedBy="social_login")
+    @OneToOne(mappedBy="social")
     private User user;
 
     @Builder
