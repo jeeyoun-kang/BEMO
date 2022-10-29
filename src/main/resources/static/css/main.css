@@ -38,7 +38,7 @@
 }
 
 /*로그인 화면 관련 css*/
-.loginHeader{
+.popup .loginHeader{
     display: flex;
     height:10%;
     background-color: rebeccapurple;
@@ -51,7 +51,7 @@
     padding-right:20px;
 }
 
-#close{
+.popup #close{
     font-size:20px;
     color: white;
     background-color: rebeccapurple;
@@ -59,19 +59,19 @@
     outline:0;
 }
 
-.loginMain{
+.popup .loginMain{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     margin: 30px 20px 20px 10px;
 }
-#loginId{
+.popup #loginId{
     width:100%;
     height:40px;
     border-width: thin;
     border-color: whitesmoke #CCCCCC #CCCCCC whitesmoke;
 }
-#loginPw{
+.popup #loginPw{
     width:100%;
     height:40px;
     margin-top:20px;
@@ -79,7 +79,7 @@
     border-width: thin;
     border-color: whitesmoke #CCCCCC #CCCCCC whitesmoke;
 }
-#loginBt{
+.popup #loginBt{
     width:100%;
     height:40px;
     margin:40px 0px 40px 0px;
@@ -90,77 +90,77 @@
     border-style:none;
 }
 
-.loginFooter{
+.popup .loginFooter{
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 
-h4{
+.movies h4{
     padding : 50px 50px 50px 50px;
     font-size: 15px;
     color:white;
 }
 /*이미지크기 동일화*/
-img {
+.movies img {
     width:200px;
     height:200px;
 }
-.jb-a {
+.movies .jb-a {
     float:left;
     width: 200px;
     position: relative
 }
-.jb-c1 {
+.movies .jb-c1 {
     position: absolute;
     top: 0px;
     left: 0px;
     opacity: 0;
     transition: opacity 0.5s linear;
 }
-.jb-a:hover .jb-c1 {
+.movies .jb-a:hover .jb-c1 {
     opacity: 1;
 }
-.jb-c2 {
+.movies .jb-c2 {
     position: absolute;
     top: 0px;
     left: 0px;
     opacity: 0;
     transition: opacity 0.5s linear;
 }
-.jb-a:hover .jb-c2 {
+.movies .jb-a:hover .jb-c2 {
     opacity: 1;
 }
-.jb-c3 {
+.movies .jb-c3 {
     position: absolute;
     top: 0px;
     left: 0px;
     opacity: 0;
     transition: opacity 0.5s linear;
 }
-.jb-a:hover .jb-c3 {
+.movies .jb-a:hover .jb-c3 {
     opacity: 1;
 }
-.jb-c4 {
+.movies .jb-c4 {
     position: absolute;
     top: 0px;
     left: 0px;
     opacity: 0;
     transition: opacity 0.5s linear;
 }
-.jb-a:hover .jb-c4 {
+.movies .jb-a:hover .jb-c4 {
     opacity: 1;
 }
-.jb-a:hover .jb-b1{
+.movies .jb-a:hover .jb-b1{
     filter: brightness(70%);
 }
-.jb-a:hover .jb-b2{
+.movies .jb-a:hover .jb-b2{
     filter: brightness(70%);
 }
-.jb-a:hover .jb-b3{
+.movies .jb-a:hover .jb-b3{
     filter: brightness(70%);
 }
-.jb-a:hover .jb-b4{
+.movies .jb-a:hover .jb-b4{
     filter: brightness(70%);
 }

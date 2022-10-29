@@ -34,10 +34,10 @@ public class User implements UserDetails {
 
     @OneToOne
     @JoinColumn(name="pass_id")
-    private Password password;
+    private Password pass;
 
     @OneToOne
-    @JoinColumn(name="social_id")
+    @JoinColumn(name="social_login_id")
     private SocialLogin social;
 
     @Builder
@@ -45,7 +45,7 @@ public class User implements UserDetails {
         this.userName = userName;
         this.loginType = loginType;
         this.auth = auth;
-        this.password = password;
+        this.pass = password;
         this.social = social;
     }
 
@@ -53,7 +53,7 @@ public class User implements UserDetails {
        this.userName = userName;
        this.loginType = loginType;
        this.auth = auth;
-       this.password = password;
+       this.pass = password;
        this.social = social;
     }
 
@@ -67,7 +67,7 @@ public class User implements UserDetails {
     }
     @Override
     public String getPassword() {
-        return password.getPassword();
+        return pass.getPassword();
     }
     @Override
     public String getUsername() {
