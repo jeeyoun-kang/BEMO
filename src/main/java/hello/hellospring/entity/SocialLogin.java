@@ -15,7 +15,7 @@ import java.util.Date;
 public class SocialLogin {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long socialLogin_id;
+    private long social_login_id;
 
     @Column(name = "socialCode")
     private int socialCode;

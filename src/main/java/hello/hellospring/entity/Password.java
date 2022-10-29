@@ -29,7 +29,7 @@ public class Password {
     @Column(name="update_date")
     private Date update_date;
 
-    @OneToOne(mappedBy="password")
+    @OneToOne(mappedBy="pass")
     private User user;
 
     @Builder
