@@ -38,6 +38,12 @@ public class SearchController {
         return "search";//
     }
 
+    @GetMapping("searchfirst")
+    public String ticketfirst(Model model) {
+        model.addAttribute("data", "search");
+        return "searchfirst";//
+    }
+
     @RequestMapping("/send1")
     public String send1(String moviename,Model model){
         //model.addAttribute("name",moviename);
@@ -88,8 +94,15 @@ public class SearchController {
             System.out.println();
         }
         //System.out.println(jsonlisttitle.get(1));
-        model.addAttribute("title",jsonlisttitle.get(0));
-        model.addAttribute("image",jsonlistimage.get(0));
+        model.addAttribute("title1",jsonlisttitle.get(0));
+        model.addAttribute("image1",jsonlistimage.get(0));
+        model.addAttribute("title2",jsonlisttitle.get(1));
+        model.addAttribute("image2",jsonlistimage.get(1));
+        model.addAttribute("title3",jsonlisttitle.get(2));
+        model.addAttribute("image3",jsonlistimage.get(2));
+        model.addAttribute("title4",jsonlisttitle.get(3));
+        model.addAttribute("image4",jsonlistimage.get(3));
+
 
 
         return "search"; //
