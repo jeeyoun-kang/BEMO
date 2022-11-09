@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>JAVA MOVIE PROJECT</title>
+    <link href="/css/main.css" rel="stylesheet" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
@@ -11,8 +12,28 @@
     <input type="text" name="moviename" >
     <button type="submit">검색</button>
 </form>
-<p th:text = "${title}"/>
-<img th:src = "${image}"/>
+<div>
+    <div class="movies">
+        <div class="jb-a">
+            <img class="jb-b1" th:src = "${image1}"/>
+            <h4 class="jb-c1" th:text = "${title1}"/>
+        </div>
+        <div class="jb-a">
+            <img class="jb-b2" th:src = "${image2}"/>
+            <h4 class="jb-c2" th:text = "${title2}"/>
+        </div>
+        <div class="jb-a">
+            <img class="jb-b3" th:src = "${image3}"/>
+            <h4 class="jb-c3" th:text = "${title3}"/>
+        </div>
+        <div class="jb-a">
+            <img class="jb-b4" th:src = "${image4}"/>
+            <h4 class="jb-c4" th:text = "${title4}"/>
+        </div>
+
+    </div>
+</div>
+
 
 
 
