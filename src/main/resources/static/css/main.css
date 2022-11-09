@@ -96,23 +96,42 @@
     align-items: center;
 }
 
+.btn{ /* 메인페이지 버튼 관련 */
+    text-align: center;
+}
+.movies{
+    padding-left: 25%;
+    padding-right: 25%;
+}
+
+h3{
+    width: 100px;
+    margin: 0 auto;
+}
+
 
 .movies h4{
-    padding : 50px 50px 50px 50px;
-    font-size: 15px;
+    padding : 50px 10px 50px 10px;
+    font-size: 20px;
+    text-align: center;
     color:white;
 }
 /*이미지크기 동일화*/
 .movies img {
+
     width:200px;
     height:200px;
 }
 .movies .jb-a {
-    float:left;
+    text-align: center;
+    margin: 5px 5px 5px 5px;
     width: 200px;
+    float:left;
+
     position: relative
 }
 .movies .jb-c1 {
+
     position: absolute;
     top: 0px;
     left: 0px;
@@ -120,6 +139,7 @@
     transition: opacity 0.5s linear;
 }
 .movies .jb-a:hover .jb-c1 {
+
     opacity: 1;
 }
 .movies .jb-c2 {
@@ -153,6 +173,7 @@
     opacity: 1;
 }
 .movies .jb-a:hover .jb-b1{
+
     filter: brightness(70%);
 }
 .movies .jb-a:hover .jb-b2{
