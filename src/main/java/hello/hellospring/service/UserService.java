@@ -1,6 +1,7 @@
 package hello.hellospring.service;
 
 import hello.hellospring.dto.UserDto;
+import hello.hellospring.entity.Authentication;
 import hello.hellospring.entity.User;
 import hello.hellospring.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,4 +53,7 @@ public class UserService implements UserDetailsService {
         user.update(userDto.getUserName(), userDto.getLoginType(), userDto.getAuth(), userDto.getPassword(), userDto.getSocialLogin());
         return userName;
     }
+    
+    //회원가입
+
 }
