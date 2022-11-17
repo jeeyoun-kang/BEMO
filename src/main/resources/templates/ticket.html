@@ -52,6 +52,7 @@
     <button type="submit" onclick="toggleBtn1()" >검색</button>
     <!--<input type="button" name="target_name" value="">-->
 </form>
+<div id="result"></div>
 <script>
     function numFormat(variable)
     {
@@ -94,46 +95,58 @@
     document.getElementById("Date").setAttribute("max", seven);
 
 
+    function checkRow(event) {
+
+        alert(event);
+    }
+
+    function get_ticket() {
+
+        const genderNodeList
+            = document.getElementsByName('ticket');
+
+        const gettheater
+            = document.getElementsByName('theater');
+        genderNodeList.forEach((node) => {
+            if(node.checked)  {
+                document.getElementById('result').innerText
+                    = node.value;
+            }
+        })
+    }
+
+
 </script>
-
-
-<!--<script th:inline="javascript">-->
-<!--    /*<![CDATA[*/-->
-<!--    var titlelist =[[${title}]];-->
-<!--    for (var i=0; i< titlelist.length;i+=1){-->
-<!--        document.ex_form.target_name.value= titlelist[i];-->
-<!--    }-->
-<!--    /*]]>*/-->
-<!--</script>-->
+<button onclick="get_ticket()">확인</button>
 </br>
+<div class ="ticket">
 <div class="div1">영화
-    <button class="div2" th:text="${title.get(0)}" /></br>
-    <button class="div2" th:text="${title.get(1)}" /></br>
-    <button class="div2" th:text="${title.get(2)}" /></br>
-    <button class="div2" th:text="${title.get(3)}" /></br>
-    <button class="div2" th:text="${title.get(4)}" /></br>
-    <button class="div2" th:text="${title.get(5)}" /></br>
-    <button class="div2" th:text="${title.get(6)}" /></br>
-    <button class="div2" th:text="${title.get(7)}" /></br>
-    <button class="div2" th:text="${title.get(8)}" /></br>
-    <button class="div2" th:text="${title.get(9)}" />
+    <input type="radio" name='ticket'  class="div2" th:value='${title.get(0)}' th:text="${title.get(0)}" /></br>
+    <input type="radio" name='ticket' class="div2" th:value='${title.get(1)}' th:text="${title.get(1)}" /></br>
+    <input type="radio" name='ticket' class="div2" th:value='${title.get(2)}' th:text="${title.get(2)}" /></br>
+    <input type="radio" name='ticket' class="div2" th:value='${title.get(3)}' th:text="${title.get(3)}" /></br>
+    <input type="radio" name='ticket' class="div2" th:value='${title.get(4)}' th:text="${title.get(4)}" /></br>
+    <input type="radio" name='ticket' class="div2" th:value='${title.get(5)}' th:text="${title.get(5)}" /></br>
+    <input type="radio" name='ticket' class="div2" th:value='${title.get(6)}' th:text="${title.get(6)}" /></br>
+    <input type="radio" name='ticket' class="div2" th:value='${title.get(7)}' th:text="${title.get(7)}" /></br>
+    <input type="radio" name='ticket' class="div2" th:value='${title.get(8)}' th:text="${title.get(8)}" /></br>
+    <input type="radio" name='ticket' class="div2" th:value='${title.get(9)}' th:text="${title.get(9)}" />
 </div>
 </br>
 <div class="div3">극장
-    <button class="div4" id="btn1" onclick="toggleBtn1()" >서울</br>
-        <button class="div4" id="btn2" onclick="toggleBtn2()">경기</br>
-            <button class="div4" id="btn3" onclick="toggleBtn3()" >인천</br>
-                <button class="div4" id="btn4" onclick="toggleBtn4()">대전/충청/세종</br>
-                    <button class="div4" id="btn5" onclick="toggleBtn5()">부산/대구/경상</br>
-                        <button class="div4" id="btn6" onclick="toggleBtn6()">광주/전라</br>
-                            <button class="div4" id="btn7" onclick="toggleBtn7()">강원
+    <input type="radio" class="div4" name="theater" value="서울" id="btn1" onclick="toggleBtn1()" >서울</br>
+        <input type="radio" class="div4" name="theater" value="경기" id="btn2" onclick="toggleBtn2()">경기</br>
+            <input type="radio" class="div4" name="theater" value="인천" id="btn3" onclick="toggleBtn3()" >인천</br>
+                <input type="radio" class="div4" name="theater" value="대전/충청/세종" id="btn4" onclick="toggleBtn4()">대전/충청/세종</br>
+                    <input type="radio" class="div4" name="theater" value="부산/대구/경상" id="btn5" onclick="toggleBtn5()">부산/대구/경상</br>
+                        <input type="radio" class="div4" name="theater" value="광주/전라" id="btn6" onclick="toggleBtn6()">광주/전라</br>
+                            <input type="radio" class="div4" name="theater" value="강원" id="btn7" onclick="toggleBtn7()">강원
 
 
 </div>
 <div class="theater">
     <p type="text" id = "theater1" style="display:none;" >
-        <button >강남</button></br>
-        <button >강남대로(씨티)</button></br>
+        <button>강남</button></br>
         <button >강동</button></br>
         <button >군자</button></br>
         <button >동대문</button></br>
@@ -190,11 +203,11 @@
     </p>
 
     <p type="text" id = "theater3" style="display:none;" >
-        검단
-        송도
-        영종
-        인천논현
-        청라지젤
+        <button>검단</button>
+        <button>>송도</button></br>
+        <button>영종</button></br>
+        <button>인천논현</button></br>
+        <button>청라지젤</button></br>
     </p>
     <p type="text" id = "theater4" style="display:none;" >
         공주
@@ -258,8 +271,12 @@
         춘천석사
     </p>
 </div>
+</div>
 
-<script>
+<script type="text/javascript">
+
+
+
     function toggleBtn1() {
 
         // 토글 할 버튼 선택 (btn1)
@@ -282,12 +299,7 @@
         theater6.style.display = 'none';
         theater7.style.display = 'none';
 
-
-
-
         // btn` 보이기 (display: block)
-
-
 
 
     }
