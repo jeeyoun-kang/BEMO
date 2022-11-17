@@ -54,7 +54,7 @@ public class MainController {
         requestHeaders.put("X-Naver-Client-Secret", clientSecret);
         String responseBody = get(apiURL,requestHeaders);
 
-        System.out.println(responseBody);
+        //System.out.println(responseBody);
         model.addAttribute("jsonbody",responseBody);
 
         List<String> jsonlisttitle = new ArrayList<String>();
@@ -67,7 +67,7 @@ public class MainController {
         for(int i=0; i < batter.length();i++){
             JSONObject obj = batter.getJSONObject(i);
             String title = obj.getString("movieNm");
-            System.out.println("title(" + i + "): " + title);
+            //System.out.println("title(" + i + "): " + title);
             jsonlisttitle.add(title);
         }
 
@@ -125,8 +125,8 @@ public class MainController {
             title = title.replaceAll("&amp;","&");
             String image = obj.getString("image");
 //            boolean draft = obj.getBoolean("draft");
-            System.out.println("title(" + i + "): " + title);
-            System.out.println("image(" + i + "): " + image);
+           // System.out.println("title(" + i + "): " + title);
+           // System.out.println("image(" + i + "): " + image);
 //            System.out.println("draft(" + i + "): " + draft);
             maintitle1.add(title);
 
@@ -140,8 +140,8 @@ public class MainController {
             title = title.replaceAll("&amp;","&");
             String image = obj.getString("image");
 //            boolean draft = obj.getBoolean("draft");
-            System.out.println("title(" + i + "): " + title);
-            System.out.println("image(" + i + "): " + image);
+           // System.out.println("title(" + i + "): " + title);
+           // System.out.println("image(" + i + "): " + image);
 //            System.out.println("draft(" + i + "): " + draft);
             maintitle2.add(title);
 
@@ -155,8 +155,8 @@ public class MainController {
             title = title.replaceAll("&amp;","&");
             String image = obj.getString("image");
 //            boolean draft = obj.getBoolean("draft");
-            System.out.println("title(" + i + "): " + title);
-            System.out.println("image(" + i + "): " + image);
+         //   System.out.println("title(" + i + "): " + title);
+          //  System.out.println("image(" + i + "): " + image);
 //            System.out.println("draft(" + i + "): " + draft);
             maintitle3.add(title);
 
@@ -170,8 +170,8 @@ public class MainController {
             title = title.replaceAll("&amp;","&");
             String image = obj.getString("image");
 //            boolean draft = obj.getBoolean("draft");
-            System.out.println("title(" + i + "): " + title);
-            System.out.println("image(" + i + "): " + image);
+        //    System.out.println("title(" + i + "): " + title);
+         //   System.out.println("image(" + i + "): " + image);
 //            System.out.println("draft(" + i + "): " + draft);
             maintitle4.add(title);
 

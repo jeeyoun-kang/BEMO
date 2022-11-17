@@ -66,7 +66,7 @@ public class SearchController {
         requestHeaders.put("X-Naver-Client-Secret", clientSecret);
         String responseBody = get(apiURL,requestHeaders);
 
-        System.out.println(responseBody);
+        //System.out.println(responseBody);
         model.addAttribute("jsonbody",responseBody);
 
         // 가장 큰 JSONObject를 가져옵니다.
@@ -85,14 +85,15 @@ public class SearchController {
             title = title.replaceAll("&amp;","&");
             String image = obj.getString("image");
 //            boolean draft = obj.getBoolean("draft");
-            System.out.println("title(" + i + "): " + title);
-            System.out.println("image(" + i + "): " + image);
+            //System.out.println("title(" + i + "): " + title);
+            //System.out.println("image(" + i + "): " + image);
 //            System.out.println("draft(" + i + "): " + draft);
             jsonlisttitle.add(title);
 
             jsonlistimage.add(image);
             System.out.println();
         }
+     
         //System.out.println(jsonlisttitle.get(1));
         model.addAttribute("title1",jsonlisttitle.get(0));
         model.addAttribute("image1",jsonlistimage.get(0));

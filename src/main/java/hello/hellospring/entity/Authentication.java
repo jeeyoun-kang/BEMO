@@ -17,7 +17,7 @@ public class Authentication {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "auth_id")
-    private long auth_id;
+    private Long auth_id;
 
     @Column(name = "auth")
     private String auth;
@@ -31,17 +31,8 @@ public class Authentication {
     @Column(name="birthday")
     private String birthday;
 
-
-//    @Column(name="sex")
-//    private int sex;
-//
-//    @Column(name="nation")
-//    private int nation;
-
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Column(name="auth_date")
-    private Date auth_date;
+    //@DateTimeFormat(pattern = "yyyy-MM-dd")
 
     @OneToOne(mappedBy="auth")
     private User user;
@@ -49,14 +40,17 @@ public class Authentication {
 
 
     @Builder
-    public Authentication(String cell_phone){
-        Assert.notNull(cell_phone, "cell_phone must be not null");
+    public Authentication(Long auth_id,String auth,String cell_phone,String birthday,Date auth_date){
+        //Assert.notNull(cell_phone, "cell_phone must be not null");
         this.cell_phone=cell_phone;
+        this.auth_id = auth_id;
+        this.auth = auth;
+        this.birthday=birthday;
 
     }
 
     public Authentication update(String cell_phone){
-        Assert.notNull(cell_phone, "cell_phone must be not null");
+        //Assert.notNull(cell_phone, "cell_phone must be not null");
         this.cell_phone=cell_phone;
         return this;
     }

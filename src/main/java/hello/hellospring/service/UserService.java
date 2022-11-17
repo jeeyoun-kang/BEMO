@@ -29,7 +29,7 @@ public class UserService implements UserDetailsService {
 
     @Transactional
     public Long create(UserDto userDto) {
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         userDto.setPassword(encoder.encode(userDto.getPassword().getPassword()));
 
         return userRepository.save(userDto.toEntity()).getUserNo();
