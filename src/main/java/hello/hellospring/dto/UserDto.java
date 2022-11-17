@@ -13,12 +13,12 @@ public class UserDto {
     private Password password;
     private Authentication auth;
     private SocialLogin socialLogin;
-    private String userName;
+    private String username;
     private int loginType;
 
     @Builder
-    public UserDto(String userName, int loginType, Authentication auth, Password password, SocialLogin socialLogin) {
-        this.userName = userName;
+    public UserDto(String username, int loginType, Authentication auth, Password password, SocialLogin socialLogin) {
+        this.username = username;
         this.loginType = loginType;
         this.auth = auth;
         this.password = password;
@@ -31,10 +31,10 @@ public class UserDto {
 
     public User toEntity() {
         return User.builder()
-                .password(password)
+                .pass(password)
                 .auth(auth)
                 .social(socialLogin)
-                .userName(userName)
+                .username(username)
                 .loginType(loginType)
                 .build();
     }

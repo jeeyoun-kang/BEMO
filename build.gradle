@@ -13,7 +13,6 @@ repositories {
 }
 
 dependencies {
-
 	implementation 'org.jsoup:jsoup:1.13.1'
 	implementation 'org.json:json:20200518'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'

@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" >
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <title>JAVA MOVIE PROJECT</title>
     <link href="/css/main.css" rel="stylesheet" />
@@ -13,18 +13,19 @@
     <button type="submit" onclick="location.href='./review'">리뷰</button>
     <button type="submit" onclick="location.href='./suggest'">추천</button>
     <button id="show">로그인</button>
-    <button type="submit" onclick="location.href='./join'">회원가입</button>
+    <button type="submit" onclick="location.href='./signup'">회원가입</button>
 </div>
 <div class="background">
     <div class="window">
         <div class="popup">
             <div class="loginHeader">로그인<button id="close">X</button></div>
             <div class="loginMain">
-                <form action="/login/signin" method = "post">
-                    <div><input type = "text" name ="id" placeholder="아이디" id = "loginId"></div>
-                    <div><input type = "password" name = "passwd" placeholder="비밀번호" id="loginPw"></div>
+                <form th:action="@{/signin}" form-method="post">
+                    <div><input type = "text" name ="username" placeholder="아이디" id = "username"></div>
+                    <div><input type = "password" name = "password" placeholder="비밀번호" id="password"></div>
                     <div><input type = "checkbox" name = "preserve">아이디 저장</div>
-                    <div><input type = "submit" value="로그인" id="loginBt"></div>
+                    <div sec:authorize="isAnonymous()"><button id="loginBt" type="submit">로그인</button></div>
+                    <div sec:authorize="isAuthenticated()" ><button href="/logout" id="logoutBt" type="submit">로그아웃</button></div>
                 </form>
             </div>
             <div class="loginFooter" id="naverIdLogin"></div>
@@ -32,28 +33,27 @@
     </div>
 </div>
 <h3>박스오피스</h3>
-<div>
 <div class="movies">
     <div class="jb-a">
         <img class="jb-b1" th:src = "${boximage1}"/>
         <h4 class="jb-c1" th:text = "${boxtitle1}"/>
+
     </div>
     <div class="jb-a">
         <img class="jb-b2" th:src = "${boximage2}"/>
         <h4 class="jb-c2" th:text = "${boxtitle2}"/>
+
     </div>
     <div class="jb-a">
         <img class="jb-b3" th:src = "${boximage3}"/>
         <h4 class="jb-c3" th:text = "${boxtitle3}"/>
+
     </div>
     <div class="jb-a">
         <img class="jb-b4" th:src = "${boximage4}"/>
         <h4 class="jb-c4" th:text = "${boxtitle4}"/>
     </div>
 </div>
-</div>
-
-
 
 <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js"
         charSet="utf-8"></script>

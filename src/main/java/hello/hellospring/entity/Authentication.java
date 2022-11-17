@@ -17,7 +17,7 @@ public class Authentication {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "auth_id")
-    private Long auth_id;
+    private long auth_id;
 
     @Column(name = "auth")
     private String auth;
@@ -31,8 +31,17 @@ public class Authentication {
     @Column(name="birthday")
     private String birthday;
 
+
+//    @Column(name="sex")
+//    private int sex;
+//
+//    @Column(name="nation")
+//    private int nation;
+
     @Temporal(TemporalType.DATE)
-    //@DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name="auth_date")
+    private Date auth_date;
 
     @OneToOne(mappedBy="auth")
     private User user;
@@ -41,19 +50,15 @@ public class Authentication {
 
     @Builder
     public Authentication(Long auth_id,String auth,String cell_phone,String birthday,Date auth_date){
-        //Assert.notNull(cell_phone, "cell_phone must be not null");
         this.cell_phone=cell_phone;
         this.auth_id = auth_id;
         this.auth = auth;
         this.birthday=birthday;
-
     }
 
-    public Authentication update(String cell_phone){
-        //Assert.notNull(cell_phone, "cell_phone must be not null");
-        this.cell_phone=cell_phone;
-        return this;
-    }
+//    public Authentication update(String cell_phone){
+//        return this;
+//    }
 
     public String[] split(String s) {
         return auth.split(",");
@@ -62,6 +67,4 @@ public class Authentication {
         this.auth = auth;
         return this;
     }
-
-
 }
