@@ -10,7 +10,7 @@ import java.util.Date;
 @ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EqualsAndHashCode(of = "social_login_id")
-@Table(name="socialLogin")
+@Table(name="social_login")
 @Entity
 public class SocialLogin {
     @Id

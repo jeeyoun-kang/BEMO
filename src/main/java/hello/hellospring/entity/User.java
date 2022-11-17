@@ -21,8 +21,8 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long userNo;
 
-    @Column(name = "userName", nullable = false)
-    private String userName;
+    @Column(name = "username", nullable = false)
+    private String username;
 
     @Column(name="loginType", nullable = false)
     private int loginType;
@@ -41,16 +41,23 @@ public class User implements UserDetails {
     private SocialLogin social;
 
     @Builder
-    public User(String userName, int loginType, Authentication auth, Password password, SocialLogin social){
-        this.userName = userName;
+    public User(String username, int loginType, Authentication auth, Password pass, SocialLogin social){
+        this.username = username;
         this.loginType = loginType;
         this.auth = auth;
-        this.pass = password;
+        this.pass = pass;
         this.social = social;
     }
+    public User(User user) {
+        this.username = user.username;
+        this.loginType = user.loginType;
+        this.auth = user.auth;
+        this.pass = user.pass;
+        this.social = user.social;
+    }
 
-    public void update(String userName, int loginType, Authentication auth, Password password, SocialLogin social){
-       this.userName = userName;
+    public void update(String username, int loginType, Authentication auth, Password password, SocialLogin social){
+       this.username = username;
        this.loginType = loginType;
        this.auth = auth;
        this.pass = password;
@@ -71,7 +78,7 @@ public class User implements UserDetails {
     }
     @Override
     public String getUsername() {
-        return userName;
+        return username;
     }
     @Override
     public boolean isAccountNonExpired() {

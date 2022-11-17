@@ -1,9 +1,5 @@
 package hello.hellospring.controller;
 
-
-
-
-
 import org.json.JSONArray;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,12 +22,8 @@ import java.util.Map;
 import org.json.JSONObject;
 
 
-
-
 @Controller
-
 public class SearchController {
-
     @GetMapping("search")
     public String ticket(Model model) {
         model.addAttribute("data", "search");
@@ -51,11 +43,8 @@ public class SearchController {
         String clientId = "TP8GiRPSMSd67q5Ioip1"; //애플리케이션 클라이언트 아이디값"
         String clientSecret = "AS7oKyBvW4"; //애플리케이션 클라이언트 시크릿값"
 
-
-
         String text = null;
         text = URLEncoder.encode(moviename, StandardCharsets.UTF_8);
-
 
         String apiURL = "https://openapi.naver.com/v1/search/movie.json?query=" + text;    // json 결과
         //String apiURL = "https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchWeeklyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt=" + text;
@@ -93,7 +82,7 @@ public class SearchController {
             jsonlistimage.add(image);
             System.out.println();
         }
-     
+
         //System.out.println(jsonlisttitle.get(1));
         model.addAttribute("title1",jsonlisttitle.get(0));
         model.addAttribute("image1",jsonlistimage.get(0));
@@ -109,7 +98,6 @@ public class SearchController {
         return "search"; //
     }
 
-
     private static String get(String apiUrl, Map<String, String> requestHeaders){
         HttpURLConnection con = connect(apiUrl);
         try {
@@ -117,7 +105,6 @@ public class SearchController {
             for(Map.Entry<String, String> header :requestHeaders.entrySet()) {
                 con.setRequestProperty(header.getKey(), header.getValue());
             }
-
 
             int responseCode = con.getResponseCode();
             if (responseCode == HttpURLConnection.HTTP_OK) { // 정상 호출
@@ -132,7 +119,6 @@ public class SearchController {
         }
     }
 
-
     private static HttpURLConnection connect(String apiUrl){
         try {
             URL url = new URL(apiUrl);
@@ -144,14 +130,11 @@ public class SearchController {
         }
     }
 
-
     private static String readBody(InputStream body){
         InputStreamReader streamReader = new InputStreamReader(body);
 
-
         try (BufferedReader lineReader = new BufferedReader(streamReader)) {
             StringBuilder responseBody = new StringBuilder();
-
 
             String line;
             while ((line = lineReader.readLine()) != null) {
@@ -165,5 +148,6 @@ public class SearchController {
         }
     }
 }
+
 
 

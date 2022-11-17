@@ -53,6 +53,7 @@ goto fail
 :findJavaFromJavaHome
 set JAVA_HOME=%JAVA_HOME:"=%
 set JAVA_EXE=%JAVA_HOME%/bin/java.exe
+set JAVA_OPTS="$JAVA_OPTS -Djava.security.egd=file:/dev/./urandom"
 
 if exist "%JAVA_EXE%" goto execute
 

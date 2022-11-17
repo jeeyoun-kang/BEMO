@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Error</title>
+</head>
+<body>
+로긴 실패
+<tr th:each="user : ${users}">
+    <td th:text="${user.username}"></td>
+    <td th:text="${user.password}"></td>
+</tr>
+
+</body>
+</html>

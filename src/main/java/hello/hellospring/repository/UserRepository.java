@@ -1,12 +1,10 @@
 package hello.hellospring.repository;
 
-import hello.hellospring.entity.Authentication;
 import hello.hellospring.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
+import java.util.Optional;
 
-public interface UserRepository extends JpaRepository<User, Long>, CustomUserRepository {
-
+public interface UserRepository extends JpaRepository<User, Integer> {
+    Optional<User> findByusername(String name);
 }
-
