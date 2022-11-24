@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<h2 th:text="${movie_title}"></h2>
+개봉일: <span th:text="${openDt}"></span></br>
+장르: <span th:text="${genreNm}"></span></br>
+감독: <span th:text="${peopleNm}"></span></br>
+배우: <span th:text="${actorNm}"></span></br>
+<button type="button">리뷰</button>
+<button type="button" >추천</button>
+</body>
+</html>

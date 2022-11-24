@@ -14,21 +14,14 @@
 <div>
     <div class="movies">
         <div class="jb-a">
-            <img class="jb-b1" th:src = "${image1}"/>
-            <h4 class="jb-c1" th:text = "${title1}"/>
+            <form th:action="@{/moviedetail/{detail} (detail=${title1})}" >
+                <button type="submit" style="background-color:transparent; border:0; outline:0;" >
+                    <img class="jb-b1" th:src = "${image1}"/>
+                    <h4 class="jb-c1" th:text = "${title1}"/>
+                </button>
+            </form>
         </div>
-        <div class="jb-a">
-            <img class="jb-b2" th:src = "${image2}"/>
-            <h4 class="jb-c2" th:text = "${title2}"/>
-        </div>
-        <div class="jb-a">
-            <img class="jb-b3" th:src = "${image3}"/>
-            <h4 class="jb-c3" th:text = "${title3}"/>
-        </div>
-        <div class="jb-a">
-            <img class="jb-b4" th:src = "${image4}"/>
-            <h4 class="jb-c4" th:text = "${title4}"/>
-        </div>
+
 
     </div>
 </div>

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class ReviewController {
     @GetMapping("review")
     public String review(Model model) {
-        model.addAttribute("data","hello!!");
+
         return "review";
 
 

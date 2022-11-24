@@ -5,15 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
     <style>
-        .div2 {
-            border: 1px solid;
-            width: 100px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
 
-        }
         .div3{
             float:left;
             margin-right: 100px;
@@ -39,8 +31,25 @@
             float:left;
         }
 
-        .clicked {
-            color: blue;
+        /*.clicked {*/
+        /*    color: blue;*/
+        /*}*/
+    </style>
+    <style>
+        .div2 input[type="radio"]{
+            display: none;
+        }
+        .div2 input[type="radio"]+span{
+            display: inline-block;
+            padding: 15px 10px;
+            border: 1px solid #dfdfdf;
+            background-color: #ffffff;
+            text-align: center;
+            cursor: pointer;
+        }
+        .div2 input[type="radio"]:checked + span {
+            background-color: #113a6b;
+            color: #ffffff;
         }
     </style>
 </head>
@@ -52,7 +61,9 @@
     <button type="submit" onclick="toggleBtn1()" >검색</button>
     <!--<input type="button" name="target_name" value="">-->
 </form>
-<div id="result"></div>
+<div id="result1"></div>
+<div id="result2"></div>
+<div id="result3"></div>
 <script>
     function numFormat(variable)
     {
@@ -82,80 +93,100 @@
         AddMonth = dat1.getMonth()
     }
 
+
     var seven = dat1.getFullYear()+"-"+AddMonth+"-"+hi;
     console.log(seven)
-    // var nullcheck = document.getElementsByName("startday")
-    // if (nullcheck ===""){
-    //     alert("hi")
-    // }
-    // console.log(nullcheck)
 
     document.getElementById("Date").setAttribute("min", today);
     document.getElementById("Date").setAttribute("max", seven);
 
-    function checkRow(event) {
 
-        alert(event);
-    }
+
     function get_ticket() {
-        const genderNodeList
+
+        const getticket
             = document.getElementsByName('ticket');
+
         const gettheater
             = document.getElementsByName('theater');
-        genderNodeList.forEach((node) => {
+
+        const getmega
+            =document.getElementsByName('mega');
+        getticket.forEach((node) => {
             if(node.checked)  {
-                document.getElementById('result').innerText
+                document.getElementById('result1').innerText
                     = node.value;
             }
+
         })
+        gettheater.forEach((node) => {
+            if(node.checked)  {
+                document.getElementById('result2').innerText
+                    = node.value;
+            }
+
+        })
+        getmega.forEach((node) => {
+            if(node.checked)  {
+                document.getElementById('result3').innerText
+                    = node.value;
+            }
+
+        })
+        //alert(document.getElementById('result1').innerText);
     }
+
+
 </script>
-<button onclick="get_ticket()">확인</button>
+<button onclick="get_ticket()">예매</button>
 </br>
 <div class ="ticket">
-    <div class="div1">영화
-        <input type="radio" name='ticket'  class="div2" th:value='${title.get(0)}' th:text="${title.get(0)}" /></br>
-        <input type="radio" name='ticket' class="div2" th:value='${title.get(1)}' th:text="${title.get(1)}" /></br>
-        <input type="radio" name='ticket' class="div2" th:value='${title.get(2)}' th:text="${title.get(2)}" /></br>
-        <input type="radio" name='ticket' class="div2" th:value='${title.get(3)}' th:text="${title.get(3)}" /></br>
-        <input type="radio" name='ticket' class="div2" th:value='${title.get(4)}' th:text="${title.get(4)}" /></br>
-        <input type="radio" name='ticket' class="div2" th:value='${title.get(5)}' th:text="${title.get(5)}" /></br>
-        <input type="radio" name='ticket' class="div2" th:value='${title.get(6)}' th:text="${title.get(6)}" /></br>
-        <input type="radio" name='ticket' class="div2" th:value='${title.get(7)}' th:text="${title.get(7)}" /></br>
-        <input type="radio" name='ticket' class="div2" th:value='${title.get(8)}' th:text="${title.get(8)}" /></br>
-        <input type="radio" name='ticket' class="div2" th:value='${title.get(9)}' th:text="${title.get(9)}" />
+    <div class="div1">영화</br>
+        <label class="div2"><input type="radio" name='ticket'   th:value='${title.get(0)}'  /><span th:text="${title.get(0)}"></span></label></br>
+        <label class="div2"><input type="radio" name='ticket'  th:value='${title.get(1)}'  /><span th:text="${title.get(1)}"></span></label></br>
+        <label class="div2"><input type="radio" name='ticket' th:value='${title.get(2)}' /><span th:text="${title.get(2)}"></span></label></br>
+        <label class="div2"><input type="radio" name='ticket'  th:value='${title.get(3)}' /><span th:text="${title.get(3)}"></span></label></br>
+        <label class="div2"><input type="radio" name='ticket' th:value='${title.get(4)}'  /><span th:text="${title.get(4)}"></span></label></br>
+        <label class="div2"><input type="radio" name='ticket'  th:value='${title.get(5)}'  /><span th:text="${title.get(5)}"></span></label></br>
+        <label class="div2"><input type="radio" name='ticket'  th:value='${title.get(6)}'  /><span th:text="${title.get(6)}"></span></label></br>
+        <label class="div2"><input type="radio" name='ticket'  th:value='${title.get(7)}' /><span th:text="${title.get(7)}"></span></label></br>
+        <label class="div2"><input type="radio" name='ticket'  th:value='${title.get(8)}'  /><span th:text="${title.get(8)}"></span></label></br>
+        <label class="div2"><input type="radio" name='ticket' th:value='${title.get(9)}'  /><span th:text="${title.get(9)}"></span></label>
+
     </div>
     </br>
-    <div class="div3">극장
-        <input type="radio" class="div4" name="theater" value="서울" id="btn1" onclick="toggleBtn1()" >서울</br>
-        <input type="radio" class="div4" name="theater" value="경기" id="btn2" onclick="toggleBtn2()">경기</br>
-        <input type="radio" class="div4" name="theater" value="인천" id="btn3" onclick="toggleBtn3()" >인천</br>
-        <input type="radio" class="div4" name="theater" value="대전/충청/세종" id="btn4" onclick="toggleBtn4()">대전/충청/세종</br>
-        <input type="radio" class="div4" name="theater" value="부산/대구/경상" id="btn5" onclick="toggleBtn5()">부산/대구/경상</br>
-        <input type="radio" class="div4" name="theater" value="광주/전라" id="btn6" onclick="toggleBtn6()">광주/전라</br>
-        <input type="radio" class="div4" name="theater" value="강원" id="btn7" onclick="toggleBtn7()">강원
+    <div class="div3">극장</br>
+        <label class="div2"><input type="radio" class="div4" name="theater" value="서울" id="btn1" onclick="toggleBtn1()" ><span>서울</span></label></br>
+        <label class="div2"><input type="radio" class="div4" name="theater" value="경기" id="btn2" onclick="toggleBtn2()"><span>경기</span></label></br>
+        <label class="div2"><input type="radio" class="div4" name="theater" value="인천" id="btn3" onclick="toggleBtn3()" ><span>인천</span></label></br>
+        <label class="div2"><input type="radio" class="div4" name="theater" value="대전/충청/세종" id="btn4" onclick="toggleBtn4()"><span>대전/충청/세종</span></label></br>
+        <label class="div2"><input type="radio" class="div4" name="theater" value="부산/대구/경상" id="btn5" onclick="toggleBtn5()"><span>부산/대구/경상</span></label></br>
+        <label class="div2"><input type="radio" class="div4" name="theater" value="광주/전라" id="btn6" onclick="toggleBtn6()"><span>광주/전라</span></label></br>
+        <label class="div2"><input type="radio" class="div4" name="theater" value="강원" id="btn7" onclick="toggleBtn7()"><sapn>강원</sapn></label>
+
+
     </div>
     <div class="theater">
         <p type="text" id = "theater1" style="display:none;" >
-            <button>강남</button></br>
-            <button >강동</button></br>
-            <button >군자</button></br>
-            <button >동대문</button></br>
-            <button >마곡</button></br>
-            <button >목동</button></br>
-            <button >상봉</button></br>
-            <button >상암월드컵경기장</button></br>
-            <button >성수</button></br>
-            <button >센트럴</button></br>
-            <button >송파파크하비오</button></br>
-            <button >신촌</button></br>
-            <button >이수</button></br>
-            <button >창동</button></br>
-            <button >코엑스</button></br>
-            <button >홍대</button></br>
-            <button >화곡</button></br>
-            <button >ARTNINE</button></br>
+            <label class="div2"><input type="radio" name= "mega" value="강남"><span>강남</span></label></br>
+            <label class="div2"><input type="radio" name= "mega" value="군자"><span>군자</span></label></br>
+            <label class="div2"><input type="radio" name= "mega" value="동대문"><span>동대문</span></label></br>
+            <label class="div2"><input type="radio" name= "mega" value="마곡"><span>마곡</span></label></br>
+            <label class="div2"><input type="radio" name= "mega" value="목동"><span>목동</span></label></br>
+            <label class="div2"><input type="radio" name= "mega" value="상봉"><span>상봉</span></label></br>
+            <label class="div2"><input type="radio" name= "mega" value="상암월드컵경기장"><span>상암월드컵경기장</span></label></br>
+            <label class="div2"><input type="radio" name= "mega" value="성수"><span>성수</span></label></br>
+            <label class="div2"><input type="radio" name= "mega" value="센트럴"><span>센트럴</span></label></br>
+            <label class="div2"><input type="radio" name= "mega" value="송파파크하비오"><span>송파파크하비오</span></label></br>
+            <label class="div2"><input type="radio" name= "mega" value="신촌"><span>신촌</span></label></br>
+            <label class="div2"><input type="radio" name= "mega" value="이수"><span>이수</span></label></br>
+            <label class="div2"><input type="radio" name= "mega" value="창동"><span>창동</span></label></br>
+            <label class="div2"><input type="radio" name= "mega" value="코엑스"><span>코엑스</span></label></br>
+            <label class="div2"><input type="radio" name= "mega" value="홍대"><span>홍대</span></label></br>
+            <label class="div2"><input type="radio" name= "mega" value="화곡"><span>화곡</span></label></br>
+            <label class="div2"><input type="radio" name= "mega" value="ARTNINE"><span>ARTNINE</span></label></br>
         </p>
+
 
         <p type="text" id = "theater2" style="display:none;">
             <button>고양스타필드</button></br>
@@ -265,8 +296,12 @@
 
 <script type="text/javascript">
 
+
+
     function toggleBtn1() {
+
         // 토글 할 버튼 선택 (btn1)
+
         const theater1 = document.getElementById('theater1');
         const theater2 = document.getElementById('theater2');
         const theater3 = document.getElementById('theater3');
@@ -275,8 +310,8 @@
         const theater6 = document.getElementById('theater6');
         const theater7 = document.getElementById('theater7');
 
+
         // btn1 숨기기 (display: none)
-        // btn` 보이기 (display: block)
         theater1.style.display='block';
         theater2.style.display = 'none';
         theater3.style.display = 'none';
@@ -284,8 +319,13 @@
         theater5.style.display = 'none';
         theater6.style.display = 'none';
         theater7.style.display = 'none';
+
+        // btn` 보이기 (display: block)
+
+
     }
     function toggleBtn2() {
+
         // 토글 할 버튼 선택 (btn1)
         const btn2= document.getElementById('btn2');
         const theater1 = document.getElementById('theater1');
@@ -296,6 +336,7 @@
         const theater6 = document.getElementById('theater6');
         const theater7 = document.getElementById('theater7');
 
+
         // btn1 숨기기 (display: none)
         theater1.style.display='none';
         theater2.style.display = 'block';
@@ -304,10 +345,14 @@
         theater5.style.display = 'none';
         theater6.style.display = 'none';
         theater7.style.display = 'none';
+
+
     }
 
     function toggleBtn3() {
+
         // 토글 할 버튼 선택 (btn1)
+
         const theater1 = document.getElementById('theater1');
         const theater2 = document.getElementById('theater2');
         const theater3 = document.getElementById('theater3');
@@ -315,6 +360,7 @@
         const theater5 = document.getElementById('theater5');
         const theater6 = document.getElementById('theater6');
         const theater7 = document.getElementById('theater7');
+
 
         // btn1 숨기기 (display: none)
         theater1.style.display='none';
@@ -324,10 +370,14 @@
         theater5.style.display = 'none';
         theater6.style.display = 'none';
         theater7.style.display = 'none';
+
+
     }
 
     function toggleBtn4() {
+
         // 토글 할 버튼 선택 (btn1)
+
         const theater1 = document.getElementById('theater1');
         const theater2 = document.getElementById('theater2');
         const theater3 = document.getElementById('theater3');
@@ -335,6 +385,7 @@
         const theater5 = document.getElementById('theater5');
         const theater6 = document.getElementById('theater6');
         const theater7 = document.getElementById('theater7');
+
 
         // btn1 숨기기 (display: none)
         theater1.style.display='none';
@@ -344,10 +395,14 @@
         theater5.style.display = 'none';
         theater6.style.display = 'none';
         theater7.style.display = 'none';
+
+
     }
 
     function toggleBtn5() {
+
         // 토글 할 버튼 선택 (btn1)
+
         const theater1 = document.getElementById('theater1');
         const theater2 = document.getElementById('theater2');
         const theater3 = document.getElementById('theater3');
@@ -355,6 +410,7 @@
         const theater5 = document.getElementById('theater5');
         const theater6 = document.getElementById('theater6');
         const theater7 = document.getElementById('theater7');
+
 
         // btn1 숨기기 (display: none)
         theater1.style.display='none';
@@ -364,10 +420,14 @@
         theater5.style.display = 'block';
         theater6.style.display = 'none';
         theater7.style.display = 'none';
+
+
     }
 
     function toggleBtn6() {
+
         // 토글 할 버튼 선택 (btn1)
+
         const theater1 = document.getElementById('theater1');
         const theater2 = document.getElementById('theater2');
         const theater3 = document.getElementById('theater3');
@@ -375,6 +435,7 @@
         const theater5 = document.getElementById('theater5');
         const theater6 = document.getElementById('theater6');
         const theater7 = document.getElementById('theater7');
+
 
         // btn1 숨기기 (display: none)
         theater1.style.display='none';
@@ -384,10 +445,14 @@
         theater5.style.display = 'none';
         theater6.style.display = 'block';
         theater7.style.display = 'none';
+
+
     }
 
     function toggleBtn7() {
+
         // 토글 할 버튼 선택 (btn1)
+
         const theater1 = document.getElementById('theater1');
         const theater2 = document.getElementById('theater2');
         const theater3 = document.getElementById('theater3');
@@ -395,6 +460,7 @@
         const theater5 = document.getElementById('theater5');
         const theater6 = document.getElementById('theater6');
         const theater7 = document.getElementById('theater7');
+
 
         // btn1 숨기기 (display: none)
         theater1.style.display='none';
@@ -404,35 +470,41 @@
         theater5.style.display = 'none';
         theater6.style.display = 'none';
         theater7.style.display = 'block';
+
+
     }
+
+
+
 </script>
 <script>
-    var div2 = document.getElementsByClassName("div2");
-
-    function handleClick(event) {
-        console.log(event.target);
-        // console.log(this);
-        // 콘솔창을 보면 둘다 동일한 값이 나온다
-
-        console.log(event.target.classList);
-
-        if (event.target.classList[1] === "clicked") {
-            event.target.classList.remove("clicked");
-        } else {
-            for (var i = 0; i < div2.length; i++) {
-                div2[i].classList.remove("clicked");
-            }
-
-            event.target.classList.add("clicked");
-        }
-    }
-    function init() {
-        for (var i = 0; i < div2.length; i++) {
-            div2[i].addEventListener("click", handleClick);
-        }
-    }
-
-    init();
+    // var div2 = document.getElementsByClassName("div2");
+    //
+    // function handleClick(event) {
+    //     console.log(event.target);
+    //     // console.log(this);
+    //     // 콘솔창을 보면 둘다 동일한 값이 나온다
+    //
+    //     console.log(event.target.classList);
+    //
+    //     if (event.target.classList[1] === "clicked") {
+    //         event.target.classList.remove("clicked");
+    //     } else {
+    //         for (var i = 0; i < div2.length; i++) {
+    //             div2[i].classList.remove("clicked");
+    //         }
+    //
+    //         event.target.classList.add("clicked");
+    //     }
+    // }
+    //
+    // function init() {
+    //     for (var i = 0; i < div2.length; i++) {
+    //         div2[i].addEventListener("click", handleClick);
+    //     }
+    // }
+    //
+    // init();
 </script>
 <script>
     var div4 = document.getElementsByClassName("div4");
@@ -460,8 +532,9 @@
             div4[i].addEventListener("click", handleClick);
         }
     }
+
     init();
 </script>
+
 </body>
-</html>
 </html>
