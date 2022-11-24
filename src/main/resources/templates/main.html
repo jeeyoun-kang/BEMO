@@ -10,8 +10,7 @@
 <div class = "btn">
     <button type="submit" onclick="location.href='./ticket'">티켓페이지</button>
     <button type="submit" onclick="location.href='./searchfirst'">검색</button>
-    <button type="submit" onclick="location.href='./review'">리뷰</button>
-    <button type="submit" onclick="location.href='./suggest'">추천</button>
+    <button type="submit" onclick="location.href='./'">홈</button>
     <button id="show">로그인</button>
     <button type="submit" onclick="location.href='./signup'">회원가입</button>
 </div>
@@ -35,23 +34,37 @@
 <h3>박스오피스</h3>
 <div class="movies">
     <div class="jb-a">
+        <form th:action="@{/moviedetail/{detail}/{code} (detail=${boxtitle1},code=${code1})}" >
+        <button type="submit" style="background-color:transparent; border:0; outline:0;" >
         <img class="jb-b1" th:src = "${boximage1}"/>
         <h4 class="jb-c1" th:text = "${boxtitle1}"/>
-
+        </button>
+        </form>
     </div>
     <div class="jb-a">
+        <form th:action="@{/moviedetail/{detail}/{code} (detail=${boxtitle2},code=${code2})}" >
+        <button type="submit" style="background-color:transparent; border:0; outline:0;" >
         <img class="jb-b2" th:src = "${boximage2}"/>
-        <h4 class="jb-c2" th:text = "${boxtitle2}"/>
-
+        <h4 class="jb-c2"  th:text = "${boxtitle2}"/>
+        </button>
+        </form>
     </div>
     <div class="jb-a">
+        <form th:action="@{/moviedetail/{detail}/{code} (detail=${boxtitle3},code=${code3})}" >
+            <button type="submit" style="background-color:transparent; border:0; outline:0;" >
         <img class="jb-b3" th:src = "${boximage3}"/>
         <h4 class="jb-c3" th:text = "${boxtitle3}"/>
+        </button>
+        </form>
 
     </div>
     <div class="jb-a">
+        <form th:action="@{/moviedetail/{detail}/{code} (detail=${boxtitle4},code=${code4})}" >
+        <button type="submit" style="background-color:transparent; border:0; outline:0;" >
         <img class="jb-b4" th:src = "${boximage4}"/>
-        <h4 class="jb-c4" th:text = "${boxtitle4}"/>
+        <h4 class="jb-c4"  th:text = "${boxtitle4}"/>
+        </button>
+        </form>
     </div>
 </div>
 

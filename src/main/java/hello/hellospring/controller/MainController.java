@@ -44,10 +44,10 @@ public class MainController {
         requestHeaders.put("X-Naver-Client-Secret", clientSecret);
         String responseBody = get(apiURL,requestHeaders);
 
-        //System.out.println(responseBody);
         model.addAttribute("jsonbody",responseBody);
 
         List<String> jsonlisttitle = new ArrayList<String>();
+        List<String> jsonlistmvcode = new ArrayList<String>();
         //가장 큰 JSONObject를 가져옵니다.
         JSONObject jObject = new JSONObject(responseBody);
         JSONObject batters = jObject.getJSONObject("boxOfficeResult");
@@ -55,10 +55,29 @@ public class MainController {
 
         for(int i=0; i < batter.length();i++){
             JSONObject obj = batter.getJSONObject(i);
-            String title = obj.getString("movieNm");
-            //System.out.println("title(" + i + "): " + title);
+            String mvcode = obj.getString("movieCd"); //영화코드
+            String title = obj.getString("movieNm");  //영화이름
+
+            jsonlistmvcode.add(mvcode);
             jsonlisttitle.add(title);
         }
+        String code1 = jsonlistmvcode.get(0);
+        String code2 = jsonlistmvcode.get(1);
+        String code3 = jsonlistmvcode.get(2);
+        String code4 = jsonlistmvcode.get(3);
+
+        model.addAttribute("code1",code1);
+        model.addAttribute("code2",code2);
+        model.addAttribute("code3",code3);
+        model.addAttribute("code4",code4);
+
+
+
+//        //박스오피스 4순위 영화코드
+//        String code1 = URLEncoder.encode(jsonlistmvcode.get(0), StandardCharsets.UTF_8);
+//        String code2 = URLEncoder.encode(jsonlistmvcode.get(1), StandardCharsets.UTF_8);
+//        String code3 = URLEncoder.encode(jsonlistmvcode.get(2), StandardCharsets.UTF_8);
+//        String code4 = URLEncoder.encode(jsonlistmvcode.get(3), StandardCharsets.UTF_8);
 
         //메인페이지에 띄울 박스오피스 4순위 타이틀과 이미지
         String text1 = URLEncoder.encode(jsonlisttitle.get(0), StandardCharsets.UTF_8);
