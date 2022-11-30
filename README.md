@@ -13,3 +13,5 @@
 - Tool : IntelliJ, Mysql, AWS EC2
 
 - Language : JAVA(ver:11)
+
+- API : 네이버 OPENAPI , 영화진흥위원회 OPENAPI
