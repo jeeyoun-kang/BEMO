@@ -2,7 +2,7 @@
 ## 영화 예매 및 리뷰 웹서비스
 
 
-###  🐾 Project Members 
+### Project Members 
 
 <table>
    <tr>
