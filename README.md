@@ -10,6 +10,7 @@
     <td align="center"><b><a href="https://github.com/AlgoRoots">장예준</a></b></td>
   </tr>
   <tr>
+</table>
 
 ### 주요 적용 기술 및 구조
 
