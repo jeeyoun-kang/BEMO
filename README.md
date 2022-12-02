@@ -11,7 +11,7 @@
     
   </tr>
   <tr>
-     <td align="center"><a href="https://github.com/jeeyoun-kang"><img src="https://user-images.githubusercontent.com/90495580/169259372-a923afea-a898-4bca-9504-7d073d6ffab8.jpeg" width="100px" /></a></td>
+     <td align="center"><a href="https://github.com/jeeyoun-kang"><img src="https://avatars.githubusercontent.com/u/59076085?v=4" width="100px" /></a></td>
     <td align="center"><a href="https://github.com/JYJProgram"><img src="https://avatars.githubusercontent.com/u/33517050?v=4" width="100px" /></a></td>
   </tr>
   <tr>
