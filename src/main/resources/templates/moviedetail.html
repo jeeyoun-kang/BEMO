@@ -20,7 +20,10 @@
 장르: <span th:text="${genreNm}"></span></br>
 감독: <span th:text="${peopleNm}"></span></br>
 배우: <span th:text="${actorNm}"></span></br>
-<button type="button">리뷰</button>
+<form th:action="@{/{movie_title}/review (movie_title=${movie_title})}" >
+
+    <button type="submit" >리뷰</button>
+</form>
 <button type="button" >추천</button>
 </body>
 </html>
