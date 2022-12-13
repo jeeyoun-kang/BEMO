@@ -1,11 +1,10 @@
 package hello.hellospring.entity;
 
 import lombok.*;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.util.Assert;
 
+import javax.management.relation.Role;
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Getter
 @ToString
@@ -19,52 +18,36 @@ public class Authentication {
     @Column(name = "auth_id")
     private long auth_id;
 
-    @Column(name = "auth")
-    private String auth;
+    @Column(name = "role")
+    private Role role;
 
     @Column(name="cell_phone", nullable = false)
     private String cell_phone;
 
-//    @Column(name = "email", nullable = false)
-//    private String email;
-
     @Column(name="birthday")
     private String birthday;
 
-
-//    @Column(name="sex")
-//    private int sex;
-//
-//    @Column(name="nation")
-//    private int nation;
-
-    @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name="auth_date")
-    private Date auth_date;
+    private LocalDateTime auth_date;
 
     @OneToOne(mappedBy="auth")
     private User user;
 
-
-
     @Builder
-    public Authentication(Long auth_id,String auth,String cell_phone,String birthday,Date auth_date){
+    public Authentication(Role role,String cell_phone,String birthday,LocalDateTime auth_date){
         this.cell_phone=cell_phone;
-        this.auth_id = auth_id;
-        this.auth = auth;
+        this.role = role;
         this.birthday=birthday;
+        this.auth_date = auth_date;
     }
-
-//    public Authentication update(String cell_phone){
-//        return this;
-//    }
-
-    public String[] split(String s) {
-        return auth.split(",");
-    }
-    public Authentication updateAuth(String auth){
-        this.auth = auth;
+    public Authentication update(String cell_phone, String birthday){
+        this.cell_phone = cell_phone;
+        this.birthday = birthday;
         return this;
+    }
+
+    public enum Role {
+        ROLE_USER,
+        ROLE_ADMIN
     }
 }
