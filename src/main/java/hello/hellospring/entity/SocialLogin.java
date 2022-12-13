@@ -1,10 +1,9 @@
 package hello.hellospring.entity;
 
 import lombok.*;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Getter
 @ToString
@@ -26,23 +25,22 @@ public class SocialLogin {
     @Column(name = "accessToken")
     private String accessToken;
 
-    @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+
     @Column(name="updateDate")
-    private Date updateDate;
+    private LocalDateTime updateDate;
 
     @OneToOne(mappedBy="social")
     private User user;
 
     @Builder
-    public SocialLogin(int socialCode, String externalId, String accessToken, Date updateDate){
+    public SocialLogin(int socialCode, String externalId, String accessToken, LocalDateTime updateDate){
         this.socialCode=socialCode;
         this.externalId=externalId;
         this.accessToken=accessToken;
         this.updateDate=updateDate;
     }
 
-    public SocialLogin update(int socialCode, String externalId, String accessToken, Date updateDate){
+    public SocialLogin update(int socialCode, String externalId, String accessToken, LocalDateTime updateDate){
         this.socialCode=socialCode;
         this.externalId=externalId;
         this.accessToken=accessToken;
