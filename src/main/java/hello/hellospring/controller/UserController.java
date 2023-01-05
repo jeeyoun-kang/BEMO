@@ -4,11 +4,9 @@ import hello.hellospring.dto.RequestDto;
 import hello.hellospring.entity.User;
 import hello.hellospring.service.PrincipalDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
 import java.util.List;
 
 @Controller
@@ -31,10 +29,10 @@ public class UserController {
         return "signup";
     }
     @RequestMapping(value = "/join", method=RequestMethod.POST)
-    public String join(RequestDto request) {
+    public String join(RequestDto request){
         System.out.println(request.getUsername()+request.getPassword()+request.getCellphone()+request.getBirthday());
         principalDetailsService.create(request);
-        return "main";
+        return "redirect:/";
     }
 
 

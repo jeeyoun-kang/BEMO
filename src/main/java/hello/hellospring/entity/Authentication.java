@@ -21,7 +21,7 @@ public class Authentication {
     @Column(name = "role")
     private Role role;
 
-    @Column(name="cell_phone", nullable = false)
+    @Column(name="cell_phone")
     private String cell_phone;
 
     @Column(name="birthday")

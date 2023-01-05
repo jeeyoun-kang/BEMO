@@ -5,7 +5,6 @@ import hello.hellospring.entity.Password;
 import hello.hellospring.entity.SocialLogin;
 import hello.hellospring.entity.User;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
@@ -16,7 +15,7 @@ public class PrincipalDetails implements UserDetails, OAuth2User{
     private Authentication auth;
     private Password pass;
     private SocialLogin socialLogin;
-    private Map<String, Object> attributes;
+    private OAuth2UserInfo oAuth2UserInfo;
 
     //UserDetails : Form 로그인 시 사용
     public PrincipalDetails(User user, Authentication auth, Password pass, SocialLogin social) {
@@ -27,18 +26,18 @@ public class PrincipalDetails implements UserDetails, OAuth2User{
     }
 
     //OAuth2User : OAuth2 로그인 시 사용
-    public PrincipalDetails(User user, Authentication auth, Password pass, SocialLogin social, Map<String, Object> attributes) {
+    public PrincipalDetails(User user, Authentication auth, Password pass, SocialLogin social, OAuth2UserInfo oAuth2UserInfo) {
         //PrincipalOauth2UserService 참고
         this.user = user;
         this.auth = auth;
         this.pass=  pass;
         this.socialLogin = social;
-        this.attributes = attributes;
+        this.oAuth2UserInfo = oAuth2UserInfo;
     }
 
     @Override
     public Map<String, Object> getAttributes() {
-        return attributes;
+        return oAuth2UserInfo.getAttributes();
     }
 
     @Override
@@ -77,7 +76,6 @@ public class PrincipalDetails implements UserDetails, OAuth2User{
 
     @Override
     public String getName() {
-        String name = attributes.get("sub").toString();
-        return name;
+        return oAuth2UserInfo.getProviderId();
     }
 }
