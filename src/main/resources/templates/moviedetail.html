@@ -20,10 +20,29 @@
 장르: <span th:text="${genreNm}"></span></br>
 감독: <span th:text="${peopleNm}"></span></br>
 배우: <span th:text="${actorNm}"></span></br>
-<form th:action="@{/{movie_title}/review (movie_title=${movie_title})}" >
+<form th:action="@{/{movie_title}/review (movie_title=${movie_title})}"  >
 
     <button type="submit" >리뷰</button>
 </form>
+<table id="PostsTable">
+    <tr>
+
+        <th>작성자</th>
+        <th>제목</th>
+        <th>내용</th>
+    </tr>
+    <p th:text="${detailList}"></p>
+    <!-- th: each를 이용하면 반복문을 이용할 수 있다. -->
+    <!-- th:each="student, studentStat: ${studentList}" 와 동일하며
+              status를 명시하지 않더라도 앞의 "오브젝트명stat" 를 이용하여 접근 가능하다. -->
+    <tr th:each="Posts: ${Posts}">
+        <td th:text="${Posts.author}"></td>
+        <td th:text="${Posts.title}"></td>
+        <td th:text="${Posts.content}"></td>
+
+
+    </tr>
+</table>
 <button type="button" >추천</button>
 </body>
 </html>

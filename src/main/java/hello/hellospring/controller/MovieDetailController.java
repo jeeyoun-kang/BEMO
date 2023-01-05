@@ -1,7 +1,9 @@
 package hello.hellospring.controller;
 
+import hello.hellospring.service.PostsService;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,10 +29,12 @@ import java.util.Map;
 
 @Controller
 public class MovieDetailController {
-
+    @Autowired
+    PostsService postsService;
     @RequestMapping("/moviedetail/{detail}/{code}")
-    public String moviedetail(Model model, @PathVariable String detail,@PathVariable String code)
-    {
+    public String moviedetail(Model model, @PathVariable String detail, @PathVariable String code) {
+        //System.out.println(fromDTO);
+        model.addAttribute("Posts",postsService.findByMvtitle(detail)); // Service 접근
         model.addAttribute("movie_title",detail);
         model.addAttribute("code",code);
 
