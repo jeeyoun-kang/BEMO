@@ -18,23 +18,31 @@
     <button type="submit" onclick="location.href='./ticket'">티켓페이지</button>
     <button type="submit" onclick="location.href='./searchfirst'">검색</button>
     <button type="submit" onclick="location.href='./'">홈</button>
-    <button id="show">로그인</button>
-    <button type="submit" onclick="location.href='./signup'">회원가입</button>
+    <button sec:authorize="isAnonymous()" id="show">로그인</button>
+    <button sec:authorize="isAnonymous()" type="submit" onclick="location.href='./signup'">회원가입</button>
+    <button sec:authorize="isAuthenticated()" id="logoutBt" type="submit" onclick="location.href='./logout'">로그아웃</button>
+    <h2>로그인 유저 : </h2>
+    <p sec:authentication="name"></p>
+
 </div>
 <div class="background">
     <div class="window">
         <div class="popup">
             <div class="loginHeader">로그인<button id="close">X</button></div>
             <div class="loginMain">
-                <form th:action="@{/signin}" form-method="post">
+                <form action="login" method="post">
                     <div><input type = "text" name ="username" placeholder="아이디" id = "username"></div>
                     <div><input type = "password" name = "password" placeholder="비밀번호" id="password"></div>
                     <div><input type = "checkbox" name = "preserve">아이디 저장</div>
-                    <div sec:authorize="isAnonymous()"><button id="loginBt" type="submit">로그인</button></div>
-                    <div sec:authorize="isAuthenticated()" ><button href="/logout" id="logoutBt" type="submit">로그아웃</button></div>
+<!--                    <button id="loginBt" type="submit">로그인</button>-->
+                    <div><button id="loginBt" type="submit">로그인</button></div>
                 </form>
             </div>
-            <div class="loginFooter" id="naverIdLogin"></div>
+            <div class="loginFooter">
+                <a id="naverIdLogin_loginButton" href="/oauth2/authorization/naver">
+                    <img src="https://static.nid.naver.com/oauth/big_g.PNG?version=js-2.0.1" height="60">
+                </a>
+            </div>
         </div>
     </div>
 </div>

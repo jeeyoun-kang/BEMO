@@ -58,18 +58,17 @@ public class WebSecurityConfig{
                 .and()
                 .formLogin()
                 .loginPage("/") // 로그인 페이지 링크
-                .loginProcessingUrl("/signin")
+                .loginProcessingUrl("/login")
                 .defaultSuccessUrl("/") // 로그인 성공 후 리다이렉트 주소
                 .failureForwardUrl("/error")
                 .and()
                 .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))
+                .logoutUrl("/logout")			// 로그아웃을 처리할 URL 입력
                 .logoutSuccessUrl("/")  // 로그아웃 성공시 리다이렉트 주소
                 .deleteCookies("JSESSIONID")
                 .invalidateHttpSession(true) // 세션 날리기
                 .and()
                 .oauth2Login()
-                .loginProcessingUrl("/oauth2join")
                 .defaultSuccessUrl("/")
                 .userInfoEndpoint()
                 .userService(customOAuth2UserService)
