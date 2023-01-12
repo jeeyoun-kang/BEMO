@@ -1,6 +1,5 @@
 package hello.hellospring.controller;
 
-import hello.hellospring.dto.PostsResponseDto;
 import hello.hellospring.dto.PostsSaveDto;
 import hello.hellospring.service.PostsService;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +25,7 @@ public class ApiController {
     }
 
     @GetMapping("/posts/{id}")
-    public PostsResponseDto findById(@PathVariable Long id) {
+    public PostsSaveDto findById(@PathVariable Long id) {
         return postsService.findById(id);
     }
 }

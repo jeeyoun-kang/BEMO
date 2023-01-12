@@ -31,4 +31,12 @@ public class PostsSaveDto {
                 .mvtitle(mvtitle)
                 .build();
     }
+
+    public PostsSaveDto(Posts entity){
+        this.id = entity.getPost_id();
+        this.title = entity.getTitle();
+        this.content = entity.getContent();
+        this.author = entity.getAuthor();
+        this.mvtitle = entity.getMvtitle();
+    }
 }

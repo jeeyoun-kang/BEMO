@@ -146,39 +146,163 @@ public class MovieDetailController {
             jsonratio.add(String.valueOf(ratio)); //소숫점 제거
 
         }
+        if(jsonperiod.size()==7) {
+            String period1 = jsonperiod.get(0);
+            String ratio1 = jsonratio.get(0);
+            model.addAttribute("period1",period1);
+            model.addAttribute("ratio1",ratio1);
 
-        String period1 = jsonperiod.get(0);
-        String ratio1 = jsonratio.get(0);
-        String period2 = jsonperiod.get(1);
-        String ratio2 = jsonratio.get(1);
-        String period3 = jsonperiod.get(2);
-        String ratio3 = jsonratio.get(2);
-        String period4 = jsonperiod.get(3);
-        String ratio4 = jsonratio.get(3);
-        String period5 = jsonperiod.get(4);
-        String ratio5 = jsonratio.get(4);
-        String period6 = jsonperiod.get(5);
-        String ratio6 = jsonratio.get(5);
-        String period7 = jsonperiod.get(6);
-        String ratio7 = jsonratio.get(6);
+            String period2 = jsonperiod.get(1);
+            String ratio2 = jsonratio.get(1);
+            model.addAttribute("period2",period2);
+            model.addAttribute("ratio2",ratio2);
 
-        model.addAttribute("period1",period1);
-        model.addAttribute("period2",period2);
-        model.addAttribute("period3",period3);
-        model.addAttribute("period4",period4);
-        model.addAttribute("period5",period5);
-        model.addAttribute("period6",period6);
-        model.addAttribute("period7",period7);
+            String period3 = jsonperiod.get(2);
+            String ratio3 = jsonratio.get(2);
+            model.addAttribute("period3",period3);
+            model.addAttribute("ratio3",ratio3);
+
+            String period4 = jsonperiod.get(3);
+            String ratio4 = jsonratio.get(3);
+            model.addAttribute("period4",period4);
+            model.addAttribute("ratio4",ratio4);
+
+            String period5 = jsonperiod.get(4);
+            String ratio5= jsonratio.get(4);
+            model.addAttribute("period5",period5);
+            model.addAttribute("ratio5",ratio5);
+
+            String period6 = jsonperiod.get(5);
+            String ratio6 = jsonratio.get(5);
+            model.addAttribute("period6",period6);
+            model.addAttribute("ratio6",ratio6);
+
+            String period7 = jsonperiod.get(6);
+            String ratio7 = jsonratio.get(6);
+            model.addAttribute("period7",period7);
+            model.addAttribute("ratio7",ratio7);
+        }
+        if(jsonperiod.size()==6) {
+            String period1 = jsonperiod.get(0);
+            String ratio1 = jsonratio.get(0);
+            model.addAttribute("period1",period1);
+            model.addAttribute("ratio1",ratio1);
+
+            String period2 = jsonperiod.get(1);
+            String ratio2 = jsonratio.get(1);
+            model.addAttribute("period2",period2);
+            model.addAttribute("ratio2",ratio2);
+
+            String period3 = jsonperiod.get(2);
+            String ratio3 = jsonratio.get(2);
+            model.addAttribute("period3",period3);
+            model.addAttribute("ratio3",ratio3);
+
+            String period4 = jsonperiod.get(3);
+            String ratio4 = jsonratio.get(3);
+            model.addAttribute("period4",period4);
+            model.addAttribute("ratio4",ratio4);
+
+            String period5 = jsonperiod.get(4);
+            String ratio5= jsonratio.get(4);
+            model.addAttribute("period5",period5);
+            model.addAttribute("ratio5",ratio5);
+
+            String period6 = jsonperiod.get(5);
+            String ratio6 = jsonratio.get(5);
+            model.addAttribute("period6",period6);
+            model.addAttribute("ratio6",ratio6);
 
 
-        model.addAttribute("ratio1",ratio1);
-        model.addAttribute("ratio2",ratio2);
-        model.addAttribute("ratio3",ratio3);
-        model.addAttribute("ratio4",ratio4);
-        model.addAttribute("ratio5",ratio5);
-        model.addAttribute("ratio6",ratio6);
-        model.addAttribute("ratio7",ratio7);
+        }
+        if(jsonperiod.size()==5) {
+            String period1 = jsonperiod.get(0);
+            String ratio1 = jsonratio.get(0);
+            model.addAttribute("period1",period1);
+            model.addAttribute("ratio1",ratio1);
 
+            String period2 = jsonperiod.get(1);
+            String ratio2 = jsonratio.get(1);
+            model.addAttribute("period2",period2);
+            model.addAttribute("ratio2",ratio2);
+
+            String period3 = jsonperiod.get(2);
+            String ratio3 = jsonratio.get(2);
+            model.addAttribute("period3",period3);
+            model.addAttribute("ratio3",ratio3);
+
+            String period4 = jsonperiod.get(3);
+            String ratio4 = jsonratio.get(3);
+            model.addAttribute("period4",period4);
+            model.addAttribute("ratio4",ratio4);
+
+            String period5 = jsonperiod.get(4);
+            String ratio5= jsonratio.get(4);
+            model.addAttribute("period5",period5);
+            model.addAttribute("ratio5",ratio5);
+
+
+        }
+        if(jsonperiod.size()==4) {
+            String period1 = jsonperiod.get(0);
+            String ratio1 = jsonratio.get(0);
+            model.addAttribute("period1",period1);
+            model.addAttribute("ratio1",ratio1);
+
+            String period2 = jsonperiod.get(1);
+            String ratio2 = jsonratio.get(1);
+            model.addAttribute("period2",period2);
+            model.addAttribute("ratio2",ratio2);
+
+            String period3 = jsonperiod.get(2);
+            String ratio3 = jsonratio.get(2);
+            model.addAttribute("period3",period3);
+            model.addAttribute("ratio3",ratio3);
+
+            String period4 = jsonperiod.get(3);
+            String ratio4 = jsonratio.get(3);
+            model.addAttribute("period4",period4);
+            model.addAttribute("ratio4",ratio4);
+
+
+        }
+        if(jsonperiod.size()==3) {
+            String period1 = jsonperiod.get(0);
+            String ratio1 = jsonratio.get(0);
+            model.addAttribute("period1",period1);
+            model.addAttribute("ratio1",ratio1);
+
+            String period2 = jsonperiod.get(1);
+            String ratio2 = jsonratio.get(1);
+            model.addAttribute("period2",period2);
+            model.addAttribute("ratio2",ratio2);
+
+            String period3 = jsonperiod.get(2);
+            String ratio3 = jsonratio.get(2);
+            model.addAttribute("period3",period3);
+            model.addAttribute("ratio3",ratio3);
+
+
+        }
+        if(jsonperiod.size()==2) {
+            String period1 = jsonperiod.get(0);
+            String ratio1 = jsonratio.get(0);
+            model.addAttribute("period1",period1);
+            model.addAttribute("ratio1",ratio1);
+
+            String period2 = jsonperiod.get(1);
+            String ratio2 = jsonratio.get(1);
+            model.addAttribute("period2",period2);
+            model.addAttribute("ratio2",ratio2);
+
+        }
+        if(jsonperiod.size()==1) {
+            String period1 = jsonperiod.get(0);
+            String ratio1 = jsonratio.get(0);
+            model.addAttribute("period1",period1);
+            model.addAttribute("ratio1",ratio1);
+
+        }
         return "moviedetail";
     }
 
@@ -280,43 +404,163 @@ public class MovieDetailController {
             jsonratio.add(String.valueOf(ratio)); //소숫점 제거
 
         }
+        if(jsonperiod.size()==7) {
+            String period1 = jsonperiod.get(0);
+            String ratio1 = jsonratio.get(0);
+            model.addAttribute("period1",period1);
+            model.addAttribute("ratio1",ratio1);
 
-        String period1 = jsonperiod.get(0);
-        String ratio1 = jsonratio.get(0);
-        String period2 = jsonperiod.get(1);
-        String ratio2 = jsonratio.get(1);
-        String period3 = jsonperiod.get(2);
-        String ratio3 = jsonratio.get(2);
-        String period4 = jsonperiod.get(3);
-        String ratio4 = jsonratio.get(3);
-        String period5 = jsonperiod.get(4);
-        String ratio5 = jsonratio.get(4);
-        String period6 = jsonperiod.get(5);
-        String ratio6 = jsonratio.get(5);
-        String period7 = jsonperiod.get(6);
-        String ratio7 = jsonratio.get(6);
+            String period2 = jsonperiod.get(1);
+            String ratio2 = jsonratio.get(1);
+            model.addAttribute("period2",period2);
+            model.addAttribute("ratio2",ratio2);
 
-        model.addAttribute("period1",period1);
-        model.addAttribute("period2",period2);
-        model.addAttribute("period3",period3);
-        model.addAttribute("period4",period4);
-        model.addAttribute("period5",period5);
-        model.addAttribute("period6",period6);
-        model.addAttribute("period7",period7);
+            String period3 = jsonperiod.get(2);
+            String ratio3 = jsonratio.get(2);
+            model.addAttribute("period3",period3);
+            model.addAttribute("ratio3",ratio3);
+
+            String period4 = jsonperiod.get(3);
+            String ratio4 = jsonratio.get(3);
+            model.addAttribute("period4",period4);
+            model.addAttribute("ratio4",ratio4);
+
+            String period5 = jsonperiod.get(4);
+            String ratio5= jsonratio.get(4);
+            model.addAttribute("period5",period5);
+            model.addAttribute("ratio5",ratio5);
+
+            String period6 = jsonperiod.get(5);
+            String ratio6 = jsonratio.get(5);
+            model.addAttribute("period6",period6);
+            model.addAttribute("ratio6",ratio6);
+
+            String period7 = jsonperiod.get(6);
+            String ratio7 = jsonratio.get(6);
+            model.addAttribute("period7",period7);
+            model.addAttribute("ratio7",ratio7);
+        }
+        if(jsonperiod.size()==6) {
+            String period1 = jsonperiod.get(0);
+            String ratio1 = jsonratio.get(0);
+            model.addAttribute("period1",period1);
+            model.addAttribute("ratio1",ratio1);
+
+            String period2 = jsonperiod.get(1);
+            String ratio2 = jsonratio.get(1);
+            model.addAttribute("period2",period2);
+            model.addAttribute("ratio2",ratio2);
+
+            String period3 = jsonperiod.get(2);
+            String ratio3 = jsonratio.get(2);
+            model.addAttribute("period3",period3);
+            model.addAttribute("ratio3",ratio3);
+
+            String period4 = jsonperiod.get(3);
+            String ratio4 = jsonratio.get(3);
+            model.addAttribute("period4",period4);
+            model.addAttribute("ratio4",ratio4);
+
+            String period5 = jsonperiod.get(4);
+            String ratio5= jsonratio.get(4);
+            model.addAttribute("period5",period5);
+            model.addAttribute("ratio5",ratio5);
+
+            String period6 = jsonperiod.get(5);
+            String ratio6 = jsonratio.get(5);
+            model.addAttribute("period6",period6);
+            model.addAttribute("ratio6",ratio6);
 
 
-        model.addAttribute("ratio1",ratio1);
-        model.addAttribute("ratio2",ratio2);
-        model.addAttribute("ratio3",ratio3);
-        model.addAttribute("ratio4",ratio4);
-        model.addAttribute("ratio5",ratio5);
-        model.addAttribute("ratio6",ratio6);
-        model.addAttribute("ratio7",ratio7);
+        }
+        if(jsonperiod.size()==5) {
+            String period1 = jsonperiod.get(0);
+            String ratio1 = jsonratio.get(0);
+            model.addAttribute("period1",period1);
+            model.addAttribute("ratio1",ratio1);
+
+            String period2 = jsonperiod.get(1);
+            String ratio2 = jsonratio.get(1);
+            model.addAttribute("period2",period2);
+            model.addAttribute("ratio2",ratio2);
+
+            String period3 = jsonperiod.get(2);
+            String ratio3 = jsonratio.get(2);
+            model.addAttribute("period3",period3);
+            model.addAttribute("ratio3",ratio3);
+
+            String period4 = jsonperiod.get(3);
+            String ratio4 = jsonratio.get(3);
+            model.addAttribute("period4",period4);
+            model.addAttribute("ratio4",ratio4);
+
+            String period5 = jsonperiod.get(4);
+            String ratio5= jsonratio.get(4);
+            model.addAttribute("period5",period5);
+            model.addAttribute("ratio5",ratio5);
 
 
-        System.out.println(period1);
-        System.out.println(ratio1);
+        }
+        if(jsonperiod.size()==4) {
+            String period1 = jsonperiod.get(0);
+            String ratio1 = jsonratio.get(0);
+            model.addAttribute("period1",period1);
+            model.addAttribute("ratio1",ratio1);
 
+            String period2 = jsonperiod.get(1);
+            String ratio2 = jsonratio.get(1);
+            model.addAttribute("period2",period2);
+            model.addAttribute("ratio2",ratio2);
+
+            String period3 = jsonperiod.get(2);
+            String ratio3 = jsonratio.get(2);
+            model.addAttribute("period3",period3);
+            model.addAttribute("ratio3",ratio3);
+
+            String period4 = jsonperiod.get(3);
+            String ratio4 = jsonratio.get(3);
+            model.addAttribute("period4",period4);
+            model.addAttribute("ratio4",ratio4);
+
+
+        }
+        if(jsonperiod.size()==3) {
+            String period1 = jsonperiod.get(0);
+            String ratio1 = jsonratio.get(0);
+            model.addAttribute("period1",period1);
+            model.addAttribute("ratio1",ratio1);
+
+            String period2 = jsonperiod.get(1);
+            String ratio2 = jsonratio.get(1);
+            model.addAttribute("period2",period2);
+            model.addAttribute("ratio2",ratio2);
+
+            String period3 = jsonperiod.get(2);
+            String ratio3 = jsonratio.get(2);
+            model.addAttribute("period3",period3);
+            model.addAttribute("ratio3",ratio3);
+
+
+        }
+        if(jsonperiod.size()==2) {
+            String period1 = jsonperiod.get(0);
+            String ratio1 = jsonratio.get(0);
+            model.addAttribute("period1",period1);
+            model.addAttribute("ratio1",ratio1);
+
+            String period2 = jsonperiod.get(1);
+            String ratio2 = jsonratio.get(1);
+            model.addAttribute("period2",period2);
+            model.addAttribute("ratio2",ratio2);
+
+        }
+        if(jsonperiod.size()==1) {
+            String period1 = jsonperiod.get(0);
+            String ratio1 = jsonratio.get(0);
+            model.addAttribute("period1",period1);
+            model.addAttribute("ratio1",ratio1);
+
+        }
         return "moviedetail2";
     }
 
