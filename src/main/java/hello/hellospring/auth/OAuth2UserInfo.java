@@ -6,8 +6,8 @@ public interface OAuth2UserInfo {
     Map<String, Object> getAttributes();
     String getProviderId();
     String getProvider();
-    String getEmail();
-    String getName();
+    String getNickname();
     String getBirthday();
     String getCellphone();
+    String getBirthYear();
 }

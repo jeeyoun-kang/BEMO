@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<table id="PostsTable">
+  <tr>
+
+    <th>작성자</th>
+    <th>제목</th>
+    <th>내용</th>
+  </tr>
+  <!-- th: each를 이용하면 반복문을 이용할 수 있다. -->
+  <!-- th:each="student, studentStat: ${studentList}" 와 동일하며
+            status를 명시하지 않더라도 앞의 "오브젝트명stat" 를 이용하여 접근 가능하다. -->
+  <tr th:each="Posts: ${Posts}">
+    <td th:text="${Posts.author}"></td>
+    <td th:text="${Posts.title}"></td>
+    <td th:text="${Posts.content}"></td>
+
+
+  </tr>
+</table>
+</body>
+</html>

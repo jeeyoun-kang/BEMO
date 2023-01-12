@@ -8,11 +8,13 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @Entity
+@Table(name = "post")
 public class Posts {
 
     @Id //PK
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name="post_id")
+    private Long post_id;
 
     @Column(length = 500, nullable = false)
     private String title;
@@ -23,12 +25,19 @@ public class Posts {
     private String author;
 
     private String mvtitle;
+
+    @ManyToOne
+    @JoinColumn(name="user_no", nullable = false)
+    private User user;
+
     @Builder
-    public Posts(String title, String content, String author, String mvtitle) {
+    public Posts(Long id,String title, String content, String author, String mvtitle) {
+        this.post_id = id;
         this.title = title;
         this.content = content;
         this.author = author;
         this.mvtitle=mvtitle;
+        this.user = user;
     }
 
 

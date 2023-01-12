@@ -3,6 +3,8 @@ package hello.hellospring.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @ToString
@@ -21,6 +23,9 @@ public class User {
     @Column(name="loginType", nullable = false)
     private int loginType;
 
+    @Column(name="nickname", nullable = false)
+    private String nickname;
+
     @OneToOne
     @JoinColumn(name="auth_id")
     private Authentication auth;
@@ -34,10 +39,14 @@ public class User {
     @JoinColumn(name="social_login_id")
     private SocialLogin social;
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Posts> posts=new ArrayList<>();
+
     @Builder
-    public User(String username, int loginType, Authentication auth, Password pass, SocialLogin social){
+    public User(String username, int loginType, String nickname, Authentication auth, Password pass, SocialLogin social){
         this.username = username;
         this.loginType = loginType;
+        this.nickname = nickname;
         this.auth = auth;
         this.pass = pass;
         this.social = social;
@@ -45,16 +54,19 @@ public class User {
     public User(User user) {
         this.username = user.username;
         this.loginType = user.loginType;
+        this.nickname = user.nickname;
         this.auth = user.auth;
         this.pass = user.pass;
         this.social = user.social;
     }
 
-    public void update(String username, int loginType, Authentication auth, Password password){
-       this.username = username;
-       this.loginType = loginType;
-       this.auth = auth;
-       this.pass = password;
+    public void update(String username, int loginType, String nickname, Authentication auth, Password password, SocialLogin social){
+        this.username = username;
+        this.loginType = loginType;
+        this.nickname = nickname;
+        this.auth = auth;
+        this.pass = password;
+        this.social = social;
     }
 
 }

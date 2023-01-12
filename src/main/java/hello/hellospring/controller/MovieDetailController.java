@@ -4,6 +4,7 @@ import hello.hellospring.service.PostsService;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,15 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -29,6 +28,21 @@ import java.util.Map;
 
 @Controller
 public class MovieDetailController {
+    @Value("${search.client.id}")
+    private String searchClientId;
+    @Value("${search.client.secret}")
+    private String searchClientSecret;
+    @Value("${search.apiURL1}")
+    private String searchApiURL1;
+    @Value("${search.apiURL2}")
+    private String searchApiURL2;
+    @Value("${data.client.id}")
+    private String dataclientId;
+    @Value("${data.client.secret}")
+    private String dataclientSecret;
+    @Value("${data.apiURL}")
+    private String dataApiURL;
+
     @Autowired
     PostsService postsService;
     @RequestMapping("/moviedetail/{detail}/{code}")
@@ -38,14 +52,11 @@ public class MovieDetailController {
         model.addAttribute("movie_title",detail);
         model.addAttribute("code",code);
 
-
-        String clientId = "TP8GiRPSMSd67q5Ioip1"; //애플리케이션 클라이언트 아이디값"
-        String clientSecret = "AS7oKyBvW4"; //애플리케이션 클라이언트 시크릿값"
-        String apiURL = "https://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key=f5eef3421c602c6cb7ea224104795888&movieCd=" + code;    // json 결과
+        String apiURL = searchApiURL1 + code;    // json 결과
 
         Map<String, String> requestHeaders2 = new HashMap<>();//
-        requestHeaders2.put("X-Naver-Client-Id", clientId);
-        requestHeaders2.put("X-Naver-Client-Secret", clientSecret);
+        requestHeaders2.put("X-Naver-Client-Id", searchClientId);
+        requestHeaders2.put("X-Naver-Client-Secret", searchClientSecret);
         String responseBody = get(apiURL,requestHeaders2);
 
         List<String> jsonlistopen = new ArrayList<String>();
@@ -94,33 +105,97 @@ public class MovieDetailController {
         String actorstr = String.join(",", jsonlistactor);
         model.addAttribute("actorNm",actorstr);
 
+        Map<String, String> requestHeaders = new HashMap<>();
+        requestHeaders.put("X-Naver-Client-Id", dataclientId);
+        requestHeaders.put("X-Naver-Client-Secret", dataclientSecret);
+        requestHeaders.put("Content-Type", "application/json");
+
+        LocalDate now = LocalDate.now(); //현재 날짜
+        LocalDate lastmonth = now.minusMonths(1); //현재 날짜 기준 한달 전
+        LocalDate lastseven = now.minusWeeks(1); //현재 날짜 기준 일주일 전
 
 
+
+        String requestBody = "{\"startDate\":\""+lastseven+"\"," +
+                "\"endDate\":\""+now+"\"," +
+                "\"timeUnit\":\"date\"," +
+                "\"keywordGroups\":[{\"groupName\":\"영화\"," + "\"keywords\":[\""+detail+"\"]}]," +
+
+                "\"device\":\"pc\"," +
+                "\"ages\":[\"1\"]," +
+                "\"gender\":\"\"}";
+
+        String responseBody2 = post(dataApiURL, requestHeaders, requestBody);
+        System.out.println(responseBody2);
+        JSONObject jObject2 = new JSONObject(responseBody2);
+        JSONArray batter = jObject2.getJSONArray("results");
+        JSONObject inner_json = batter.getJSONObject(0);
+
+        JSONArray jObject3 = inner_json.getJSONArray("data");
+
+
+        List<String> jsonperiod = new ArrayList<String>();
+        List<String> jsonratio = new ArrayList<String>();
+
+        for(int i=0; i < jObject3.length();i++){
+            JSONObject obj = jObject3.getJSONObject(i);
+            String period = obj.getString("period"); //영화코드
+            Integer ratio = obj.getInt("ratio"); //영
+
+            jsonperiod.add(period);
+            jsonratio.add(String.valueOf(ratio)); //소숫점 제거
+
+        }
+
+        String period1 = jsonperiod.get(0);
+        String ratio1 = jsonratio.get(0);
+        String period2 = jsonperiod.get(1);
+        String ratio2 = jsonratio.get(1);
+        String period3 = jsonperiod.get(2);
+        String ratio3 = jsonratio.get(2);
+        String period4 = jsonperiod.get(3);
+        String ratio4 = jsonratio.get(3);
+        String period5 = jsonperiod.get(4);
+        String ratio5 = jsonratio.get(4);
+        String period6 = jsonperiod.get(5);
+        String ratio6 = jsonratio.get(5);
+        String period7 = jsonperiod.get(6);
+        String ratio7 = jsonratio.get(6);
+
+        model.addAttribute("period1",period1);
+        model.addAttribute("period2",period2);
+        model.addAttribute("period3",period3);
+        model.addAttribute("period4",period4);
+        model.addAttribute("period5",period5);
+        model.addAttribute("period6",period6);
+        model.addAttribute("period7",period7);
+
+
+        model.addAttribute("ratio1",ratio1);
+        model.addAttribute("ratio2",ratio2);
+        model.addAttribute("ratio3",ratio3);
+        model.addAttribute("ratio4",ratio4);
+        model.addAttribute("ratio5",ratio5);
+        model.addAttribute("ratio6",ratio6);
+        model.addAttribute("ratio7",ratio7);
 
         return "moviedetail";
-
-
     }
 
     @RequestMapping("/moviedetail/{detail}")
     public String moviedetail(Model model, @PathVariable String detail)
     {
+        model.addAttribute("Posts",postsService.findByMvtitle(detail)); // Service 접근
         model.addAttribute("movie_title",detail);
-
-
-        String clientId = "TP8GiRPSMSd67q5Ioip1"; //애플리케이션 클라이언트 아이디값"
-        String clientSecret = "AS7oKyBvW4"; //애플리케이션 클라이언트 시크릿값"
 
         String text = null;
         text = URLEncoder.encode(detail, StandardCharsets.UTF_8);
 
-        String apiURL = "https://openapi.naver.com/v1/search/movie.json?query=" + text;    // json 결과
-        //String apiURL = "https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchWeeklyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt=" + text;
-
+        String apiURL = searchApiURL2 + text;    // json 결과
 
         Map<String, String> requestHeaders = new HashMap<>();
-        requestHeaders.put("X-Naver-Client-Id", clientId);
-        requestHeaders.put("X-Naver-Client-Secret", clientSecret);
+        requestHeaders.put("X-Naver-Client-Id", searchClientId);
+        requestHeaders.put("X-Naver-Client-Secret", searchClientSecret);
         String responseBody = get(apiURL,requestHeaders);
 
         model.addAttribute("jsonbody",responseBody);
@@ -150,10 +225,6 @@ public class MovieDetailController {
             actor=actor.replaceAll("\\|",",");
             actor=actor.replaceAll("\\<.*?>","");
 
-
-
-
-
             jsonlisttitle.add(title);
             jsonlistimage.add(image);
             jsonlistdi.add(director);
@@ -168,11 +239,113 @@ public class MovieDetailController {
         model.addAttribute("movie_title",jsonlisttitle.get(0));
         model.addAttribute("image1",jsonlistimage.get(0));
 
+        Map<String, String> requestHeaders2 = new HashMap<>();
+        requestHeaders2.put("X-Naver-Client-Id", dataclientId);
+        requestHeaders2.put("X-Naver-Client-Secret", dataclientSecret);
+        requestHeaders2.put("Content-Type", "application/json");
 
+        LocalDate now = LocalDate.now(); //현재 날짜
+        LocalDate lastmonth = now.minusMonths(1); //현재 날짜 기준 한달 전
+        LocalDate lastseven = now.minusWeeks(1); //현재 날짜 기준 일주일 전
+
+
+        String requestBody = "{\"startDate\":\""+lastseven+"\"," +
+                "\"endDate\":\""+now+"\"," +
+                "\"timeUnit\":\"date\"," +
+                "\"keywordGroups\":[{\"groupName\":\"영화\"," + "\"keywords\":[\""+detail+"\"]}]," +
+
+                "\"device\":\"pc\"," +
+                "\"ages\":[\"1\"]," +
+                "\"gender\":\"\"}";
+
+        String responseBody2 = post(dataApiURL, requestHeaders2, requestBody);
+
+        JSONObject jObject2 = new JSONObject(responseBody2);
+
+        JSONArray batter = jObject2.getJSONArray("results");
+        JSONObject inner_json = batter.getJSONObject(0);
+
+        JSONArray jObject3 = inner_json.getJSONArray("data");
+
+
+        List<String> jsonperiod = new ArrayList<String>();
+        List<String> jsonratio = new ArrayList<String>();
+
+        for(int i=0; i < jObject3.length();i++){
+            JSONObject obj = jObject3.getJSONObject(i);
+            String period = obj.getString("period"); //영화코드
+            Integer ratio = obj.getInt("ratio"); //영
+
+            jsonperiod.add(period);
+            jsonratio.add(String.valueOf(ratio)); //소숫점 제거
+
+        }
+
+        String period1 = jsonperiod.get(0);
+        String ratio1 = jsonratio.get(0);
+        String period2 = jsonperiod.get(1);
+        String ratio2 = jsonratio.get(1);
+        String period3 = jsonperiod.get(2);
+        String ratio3 = jsonratio.get(2);
+        String period4 = jsonperiod.get(3);
+        String ratio4 = jsonratio.get(3);
+        String period5 = jsonperiod.get(4);
+        String ratio5 = jsonratio.get(4);
+        String period6 = jsonperiod.get(5);
+        String ratio6 = jsonratio.get(5);
+        String period7 = jsonperiod.get(6);
+        String ratio7 = jsonratio.get(6);
+
+        model.addAttribute("period1",period1);
+        model.addAttribute("period2",period2);
+        model.addAttribute("period3",period3);
+        model.addAttribute("period4",period4);
+        model.addAttribute("period5",period5);
+        model.addAttribute("period6",period6);
+        model.addAttribute("period7",period7);
+
+
+        model.addAttribute("ratio1",ratio1);
+        model.addAttribute("ratio2",ratio2);
+        model.addAttribute("ratio3",ratio3);
+        model.addAttribute("ratio4",ratio4);
+        model.addAttribute("ratio5",ratio5);
+        model.addAttribute("ratio6",ratio6);
+        model.addAttribute("ratio7",ratio7);
+
+
+        System.out.println(period1);
+        System.out.println(ratio1);
 
         return "moviedetail2";
+    }
 
+    private static String post(String apiUrl, Map<String, String> requestHeaders, String requestBody) {
+        HttpURLConnection con = connect(apiUrl);
 
+        try {
+            con.setRequestMethod("POST");
+            for(Map.Entry<String, String> header :requestHeaders.entrySet()) {
+                con.setRequestProperty(header.getKey(), header.getValue());
+            }
+
+            con.setDoOutput(true);
+            try (DataOutputStream wr = new DataOutputStream(con.getOutputStream())) {
+                wr.write(requestBody.getBytes());
+                wr.flush();
+            }
+
+            int responseCode = con.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) { // 정상 응답
+                return readBody(con.getInputStream());
+            } else {  // 에러 응답
+                return readBody(con.getErrorStream());
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("API 요청과 응답 실패", e);
+        } finally {
+            con.disconnect(); // Connection을 재활용할 필요가 없는 프로세스일 경우
+        }
     }
 
     private static String get(String apiUrl, Map<String, String> requestHeaders){

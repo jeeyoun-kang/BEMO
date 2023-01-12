@@ -31,7 +31,6 @@
         <th>제목</th>
         <th>내용</th>
     </tr>
-    <p th:text="${detailList}"></p>
     <!-- th: each를 이용하면 반복문을 이용할 수 있다. -->
     <!-- th:each="student, studentStat: ${studentList}" 와 동일하며
               status를 명시하지 않더라도 앞의 "오브젝트명stat" 를 이용하여 접근 가능하다. -->
@@ -44,5 +43,91 @@
     </tr>
 </table>
 <button type="button" >추천</button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+<div style="width: 500px; height: 500px;">
+    <!--차트가 그려질 부분-->
+    <canvas id="myChart"></canvas>
+</div>
+<script th:inline="javascript">
+    var mvtitle=[[${movie_title}]];
+
+    const period1 = [[${period1}]];
+    const period2 = [[${period2}]];
+    const period3 = [[${period3}]];
+    const period4 = [[${period4}]];
+    const period5 = [[${period5}]];
+    const period6 = [[${period6}]];
+    const period7 = [[${period7}]];
+
+    const ratio1 = [[${ratio1}]];
+    const ratio2 = [[${ratio2}]];
+    const ratio3 = [[${ratio3}]];
+    const ratio4 = [[${ratio4}]];
+    const ratio5 = [[${ratio5}]];
+    const ratio6 = [[${ratio6}]];
+    const ratio7 = [[${ratio7}]];
+
+    var context = document
+        .getElementById('myChart')
+        .getContext('2d');
+    var myChart = new Chart(context, {
+        type: 'line', // 차트의 형태
+        data: { // 차트에 들어갈 데이터
+            labels: [
+                //x 축
+                period1,period2,period3,period4,period5,period6,period7
+            ],
+            datasets: [
+                { //데이터
+                    label: mvtitle+" 검색량", //차트 제목
+                    fill: false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
+                    data: [
+                        ratio1,ratio2,ratio3,ratio4,ratio5,ratio6,ratio7//x축 label에 대응되는 데이터 값
+                    ],
+                    backgroundColor: [
+                        //색상
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        //경계선 색상
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1 //경계선 굵기
+                }/* ,
+                        {
+                            label: 'test2',
+                            fill: false,
+                            data: [
+                                8, 34, 12, 24
+                            ],
+                            backgroundColor: 'rgb(157, 109, 12)',
+                            borderColor: 'rgb(157, 109, 12)'
+                        } */
+            ]
+        },
+        options: {
+            scales: {
+                yAxes: [
+                    {
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }
+                ]
+            }
+        }
+    });
+</script>
 </body>
 </html>

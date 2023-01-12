@@ -8,13 +8,15 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class PostsSaveDto {
+    private Long id;
+
     private String title;
     private String content;
     private String author;
-
     private String mvtitle;
     @Builder
-    public PostsSaveDto(String title,String content,String author,String mvtitle){
+    public PostsSaveDto(Long id,String title,String content,String author,String mvtitle){
+        this.id = id;
         this.title=title;
         this.content=content;
         this.author=author;
@@ -22,6 +24,7 @@ public class PostsSaveDto {
     }
     public Posts toEntity(){
         return Posts.builder()
+                .id(id)
                 .title(title)
                 .content(content)
                 .author(author)
