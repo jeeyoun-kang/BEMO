@@ -1,7 +1,11 @@
 package hello.hellospring.controller;
 
+import hello.hellospring.auth.PrincipalDetails;
+import hello.hellospring.service.PostsService;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,9 +28,14 @@ import static org.apache.el.util.MessageFactory.get;
 
 @Controller
 public class MainController {
+    @Autowired
+    PostsService postsService;
     @RequestMapping(value="/")
-    public String main(Model model) {
-
+    public String main(Model model, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+        if (principalDetails != null) {
+            model.addAttribute("userinfo", principalDetails.getUsername());
+        }
+        model.addAttribute("Posts",postsService.findAllDesc());
         // 어제 날짜 구하기 (시스템 시계, 시스템 타임존)
         Calendar c1 = new GregorianCalendar();
         c1.add(Calendar.DATE, -1); // 오늘날짜로부터 -1
@@ -65,11 +74,19 @@ public class MainController {
         String code2 = jsonlistmvcode.get(1);
         String code3 = jsonlistmvcode.get(2);
         String code4 = jsonlistmvcode.get(3);
+        String code5 = jsonlistmvcode.get(0);
+        String code6 = jsonlistmvcode.get(1);
+        String code7 = jsonlistmvcode.get(2);
+        String code8 = jsonlistmvcode.get(3);
 
         model.addAttribute("code1",code1);
         model.addAttribute("code2",code2);
         model.addAttribute("code3",code3);
         model.addAttribute("code4",code4);
+        model.addAttribute("code5",code5);
+        model.addAttribute("code6",code6);
+        model.addAttribute("code7",code7);
+        model.addAttribute("code8",code8);
 
 
 
@@ -84,11 +101,20 @@ public class MainController {
         String text2 = URLEncoder.encode(jsonlisttitle.get(1), StandardCharsets.UTF_8);
         String text3 = URLEncoder.encode(jsonlisttitle.get(2), StandardCharsets.UTF_8);
         String text4 = URLEncoder.encode(jsonlisttitle.get(3), StandardCharsets.UTF_8);
+        String text5 = URLEncoder.encode(jsonlisttitle.get(4), StandardCharsets.UTF_8);
+        String text6 = URLEncoder.encode(jsonlisttitle.get(5), StandardCharsets.UTF_8);
+        String text7 = URLEncoder.encode(jsonlisttitle.get(6), StandardCharsets.UTF_8);
+        String text8 = URLEncoder.encode(jsonlisttitle.get(7), StandardCharsets.UTF_8);
 
         String imageURL1 = "https://openapi.naver.com/v1/search/movie.json?query=" + text1;
         String imageURL2 = "https://openapi.naver.com/v1/search/movie.json?query=" + text2;
         String imageURL3 = "https://openapi.naver.com/v1/search/movie.json?query=" + text3;
         String imageURL4 = "https://openapi.naver.com/v1/search/movie.json?query=" + text4;
+        String imageURL5 = "https://openapi.naver.com/v1/search/movie.json?query=" + text5;
+        String imageURL6 = "https://openapi.naver.com/v1/search/movie.json?query=" + text6;
+        String imageURL7 = "https://openapi.naver.com/v1/search/movie.json?query=" + text7;
+        String imageURL8 = "https://openapi.naver.com/v1/search/movie.json?query=" + text8;
+
 
         Map<String, String> requestHeaders2 = new HashMap<>();
         requestHeaders2.put("X-Naver-Client-Id", clientId);
@@ -97,6 +123,10 @@ public class MainController {
         String responseBody2 = get(imageURL2,requestHeaders2);
         String responseBody3 = get(imageURL3,requestHeaders2);
         String responseBody4 = get(imageURL4,requestHeaders2);
+        String responseBody5 = get(imageURL5,requestHeaders2);
+        String responseBody6 = get(imageURL6,requestHeaders2);
+        String responseBody7 = get(imageURL7,requestHeaders2);
+        String responseBody8 = get(imageURL8,requestHeaders2);
 
         // 가장 큰 JSONObject를 가져옵니다.
         JSONObject Main1Object = new JSONObject(responseBody1);
@@ -113,6 +143,21 @@ public class MainController {
         JSONObject Main4Object = new JSONObject(responseBody4);
         // 배열을 가져옵니다.
         JSONArray jArray4 = Main4Object.getJSONArray("items");
+        JSONObject Main5Object = new JSONObject(responseBody5);
+        // 배열을 가져옵니다.
+        JSONArray jArray5 = Main5Object.getJSONArray("items");
+
+        JSONObject Main6Object = new JSONObject(responseBody6);
+        // 배열을 가져옵니다.
+        JSONArray jArray6 = Main6Object.getJSONArray("items");
+
+        JSONObject Main7Object = new JSONObject(responseBody7);
+        // 배열을 가져옵니다.
+        JSONArray jArray7 = Main7Object.getJSONArray("items");
+
+        JSONObject Main8Object = new JSONObject(responseBody8);
+        // 배열을 가져옵니다.
+        JSONArray jArray8 = Main8Object.getJSONArray("items");
 
         List<String> maintitle1 = new ArrayList<String>();
         List<String> mainimage1 = new ArrayList<String>();
@@ -122,6 +167,14 @@ public class MainController {
         List<String> mainimage3 = new ArrayList<String>();
         List<String> maintitle4 = new ArrayList<String>();
         List<String> mainimage4 = new ArrayList<String>();
+        List<String> maintitle5 = new ArrayList<String>();
+        List<String> mainimage5 = new ArrayList<String>();
+        List<String> maintitle6 = new ArrayList<String>();
+        List<String> mainimage6 = new ArrayList<String>();
+        List<String> maintitle7 = new ArrayList<String>();
+        List<String> mainimage7 = new ArrayList<String>();
+        List<String> maintitle8 = new ArrayList<String>();
+        List<String> mainimage8 = new ArrayList<String>();
         //List<String> jsonlistresult1 = new ArrayList<String>();
         // 배열의 모든 아이템을 출력합니다.
         for (int i = 0; i < jArray1.length(); i++) {
@@ -130,13 +183,8 @@ public class MainController {
             title = title.replaceAll("\\<.*?>","");
             title = title.replaceAll("&amp;","&");
             String image = obj.getString("image");
-//            boolean draft = obj.getBoolean("draft");
-//            System.out.println("title(" + i + "): " + title);
-//            System.out.println("image(" + i + "): " + image);
-//            System.out.println("draft(" + i + "): " + draft);
             maintitle1.add(title);
             mainimage1.add(image);
-//            System.out.println();
         }
         for (int i = 0; i < jArray2.length(); i++) {
             JSONObject obj = jArray2.getJSONObject(i);
@@ -144,13 +192,8 @@ public class MainController {
             title = title.replaceAll("\\<.*?>","");
             title = title.replaceAll("&amp;","&");
             String image = obj.getString("image");
-//            boolean draft = obj.getBoolean("draft");
-//            System.out.println("title(" + i + "): " + title);
-//            System.out.println("image(" + i + "): " + image);
-//            System.out.println("draft(" + i + "): " + draft);
             maintitle2.add(title);
             mainimage2.add(image);
-//            System.out.println();
         }
         for (int i = 0; i < jArray3.length(); i++) {
             JSONObject obj = jArray3.getJSONObject(i);
@@ -158,13 +201,8 @@ public class MainController {
             title = title.replaceAll("\\<.*?>","");
             title = title.replaceAll("&amp;","&");
             String image = obj.getString("image");
-//            boolean draft = obj.getBoolean("draft");
-//            System.out.println("title(" + i + "): " + title);
-//            System.out.println("image(" + i + "): " + image);
-//            System.out.println("draft(" + i + "): " + draft);
             maintitle3.add(title);
             mainimage3.add(image);
-//            System.out.println();
         }
         for (int i = 0; i < jArray4.length(); i++) {
             JSONObject obj = jArray4.getJSONObject(i);
@@ -172,13 +210,47 @@ public class MainController {
             title = title.replaceAll("\\<.*?>","");
             title = title.replaceAll("&amp;","&");
             String image = obj.getString("image");
-//            boolean draft = obj.getBoolean("draft");
-//            System.out.println("title(" + i + "): " + title);
-//            System.out.println("image(" + i + "): " + image);
-//            System.out.println("draft(" + i + "): " + draft);
             maintitle4.add(title);
             mainimage4.add(image);
-//            System.out.println();
+        }
+        for (int i = 0; i < jArray5.length(); i++) {
+            JSONObject obj = jArray5.getJSONObject(i);
+            String title = obj.getString("title");
+            title = title.replaceAll("\\<.*?>","");
+            title = title.replaceAll("&amp;","&");
+            String image = obj.getString("image");
+            maintitle5.add(title);
+            mainimage5.add(image);
+        }
+
+        for (int i = 0; i < jArray6.length(); i++) {
+            JSONObject obj = jArray6.getJSONObject(i);
+            String title = obj.getString("title");
+            title = title.replaceAll("\\<.*?>","");
+            title = title.replaceAll("&amp;","&");
+            String image = obj.getString("image");
+            maintitle6.add(title);
+            mainimage6.add(image);
+        }
+
+        for (int i = 0; i < jArray7.length(); i++) {
+            JSONObject obj = jArray7.getJSONObject(i);
+            String title = obj.getString("title");
+            title = title.replaceAll("\\<.*?>","");
+            title = title.replaceAll("&amp;","&");
+            String image = obj.getString("image");
+            maintitle7.add(title);
+            mainimage7.add(image);
+        }
+
+        for (int i = 0; i < jArray8.length(); i++) {
+            JSONObject obj = jArray8.getJSONObject(i);
+            String title = obj.getString("title");
+            title = title.replaceAll("\\<.*?>","");
+            title = title.replaceAll("&amp;","&");
+            String image = obj.getString("image");
+            maintitle8.add(title);
+            mainimage8.add(image);
         }
         //System.out.println(jsonlisttitle.get(1));
         model.addAttribute("boxtitle1",maintitle1.get(0));
@@ -189,6 +261,14 @@ public class MainController {
         model.addAttribute("boximage3",mainimage3.get(0));
         model.addAttribute("boxtitle4",maintitle4.get(0));
         model.addAttribute("boximage4",mainimage4.get(0));
+        model.addAttribute("boxtitle5",maintitle5.get(0));
+        model.addAttribute("boximage5",mainimage5.get(0));
+        model.addAttribute("boxtitle6",maintitle6.get(0));
+        model.addAttribute("boximage6",mainimage6.get(0));
+        model.addAttribute("boxtitle7",maintitle7.get(0));
+        model.addAttribute("boximage7",mainimage7.get(0));
+        model.addAttribute("boxtitle8",maintitle8.get(0));
+        model.addAttribute("boximage8",mainimage8.get(0));
 
         return "main";
     }

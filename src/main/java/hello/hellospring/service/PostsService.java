@@ -1,23 +1,35 @@
 package hello.hellospring.service;
 
+import hello.hellospring.auth.PrincipalDetails;
 import hello.hellospring.dto.PostsResponseDto;
 import hello.hellospring.dto.PostsSaveDto;
 import hello.hellospring.entity.Posts;
-import hello.hellospring.repository.PostsRepository;
-import lombok.RequiredArgsConstructor;
+import hello.hellospring.repository.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class PostsService {
     private final PostsRepository postsRepository;
+    private final PrincipalDetailsService principalDetailsService;
+
+    public PostsService(PostsRepository postsRepository, PrincipalDetailsService principalDetailsService) {
+        this.principalDetailsService = principalDetailsService;
+        this.postsRepository = postsRepository;
+    }
 
     @Transactional
     public Long save(PostsSaveDto requestDto) {
-        return postsRepository.save(requestDto.toEntity()).getId();
+        return postsRepository.save(requestDto.toEntity()).getPost_id();
+    }
+
+    @Transactional
+    public void setUser(PostsSaveDto requestDto) {
+        PrincipalDetails principalDetails = principalDetailsService.loadUserByUsername(requestDto.getAuthor());
+
+//        postsRepository.save()
     }
 
 
@@ -38,9 +50,9 @@ public class PostsService {
     }
 
 
-//    public List<Posts> findAllDesc(){
-//        return postsRepository.findAllDesc();
-//    }
+    public List<Posts> findAllDesc(){
+        return postsRepository.findAllDesc();
+    }
 
 
     public List<Posts> findByMvtitle(String mvtitle) {

@@ -45,6 +45,10 @@ div {
     width: 100%;
 }
 
+.nickname input {
+    width: 100%;
+}
+
 .password input {
     width: 100%;
 }

@@ -13,10 +13,18 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.header.writers.frameoptions.XFrameOptionsHeaderWriter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 @RequiredArgsConstructor
 @EnableWebSecurity // spring security 활성화
@@ -49,9 +57,10 @@ public class WebSecurityConfig{
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/login", "/signup", "/", "/review", "/searchfirst","/search", "/hashtag",
+                .antMatchers("/login","/profile", "/signup", "/", "/review", "/searchfirst","/search", "/hashtag",
                         "/ticketmain", "/suggest", "/send1", "/send2","/join", "/error", "/loginSuccess","/moviedetail",
-                        "/moviedetail/{detail}","/moviedetail/{detail}/{code}","/{movie_title}/review","/{movie_title}/review/posts").permitAll() // 누구나 접근 허용
+                        "/moviedetail/{detail}","/moviedetail/{detail}/{code}","/{movie_title}/review",
+                        "/{movie_title}/review/posts","/comments/{id}","/hello").permitAll() // 누구나 접근 허용
                 .antMatchers("/user").hasRole("USER") // USER, ADMIN만 접근 가능
                 .antMatchers("/admin").hasRole("ADMIN") // ADMIN만 접근 가능
                 .anyRequest().authenticated() // 나머지 요청들은 권한의 종류에 상관 없이 권한이 있어야 접근 가능

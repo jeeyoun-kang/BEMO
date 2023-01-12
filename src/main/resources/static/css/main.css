@@ -104,7 +104,7 @@
     padding-right: 25%;
 }
 
-h3{
+h2{
     width: 100px;
     margin: 0 auto;
 }
@@ -178,4 +178,51 @@ h3{
 }
 .movies .jb-a:hover .jb-b4{
     filter: brightness(70%);
+}
+.post{
+    float:left;
+}
+
+.movies .slide{
+    width:840px; height:200px;/**사진보다 크면 다음 사진까지 표시되어 img와 slide크기를 맞춘다.**/
+    overflow: hidden;/
+}
+
+.movies .images {
+
+    display: flex; /**좌우 슬라이드를 위해 flex로 사진을 가로정렬한다.**/
+    height:200px; /**slide와 images의 높이가 다르면 부자연스럽게 표시돼 slide의 높이에 맞게 높이를 바꾼다.**/
+    transition: transform 0.5s;
+    /**어떤 속성에 대해 애니메이션 효과를 주는 속성이다.
+    tranform속성에 0.5초의 듀레이션(동작의 시작해서 끝나는 시간)을 준다.**/
+
+}
+
+.movies .back{
+    position:relative;
+    bottom: 120px; right: 200px;
+    width: 30px; height: 30px;
+    color: white;
+    background: #646464;
+}
+.movies .next{
+    position:relative;
+    bottom: 120px; left: 680px;
+    width: 30px; height: 30px;
+    color: white;
+    background: #646464;
+}
+
+.movies .next:active{/**버튼을 클릭하는 동안 색을 바꾼다.**/
+    background:#3e3e3e;
+}
+.movies .next:disabled{/**버튼 속성이 disabled되면 색을 바꾼다.**/
+    background: #cbcaca;
+}
+
+.movies .back:active{/**버튼을 클릭하는 동안 색을 바꾼다.**/
+    background:#3e3e3e;
+}
+.movies .back:disabled{/**버튼 속성이 disabled되면 색을 바꾼다.**/
+    background: #cbcaca;
 }

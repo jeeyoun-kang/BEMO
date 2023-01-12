@@ -14,10 +14,12 @@ public class RequestDto {
     private String password;
     private String cellphone;
     private String birthday;
+    private String nickname;
 
     @Builder
-    public RequestDto(String username, String password, String cellphone, String birthday) {
+    public RequestDto(String username, String nickname, String password, String cellphone, String birthday) {
         this.username = username;
+        this.nickname = nickname;
         this.password = password;
         this.cellphone = cellphone;
         this.birthday = birthday;

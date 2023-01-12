@@ -12,7 +12,6 @@
         *{font-family: 'Jua', sans-serif;}
     </style>
 </head>
-
 <body>
 <div class = "btn">
     <button type="submit" onclick="location.href='./hashtag'">해시태그</button>
@@ -21,10 +20,15 @@
     <button sec:authorize="isAnonymous()" id="show">로그인</button>
     <button sec:authorize="isAnonymous()" type="submit" onclick="location.href='./signup'">회원가입</button>
     <button sec:authorize="isAuthenticated()" id="logoutBt" type="submit" onclick="location.href='./logout'">로그아웃</button>
-    <h2>로그인 유저 : </h2>
-    <p sec:authentication="name"></p>
-
-</div>
+<!--    <button sec:authorize="isAuthenticated()" type="submit" onclick="location.href='./profile'">프로필</button>-->
+    <form sec:authorize="isAuthenticated()" action="getUser()" th:action="@{profile}" method="post">
+        <input type="hidden" id="profile" th:name="userinfo" th:value="${userinfo}">
+        <input type="submit" value="프로필">
+    </form>
+    <div sec:authorize="isAuthenticated()">
+        <strong> 로그인 유저 : <span sec:authentication="principal.nickname"/></strong>
+    </div>
+</div><br>
 <div class="background">
     <div class="window">
         <div class="popup">
@@ -46,45 +50,151 @@
         </div>
     </div>
 </div>
-<h3>박스오피스</h3>
+<h2>박스오피스</h2>
 <div class="movies">
-    <div class="jb-a">
-        <form th:action="@{/moviedetail/{detail}/{code} (detail=${boxtitle1},code=${code1})}" >
-        <button type="submit" style="background-color:transparent; border:0; outline:0;" >
-        <img class="jb-b1" th:src = "${boximage1}"/>
-        <h4 class="jb-c1" th:text = "${boxtitle1}"/>
-        </button>
-        </form>
-    </div>
-    <div class="jb-a">
-        <form th:action="@{/moviedetail/{detail}/{code} (detail=${boxtitle2},code=${code2})}" >
-        <button type="submit" style="background-color:transparent; border:0; outline:0;" >
-        <img class="jb-b2" th:src = "${boximage2}"/>
-        <h4 class="jb-c2"  th:text = "${boxtitle2}"/>
-        </button>
-        </form>
-    </div>
-    <div class="jb-a">
-        <form th:action="@{/moviedetail/{detail}/{code} (detail=${boxtitle3},code=${code3})}" >
-            <button type="submit" style="background-color:transparent; border:0; outline:0;" >
-        <img class="jb-b3" th:src = "${boximage3}"/>
-        <h4 class="jb-c3" th:text = "${boxtitle3}"/>
-        </button>
-        </form>
+    <div class="slide">
+        <div class="images">
+            <div class="jb-a">
+                <form th:action="@{/moviedetail/{detail}/{code} (detail=${boxtitle1},code=${code1})}" >
+                    <button type="submit" style="background-color:transparent; border:0; outline:0;" >
+                        <img class="jb-b1" th:src = "${boximage1}"/>
+                        <h4 class="jb-c1" th:text = "${boxtitle1}"/>
+                    </button>
+                </form>
+            </div>
+            <div class="jb-a">
+                <form th:action="@{/moviedetail/{detail}/{code} (detail=${boxtitle2},code=${code2})}" >
+                    <button type="submit" style="background-color:transparent; border:0; outline:0;" >
+                        <img class="jb-b2" th:src = "${boximage2}"/>
+                        <h4 class="jb-c2"  th:text = "${boxtitle2}"/>
+                    </button>
+                </form>
+            </div>
+            <div class="jb-a">
+                <form th:action="@{/moviedetail/{detail}/{code} (detail=${boxtitle3},code=${code3})}" >
+                    <button type="submit" style="background-color:transparent; border:0; outline:0;" >
+                        <img class="jb-b3" th:src = "${boximage3}"/>
+                        <h4 class="jb-c3" th:text = "${boxtitle3}"/>
+                    </button>
+                </form>
 
+            </div>
+            <div class="jb-a">
+                <form th:action="@{/moviedetail/{detail}/{code} (detail=${boxtitle4},code=${code4})}" >
+                    <button type="submit" style="background-color:transparent; border:0; outline:0;" >
+                        <img class="jb-b4" th:src = "${boximage4}"/>
+                        <h4 class="jb-c4"  th:text = "${boxtitle4}"/>
+                    </button>
+                </form>
+            </div>
+            <div class="jb-a">
+                <form th:action="@{/moviedetail/{detail}/{code} (detail=${boxtitle5},code=${code5})}" >
+                    <button type="submit" style="background-color:transparent; border:0; outline:0;" >
+                        <img class="jb-b1" th:src = "${boximage5}"/>
+                        <h4 class="jb-c1" th:text = "${boxtitle5}"/>
+                    </button>
+                </form>
+            </div>
+            <div class="jb-a">
+                <form th:action="@{/moviedetail/{detail}/{code} (detail=${boxtitle6},code=${code6})}" >
+                    <button type="submit" style="background-color:transparent; border:0; outline:0;" >
+                        <img class="jb-b2" th:src = "${boximage6}"/>
+                        <h4 class="jb-c2"  th:text = "${boxtitle6}"/>
+                    </button>
+                </form>
+            </div>
+            <div class="jb-a">
+                <form th:action="@{/moviedetail/{detail}/{code} (detail=${boxtitle7},code=${code7})}" >
+                    <button type="submit" style="background-color:transparent; border:0; outline:0;" >
+                        <img class="jb-b3" th:src = "${boximage7}"/>
+                        <h4 class="jb-c3" th:text = "${boxtitle7}"/>
+                    </button>
+                </form>
+
+            </div>
+            <div class="jb-a">
+                <form th:action="@{/moviedetail/{detail}/{code} (detail=${boxtitle8},code=${code8})}" >
+                    <button type="submit" style="background-color:transparent; border:0; outline:0;" >
+                        <img class="jb-b4" th:src = "${boximage8}"/>
+                        <h4 class="jb-c4"  th:text = "${boxtitle8}"/>
+                    </button>
+                </form>
+            </div>
+        </div>
     </div>
-    <div class="jb-a">
-        <form th:action="@{/moviedetail/{detail}/{code} (detail=${boxtitle4},code=${code4})}" >
-        <button type="submit" style="background-color:transparent; border:0; outline:0;" >
-        <img class="jb-b4" th:src = "${boximage4}"/>
-        <h4 class="jb-c4"  th:text = "${boxtitle4}"/>
-        </button>
-        </form>
+    <button class="back">❮</button>
+    <button class="next">❯</button>
+
+    <div class="post">
+        <table id="PostsTable">
+            <h3>Review</h3>
+            <tr>
+
+                <th>작성자</th>
+                <th>제목</th>
+                <th>내용</th>
+            </tr>
+            <!-- th: each를 이용하면 반복문을 이용할 수 있다. -->
+            <!-- th:each="student, studentStat: ${studentList}" 와 동일하며
+                      status를 명시하지 않더라도 앞의 "오브젝트명stat" 를 이용하여 접근 가능하다. -->
+
+            <tr th:each="Posts: ${Posts}">
+                <form th:action="@{/comments/{id} (id=${Posts.id})}" >
+
+                    <td th:text="${Posts.author}"></td>
+                    <td><button type="submit" th:text="${Posts.title}"></button></td>
+                    <td th:text="${Posts.content}"></td>
+
+                </form>
+            </tr>
+
+        </table>
     </div>
 </div>
 
 <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js"
         charSet="utf-8"></script>
 <script type="text/javascript" src="/js/main.js"></script>
+<script>
+    let pages = 0;//현재 인덱스 번호
+    let positionValue = 0;//images 위치값
+    const IMAGE_WIDTH = 212;//한번 이동 시 IMAGE_WIDTH만큼 이동한다.
+    //DOM
+    const backBtn = document.querySelector(".back")
+    const nextBtn = document.querySelector(".next")
+    const images = document.querySelector(".images")
+
+    function next() {
+        if (pages< 4) {
+            backBtn.removeAttribute('disabled')//뒤로 이동해 더이상 disabled가 아니여서 속성을 삭제한다.
+            positionValue -= IMAGE_WIDTH;//IMAGE_WIDTH의 증감을 positionValue에 저장한다.
+            images.style.transform = `translateX(${positionValue}px)`;
+            //x축으로 positionValue만큼의 px을 이동한다.
+            pages += 1; //다음 페이지로 이동해서 pages를 1증가 시킨다.
+        }
+        if (pages === 4) { //
+            nextBtn.setAttribute('disabled', 'true')//마지막 장일 때 next버튼이 disabled된다.
+        }
+    }
+
+    function back() {
+        if (pages > 0) {
+            nextBtn.removeAttribute('disabled')
+            positionValue += IMAGE_WIDTH;
+            images.style.transform = `translateX(${positionValue}px)`;
+            pages -= 1; //이전 페이지로 이동해서 pages를 1감소 시킨다.
+        }
+        if (pages === 0) {
+            backBtn.setAttribute('disabled', 'true')//마지막 장일 때 back버튼이 disabled된다.
+        }
+    }
+
+    function init() {  //초기 화면 상태
+        backBtn.setAttribute('disabled', 'true'); //속성이 disabled가 된다.
+        backBtn.addEventListener("click", back); //클릭시 다음으로 이동한다.
+        nextBtn.addEventListener("click", next);//클릭시 이전으로 이동한다.
+    }
+    init();
+</script>
 </body>
 </html>
