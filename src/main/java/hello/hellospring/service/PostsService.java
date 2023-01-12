@@ -1,7 +1,6 @@
 package hello.hellospring.service;
 
 import hello.hellospring.auth.PrincipalDetails;
-import hello.hellospring.dto.PostsResponseDto;
 import hello.hellospring.dto.PostsSaveDto;
 import hello.hellospring.entity.Posts;
 import hello.hellospring.repository.*;
@@ -42,11 +41,11 @@ public class PostsService {
     }
 
     @Transactional(readOnly = true)
-    public PostsResponseDto findById(Long id) {
+    public PostsSaveDto findById(Long id) {
         Posts entity = postsRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. id=" + id));
 
-        return new PostsResponseDto(entity);
+        return new PostsSaveDto(entity);
     }
 
 

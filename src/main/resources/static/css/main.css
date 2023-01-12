@@ -105,6 +105,7 @@
 }
 
 h2{
+    text-align: center;
     width: 100px;
     margin: 0 auto;
 }
@@ -200,14 +201,14 @@ h2{
 
 .movies .back{
     position:relative;
-    bottom: 120px; right: 200px;
+    bottom: 120px; right: 140px;
     width: 30px; height: 30px;
     color: white;
     background: #646464;
 }
 .movies .next{
     position:relative;
-    bottom: 120px; left: 680px;
+    bottom: 120px; left: 720px;
     width: 30px; height: 30px;
     color: white;
     background: #646464;
