@@ -5,6 +5,7 @@ import hello.hellospring.service.PostsService;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +29,12 @@ import static org.apache.el.util.MessageFactory.get;
 
 @Controller
 public class MainController {
+    @Value("${kobis.apiURL}")
+    private String KobisApiURL;
+    @Value("${search.client.id}")
+    private String searchClientId;
+    @Value("${search.client.secret}")
+    private String searchClientSecret;
     @Autowired
     PostsService postsService;
     @RequestMapping(value="/")
@@ -43,14 +50,12 @@ public class MainController {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd"); // 날짜 포맷
 
         String yesterday = sdf.format(c1.getTime());
-        String clientId = "TP8GiRPSMSd67q5Ioip1"; //애플리케이션 클라이언트 아이디값"
-        String clientSecret = "AS7oKyBvW4"; //애플리케이션 클라이언트 시크릿값"
-        String apiURL = "https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt=" + yesterday;    // json 결과
-        //String apiURL = "https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchWeeklyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt=" + text;
+        //애플리케이션 클라이언트 시크릿값"
+        String apiURL =  KobisApiURL+ yesterday;    // json 결과
 
         Map<String, String> requestHeaders = new HashMap<>();//
-        requestHeaders.put("X-Naver-Client-Id", clientId);
-        requestHeaders.put("X-Naver-Client-Secret", clientSecret);
+        requestHeaders.put("X-Naver-Client-Id", searchClientId);
+        requestHeaders.put("X-Naver-Client-Secret", searchClientSecret);
         String responseBody = get(apiURL,requestHeaders);
 
         model.addAttribute("jsonbody",responseBody);
@@ -89,13 +94,6 @@ public class MainController {
         model.addAttribute("code8",code8);
 
 
-
-//        //박스오피스 4순위 영화코드
-//        String code1 = URLEncoder.encode(jsonlistmvcode.get(0), StandardCharsets.UTF_8);
-//        String code2 = URLEncoder.encode(jsonlistmvcode.get(1), StandardCharsets.UTF_8);
-//        String code3 = URLEncoder.encode(jsonlistmvcode.get(2), StandardCharsets.UTF_8);
-//        String code4 = URLEncoder.encode(jsonlistmvcode.get(3), StandardCharsets.UTF_8);
-
         //메인페이지에 띄울 박스오피스 4순위 타이틀과 이미지
         String text1 = URLEncoder.encode(jsonlisttitle.get(0), StandardCharsets.UTF_8);
         String text2 = URLEncoder.encode(jsonlisttitle.get(1), StandardCharsets.UTF_8);
@@ -117,8 +115,8 @@ public class MainController {
 
 
         Map<String, String> requestHeaders2 = new HashMap<>();
-        requestHeaders2.put("X-Naver-Client-Id", clientId);
-        requestHeaders2.put("X-Naver-Client-Secret", clientSecret);
+        requestHeaders2.put("X-Naver-Client-Id", searchClientId);
+        requestHeaders2.put("X-Naver-Client-Secret", searchClientSecret);
         String responseBody1 = get(imageURL1,requestHeaders2);
         String responseBody2 = get(imageURL2,requestHeaders2);
         String responseBody3 = get(imageURL3,requestHeaders2);
