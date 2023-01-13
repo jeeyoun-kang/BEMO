@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HashtagController {
     @GetMapping("/hashtag")
     public String hello(Model model) {
-        model.addAttribute("data","hello!!");
+        
         return "hashtag";
 
 
