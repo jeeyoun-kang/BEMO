@@ -82,4 +82,5 @@ public class PrincipalDetails implements UserDetails, OAuth2User{
     public String getCellphone() {return auth.getCell_phone();}
     public String getBirthday() {return auth.getBirthday();}
     public String getNickname() {return user.getNickname();}
+    public User getUser() {return user;}
 }
