@@ -69,4 +69,8 @@ public class User {
         this.social = social;
     }
 
+    public void addPosts(Posts posts){
+        this.posts.add(posts);
+        posts.setUser(this);
+    }
 }

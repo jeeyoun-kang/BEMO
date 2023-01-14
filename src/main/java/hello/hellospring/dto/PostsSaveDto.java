@@ -1,22 +1,26 @@
 package hello.hellospring.dto;
 
 import hello.hellospring.entity.Posts;
+import hello.hellospring.entity.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Getter
 @NoArgsConstructor
 public class PostsSaveDto {
     private Long id;
-
     private String title;
     private String content;
     private String author;
     private String mvtitle;
+    private String now = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+
     @Builder
-    public PostsSaveDto(Long id,String title,String content,String author,String mvtitle){
-        this.id = id;
+    public PostsSaveDto(String title,String content,String author,String mvtitle){
         this.title=title;
         this.content=content;
         this.author=author;
@@ -24,11 +28,12 @@ public class PostsSaveDto {
     }
     public Posts toEntity(){
         return Posts.builder()
-                .id(id)
                 .title(title)
                 .content(content)
                 .author(author)
                 .mvtitle(mvtitle)
+                .upload_date(now)
+                .update_date(now)
                 .build();
     }
 

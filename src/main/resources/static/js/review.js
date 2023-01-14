@@ -11,14 +11,14 @@ var main = {
         });
     },
     save : function ( ) {
-        var data = {
+        const data = {
             title: $('#title').val(),
             author: $('#author').val(),
             content: $('#content').val(),
             mvtitle: $('#mvtitle').text()
 
         };
-
+        console.log("작성자="+data.author);
         $.ajax({
             type: 'POST',
             url: '/{movie_title}/review/posts',

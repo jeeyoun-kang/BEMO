@@ -4,11 +4,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
 @Entity
-@Table(name = "post")
+@Table(name = "posts")
 public class Posts {
 
     @Id //PK
@@ -26,20 +27,30 @@ public class Posts {
 
     private String mvtitle;
 
-    @ManyToOne
-    @JoinColumn(name="user_no", nullable = false)
+    private String upload_date;
+    private String update_date;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="user_no")
     private User user;
 
     @Builder
-    public Posts(Long id,String title, String content, String author, String mvtitle) {
-        this.post_id = id;
+    public Posts(String title, String content, String author, String mvtitle, String upload_date, String update_date) {
         this.title = title;
         this.content = content;
         this.author = author;
         this.mvtitle=mvtitle;
+        this.upload_date = upload_date;
+        this.update_date = update_date;
+    }
+    public Posts update(String title, String content,String update_date){
+        this.title = title;
+        this.content = content;
+        this.update_date = update_date;
+        return this;
+    }
+    public void setUser(User user) {
         this.user = user;
     }
-
-
 
 }

@@ -46,7 +46,7 @@ public class UserController {
             model.addAttribute("nickname", principalDetails.getNickname());
             model.addAttribute("cellphone",principalDetails.getCellphone());
             model.addAttribute("birthday", principalDetails.getBirthday());
-
+            model.addAttribute("Posts", principalDetails.getUser().getPosts());
         }
         return "profile";
     }
