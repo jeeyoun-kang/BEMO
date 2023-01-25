@@ -201,14 +201,14 @@ h2{
 
 .movies .back{
     position:relative;
-    bottom: 120px; right: 140px;
+    bottom: 120px; right: 350px;
     width: 30px; height: 30px;
     color: white;
     background: #646464;
 }
 .movies .next{
     position:relative;
-    bottom: 120px; left: 720px;
+    bottom: 120px; left: 560px;
     width: 30px; height: 30px;
     color: white;
     background: #646464;

@@ -6,12 +6,10 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.Sort;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -23,7 +21,6 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.*;
 
 import static org.apache.el.util.MessageFactory.get;
@@ -36,6 +33,7 @@ public class MainController {
     private String searchClientId;
     @Value("${search.client.secret}")
     private String searchClientSecret;
+
     @Autowired
     PostsService postsService;
     @RequestMapping(value="/")
@@ -44,6 +42,8 @@ public class MainController {
             model.addAttribute("userinfo", principalDetails.getUsername());
         }
         model.addAttribute("Posts",postsService.findAllDesc());
+
+
         // 어제 날짜 구하기 (시스템 시계, 시스템 타임존)
         Calendar c1 = new GregorianCalendar();
         c1.add(Calendar.DATE, -1); // 오늘날짜로부터 -1
