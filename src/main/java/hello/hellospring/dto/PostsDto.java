@@ -1,17 +1,23 @@
 package hello.hellospring.dto;
 
 import hello.hellospring.entity.Posts;
-import hello.hellospring.entity.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Getter
+@Setter
 @NoArgsConstructor
-public class PostsSaveDto {
+public class PostsDto {
+
+    private String update_date;
+
+    private String upload_date;
     private Long id;
     private String title;
     private String content;
@@ -19,12 +25,18 @@ public class PostsSaveDto {
     private String mvtitle;
     private String now = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
 
+    private String url;
+
+    private MultipartFile file;
+
     @Builder
-    public PostsSaveDto(String title,String content,String author,String mvtitle){
+    public PostsDto(String title, String content, String author, String mvtitle,String url,MultipartFile file){
         this.title=title;
         this.content=content;
         this.author=author;
         this.mvtitle = mvtitle;
+        this.url=url;
+        this.file=file;
     }
     public Posts toEntity(){
         return Posts.builder()
@@ -34,14 +46,19 @@ public class PostsSaveDto {
                 .mvtitle(mvtitle)
                 .upload_date(now)
                 .update_date(now)
+                .url(url)
                 .build();
     }
 
-    public PostsSaveDto(Posts entity){
+    public PostsDto(Posts entity){
         this.id = entity.getPost_id();
         this.title = entity.getTitle();
         this.content = entity.getContent();
         this.author = entity.getAuthor();
         this.mvtitle = entity.getMvtitle();
+        this.url=entity.getUrl();
     }
+
+
+
 }

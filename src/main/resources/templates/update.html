@@ -5,29 +5,30 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-
-    <style>
-        *{font-family: 'Jua', sans-serif;}
-    </style>
     <title>Document</title>
 </head>
-<body>
 
-<div class="col-md-12">
-    <div class="col-md-4">
-        <form  id="excelForm" enctype="multipart/form-data">
-            <span id = "mvtitle" name="mvtitle" th:text="${movie_title}"></span></br>
-        <div class="form-group">
+<body>
+<table id="PostsTable">
+    <tr>
+
+        <th>작성자</th>
+        <th>영화</th>
+        <th>제목</th>
+        <th>내용</th>
+        <th>이미지</th>
+    </tr>
+    <!-- th: each를 이용하면 반복문을 이용할 수 있다. -->
+    <!-- th:each="student, studentStat: ${studentList}" 와 동일하며
+              status를 명시하지 않더라도 앞의 "오브젝트명stat" 를 이용하여 접근 가능하다. -->
+    <form  id="excelForm" enctype="multipart/form-data">
+        <p style="display: none" name="update_id" id="update_id" th:text="${update_id}"></p>
+        <tr th:each="Posts: ${Posts}">
+<!--            <td th:text="${Posts.user.nickname}"></td>-->
+            <td th:text="${Posts.mvtitle}" name="mvtitle" id="mvtitle"></td>
+            <div class="form-group">
                 <label for="title">제목</label>
                 <input type="text" class="form-control" name="title" id="title" placeholder="제목을 입력하세요">
-            </div>
-            <div class="form-group">
-                <label for="author"> 작성자: [[${nickname}]] </label>
-                <input type="hidden" id="author" name="author" th:name="userinfo" th:value="${userinfo}">
             </div>
             <div class="form-group">
                 <label for="content"> 내용 </label>
@@ -38,11 +39,11 @@
                 <input type="file" name="file" id="file"> <br>
             </div>
         </form>
-
-        <a href="/" role="button" class="btn btn-secondary">취소</a>
-        <button type="button" class="btn btn-primary" id="btn-save">등록</button>
-    </div>
-</div>
+    </tr>
+</table>
+<a href="/" role="button" class="btn btn-secondary">취소</a>
+<button type="button" class="btn btn-primary" id="btn-update">수정완료</button>
+<button type="button" class="btn btn-danger" id="btn-delete">삭제</button>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script type="text/javascript" th:src="@{/js/review.js}"></script>
 </body>

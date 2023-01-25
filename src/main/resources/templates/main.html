@@ -131,10 +131,12 @@
             <tr>
 
                 <th>작성자</th>
+                <th>영화</th>
                 <th>제목</th>
                 <th>내용</th>
                 <th>작성일자</th>
                 <th>수정일자</th>
+                <th>이미지</th>
             </tr>
             <!-- th: each를 이용하면 반복문을 이용할 수 있다. -->
             <!-- th:each="student, studentStat: ${studentList}" 와 동일하며
@@ -144,10 +146,13 @@
                 <form th:action="@{/comments/{id} (id=${Posts.post_id})}" >
 
                     <td th:text="${Posts.user.nickname}"></td>
+                    <td th:text="${Posts.mvtitle}"></td>
                     <td><button type="submit" th:text="${Posts.title}"></button></td>
                     <td th:text="${Posts.content}"></td>
                     <td th:text="${Posts.upload_date}"></td>
                     <td th:text="${Posts.update_date}"></td>
+                    <img id="image" th:src="${Posts.url}">
+
                 </form>
             </tr>
 
