@@ -8,10 +8,29 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+    <!-- 소스 다운 -->
+    <script src="https://unpkg.com/@yaireo/tagify"></script>
+    <!-- 폴리필 (구버젼 브라우저 지원) -->
+    <script src="https://unpkg.com/@yaireo/tagify/dist/tagify.polyfills.min.js"></script>
+    <link href="https://unpkg.com/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
     <style>
         *{font-family: 'Jua', sans-serif;}
+        .tagify--outside{
+            border: 0;
+        }
+
+        .tagify--outside .tagify__input{
+            order: -1;
+            flex: 100%;
+            border: 1px solid;
+            margin-bottom: 1em;
+            transition: .1s;
+        }
+        .tagify--outside.tagify--focus .tagify__input{
+            transition:0s;
+        }
     </style>
     <title>Document</title>
 </head>
@@ -36,6 +55,9 @@
             <div class="form-group">
                 <label for="file"> 파일 </label>
                 <input type="file" name="file" id="file"> <br>
+            </div>
+            <div class="form-group">
+                <input id="hashtag" name="hashtag" class='tagify--outside'>
             </div>
         </form>
 

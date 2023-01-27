@@ -23,8 +23,6 @@ import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import static org.apache.el.util.MessageFactory.get;
-
 @Controller
 public class MainController {
     @Value("${kobis.apiURL}")
