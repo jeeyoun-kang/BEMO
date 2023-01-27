@@ -1,3 +1,16 @@
+var input =document.querySelector('input[name=hashtag]');
+var tagify = new Tagify(input, {
+    whitelist:  ["반전", "감동", "액션", "역사"],
+    maxTags: 3,
+    userInput: false,
+
+    dropdown: {
+        position: "input",
+        classname: "tagsLook",
+        enabled: 0,
+        closeOnSelect: false
+    }
+})
 
 var main = {
     init : function () {
@@ -17,14 +30,16 @@ var main = {
     save : function ( ) {
         var form = $('#excelForm')[0];
         var formData = new FormData(form);
+        const hashtagData = $('input[name=hashtag]').val();
+        console.log(hashtagData);
         var data = {
             title: $('#title').val(),
             author: $('#author').val(),
             content: $('#content').val(),
             mvtitle: $('#mvtitle').text(),
-
+            hashtag: hashtagData,
         };
-        console.log(data.mvtitle);
+        console.log("해시태그="+data.hashtag);
         formData.append('file', $('#file'));
         formData.append('key', new Blob([ JSON.stringify(data) ], {type : "application/json"}));
 

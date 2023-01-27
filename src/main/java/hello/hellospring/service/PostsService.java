@@ -1,28 +1,43 @@
 package hello.hellospring.service;
 
 import hello.hellospring.dto.PostsDto;
+import hello.hellospring.entity.Hashtags;
 import hello.hellospring.entity.Posts;
 import hello.hellospring.repository.*;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class PostsService {
     private final PostsRepository postsRepository;
     private final UserRepository userRepository;
+    private final HashtagsRepository hashtagsRepository;
 
-    public PostsService(PostsRepository postsRepository, UserRepository userRepository) {
+    public PostsService(PostsRepository postsRepository, UserRepository userRepository, HashtagsRepository hashtagsRepository) {
         this.postsRepository = postsRepository;
         this.userRepository = userRepository;
+        this.hashtagsRepository = hashtagsRepository;
     }
 
     @Transactional
     public Long save(PostsDto requestDto) {
+        System.out.println("전달갑:"+requestDto.getHashtag());
+        String[] data = StringUtils.split(requestDto.getHashtag(), " ");
+        System.out.println("전달값:"+data);
+        List<Hashtags> hashtags= new ArrayList<>();
+        for(int i = 0; i < data.length; i++) {
+            Hashtags hashtag = new Hashtags(data[i], requestDto.getMvtitle());
+            hashtagsRepository.save(hashtag);
+            hashtags.add(hashtag);
+        }
+        requestDto.setHashtags(hashtags);
         Posts posts = postsRepository.save(requestDto.toEntity());
         userRepository.findByUsername(requestDto.getAuthor()).addPosts(posts);
         return posts.getPost_id();

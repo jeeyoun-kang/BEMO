@@ -2,7 +2,6 @@ package hello.hellospring.entity;
 
 import lombok.*;
 
-import javax.management.relation.Role;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 

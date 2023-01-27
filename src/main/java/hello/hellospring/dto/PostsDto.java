@@ -1,5 +1,6 @@
 package hello.hellospring.dto;
 
+import hello.hellospring.entity.Hashtags;
 import hello.hellospring.entity.Posts;
 import lombok.Builder;
 import lombok.Getter;
@@ -9,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Getter
 @Setter
@@ -24,19 +26,20 @@ public class PostsDto {
     private String author;
     private String mvtitle;
     private String now = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-
     private String url;
-
     private MultipartFile file;
+    private String hashtag;
+    private List<Hashtags> hashtags;
 
     @Builder
-    public PostsDto(String title, String content, String author, String mvtitle,String url,MultipartFile file){
+    public PostsDto(String title, String content, String author, String mvtitle,String url,MultipartFile file, String hashtag){
         this.title=title;
         this.content=content;
         this.author=author;
         this.mvtitle = mvtitle;
         this.url=url;
         this.file=file;
+        this.hashtag = hashtag;
     }
     public Posts toEntity(){
         return Posts.builder()
@@ -47,6 +50,7 @@ public class PostsDto {
                 .upload_date(now)
                 .update_date(now)
                 .url(url)
+                .hashtags(hashtags)
                 .build();
     }
 
@@ -57,8 +61,9 @@ public class PostsDto {
         this.author = entity.getAuthor();
         this.mvtitle = entity.getMvtitle();
         this.url=entity.getUrl();
+        this.hashtags = entity.getHashtags();
     }
-
-
-
+    public void setHashtags(List<Hashtags> hashtags) {
+        this.hashtags = hashtags;
+    }
 }
