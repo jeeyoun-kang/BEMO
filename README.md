@@ -1,4 +1,4 @@
-# Movie-Website-SpringBoot
+# BEMO
 ## 영화 추천 및 리뷰 웹서비스
 
 
