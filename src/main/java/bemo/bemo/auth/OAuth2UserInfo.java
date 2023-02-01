@@ -1,4 +1,4 @@
-package hello.hellospring.auth;
+package bemo.bemo.auth;
 
 import java.util.Map;
 

@@ -1,7 +1,7 @@
-package hello.hellospring.repository;
+package bemo.bemo.repository;
 
-import hello.hellospring.entity.SocialLogin;
-import hello.hellospring.entity.User;
+import bemo.bemo.entity.SocialLogin;
+import bemo.bemo.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface SocialRepository extends JpaRepository<SocialLogin, Integer> {

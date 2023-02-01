@@ -1,9 +1,5 @@
-package hello.hellospring.dto;
+package bemo.bemo.dto;
 
-import hello.hellospring.entity.Authentication;
-import hello.hellospring.entity.Password;
-import hello.hellospring.entity.SocialLogin;
-import hello.hellospring.entity.User;
 import lombok.*;
 
 @Getter

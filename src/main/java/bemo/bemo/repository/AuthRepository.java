@@ -1,7 +1,7 @@
-package hello.hellospring.repository;
+package bemo.bemo.repository;
 
-import hello.hellospring.entity.Authentication;
-import hello.hellospring.entity.User;
+import bemo.bemo.entity.User;
+import bemo.bemo.entity.Authentication;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AuthRepository extends JpaRepository<Authentication, Integer> {

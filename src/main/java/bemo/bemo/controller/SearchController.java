@@ -1,4 +1,4 @@
-package hello.hellospring.controller;
+package bemo.bemo.controller;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

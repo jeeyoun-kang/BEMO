@@ -1,9 +1,9 @@
-package hello.hellospring.auth;
+package bemo.bemo.auth;
 
-import hello.hellospring.entity.Authentication;
-import hello.hellospring.entity.Password;
-import hello.hellospring.entity.SocialLogin;
-import hello.hellospring.entity.User;
+import bemo.bemo.entity.User;
+import bemo.bemo.entity.Authentication;
+import bemo.bemo.entity.Password;
+import bemo.bemo.entity.SocialLogin;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;

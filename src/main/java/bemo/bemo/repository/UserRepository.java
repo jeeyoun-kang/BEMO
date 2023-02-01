@@ -1,6 +1,6 @@
-package hello.hellospring.repository;
+package bemo.bemo.repository;
 
-import hello.hellospring.entity.User;
+import bemo.bemo.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<User, Integer> {

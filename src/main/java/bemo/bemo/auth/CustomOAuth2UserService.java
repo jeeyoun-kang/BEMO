@@ -1,13 +1,13 @@
-package hello.hellospring.auth;
+package bemo.bemo.auth;
 
-import hello.hellospring.entity.Authentication;
-import hello.hellospring.entity.Password;
-import hello.hellospring.entity.SocialLogin;
-import hello.hellospring.entity.User;
-import hello.hellospring.repository.AuthRepository;
-import hello.hellospring.repository.PassRepository;
-import hello.hellospring.repository.SocialRepository;
-import hello.hellospring.repository.UserRepository;
+import bemo.bemo.entity.User;
+import bemo.bemo.repository.SocialRepository;
+import bemo.bemo.repository.UserRepository;
+import bemo.bemo.entity.Authentication;
+import bemo.bemo.entity.Password;
+import bemo.bemo.entity.SocialLogin;
+import bemo.bemo.repository.AuthRepository;
+import bemo.bemo.repository.PassRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
