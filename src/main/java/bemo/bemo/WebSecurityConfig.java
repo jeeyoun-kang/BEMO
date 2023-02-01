@@ -1,7 +1,7 @@
-package hello.hellospring;
+package bemo.bemo;
 
-import hello.hellospring.auth.CustomOAuth2UserService;
-import hello.hellospring.service.PrincipalDetailsServiceImpl;
+import bemo.bemo.auth.CustomOAuth2UserService;
+import bemo.bemo.service.PrincipalDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

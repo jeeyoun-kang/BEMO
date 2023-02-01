@@ -1,7 +1,7 @@
-package hello.hellospring.dto;
+package bemo.bemo.dto;
 
-import hello.hellospring.entity.Hashtags;
-import hello.hellospring.entity.Posts;
+import bemo.bemo.entity.Hashtags;
+import bemo.bemo.entity.Posts;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

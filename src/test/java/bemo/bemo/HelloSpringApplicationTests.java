@@ -1,4 +1,4 @@
-package hello.hellospring;
+package bemo.bemo;
 
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;

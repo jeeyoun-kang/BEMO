@@ -1,9 +1,11 @@
-package hello.hellospring.service;
+package bemo.bemo.service;
 
-import hello.hellospring.dto.PostsDto;
-import hello.hellospring.entity.Hashtags;
-import hello.hellospring.entity.Posts;
-import hello.hellospring.repository.*;
+import bemo.bemo.dto.PostsDto;
+import bemo.bemo.entity.Hashtags;
+import bemo.bemo.entity.Posts;
+import bemo.bemo.repository.HashtagsRepository;
+import bemo.bemo.repository.PostsRepository;
+import bemo.bemo.repository.UserRepository;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

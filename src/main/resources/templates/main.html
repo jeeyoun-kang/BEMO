@@ -20,7 +20,7 @@
     <button sec:authorize="isAnonymous()" id="show">로그인</button>
     <button sec:authorize="isAnonymous()" type="submit" onclick="location.href='./signup'">회원가입</button>
     <button sec:authorize="isAuthenticated()" id="logoutBt" type="submit" onclick="location.href='./logout'">로그아웃</button>
-<!--    <button sec:authorize="isAuthenticated()" type="submit" onclick="location.href='./profile'">프로필</button>-->
+    <!--    <button sec:authorize="isAuthenticated()" type="submit" onclick="location.href='./profile'">프로필</button>-->
     <form sec:authorize="isAuthenticated()" action="getUser()" th:action="@{profile}" method="post">
         <input type="hidden" id="profile" th:name="userinfo" th:value="${userinfo}">
         <input type="submit" value="프로필">
@@ -38,7 +38,7 @@
                     <div><input type = "text" name ="username" placeholder="아이디" id = "username"></div>
                     <div><input type = "password" name = "password" placeholder="비밀번호" id="password"></div>
                     <div><input type = "checkbox" name = "preserve">아이디 저장</div>
-<!--                    <button id="loginBt" type="submit">로그인</button>-->
+                    <!--                    <button id="loginBt" type="submit">로그인</button>-->
                     <div><button id="loginBt" type="submit">로그인</button></div>
                 </form>
             </div>
@@ -50,6 +50,10 @@
         </div>
     </div>
 </div>
+<!--<form action="send1" method="GET">-->
+<!--    <input type="text" name="moviename" >-->
+<!--    <button type="submit">검색</button>-->
+<!--</form>-->
 <h2>박스오피스</h2>
 <div class="movies">
     <div class="slide">

@@ -1,6 +1,6 @@
-package hello.hellospring.repository;
+package bemo.bemo.repository;
 
-import hello.hellospring.entity.Posts;
+import bemo.bemo.entity.Posts;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

@@ -1,4 +1,4 @@
-package hello.hellospring.entity;
+package bemo.bemo.entity;
 
 import lombok.Builder;
 import lombok.Getter;

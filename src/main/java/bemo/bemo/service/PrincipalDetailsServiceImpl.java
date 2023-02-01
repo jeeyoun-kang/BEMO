@@ -1,14 +1,14 @@
-package hello.hellospring.service;
+package bemo.bemo.service;
 
-import hello.hellospring.auth.PrincipalDetails;
-import hello.hellospring.entity.Authentication;
-import hello.hellospring.entity.Password;
-import hello.hellospring.entity.SocialLogin;
-import hello.hellospring.entity.User;
-import hello.hellospring.repository.AuthRepository;
-import hello.hellospring.repository.PassRepository;
-import hello.hellospring.repository.SocialRepository;
-import hello.hellospring.repository.UserRepository;
+import bemo.bemo.auth.PrincipalDetails;
+import bemo.bemo.entity.Authentication;
+import bemo.bemo.entity.Password;
+import bemo.bemo.entity.SocialLogin;
+import bemo.bemo.entity.User;
+import bemo.bemo.repository.AuthRepository;
+import bemo.bemo.repository.PassRepository;
+import bemo.bemo.repository.SocialRepository;
+import bemo.bemo.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;

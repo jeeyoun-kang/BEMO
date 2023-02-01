@@ -1,4 +1,4 @@
-package hello.hellospring.service;
+package bemo.bemo.service;
 
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.SdkClientException;
@@ -62,6 +62,10 @@ public class S3Service {
         for (S3ObjectSummary object: objectSummaries) {
             System.out.println("object = " + object.toString());
         }
+        System.out.println(amazonS3.getUrl(bucket, fileName).toString());
         return amazonS3.getUrl(bucket, fileName).toString();
+    }
+    public String getThumbnailPath(String path) {
+        return amazonS3.getUrl(bucket, path).toString();
     }
 }

@@ -1,9 +1,9 @@
-package hello.hellospring.controller;
+package bemo.bemo.controller;
 
-import hello.hellospring.auth.PrincipalDetails;
-import hello.hellospring.dto.RequestDto;
-import hello.hellospring.entity.User;
-import hello.hellospring.service.PrincipalDetailsService;
+import bemo.bemo.auth.PrincipalDetails;
+import bemo.bemo.entity.User;
+import bemo.bemo.dto.RequestDto;
+import bemo.bemo.service.PrincipalDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

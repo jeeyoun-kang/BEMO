@@ -11,7 +11,6 @@ var tagify = new Tagify(input, {
         closeOnSelect: false
     }
 })
-
 var main = {
     init : function () {
         var _this = this;
@@ -27,22 +26,30 @@ var main = {
             _this.update();
         });
     },
-    save : function ( ) {
+    save : function (name) {
         var form = $('#excelForm')[0];
         var formData = new FormData(form);
-        const hashtagData = $('input[name=hashtag]').val();
-        console.log(hashtagData);
+        // const hashtagdata = $('input[name=hashtag]').val();
+        // const test = JSON.parse(hashtagdata);
+        // console.log(test);
+        // var hashtagData="";
+        // for (var i in test){
+        //     hashtagData+=test[i].value+",";
+        // }
+        // console.log(hashtagData);
         var data = {
             title: $('#title').val(),
             author: $('#author').val(),
             content: $('#content').val(),
             mvtitle: $('#mvtitle').text(),
-            hashtag: hashtagData,
+            //hashtag: hashtagData,
         };
-        console.log("해시태그="+data.hashtag);
         formData.append('file', $('#file'));
-        formData.append('key', new Blob([ JSON.stringify(data) ], {type : "application/json"}));
+        var filename=formData.get('file').name;
 
+
+        formData.append('key', new Blob([ JSON.stringify(data) ], {type : "application/json"}));
+        console.log(formData);
         $.ajax({
             type: 'POST',
             url: '/{movie_title}/review/posts',
