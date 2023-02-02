@@ -27,23 +27,27 @@ var main = {
         });
     },
     save : function (name) {
-        var form = $('#excelForm')[0];
-        var formData = new FormData(form);
-        // const hashtagdata = $('input[name=hashtag]').val();
-        // const test = JSON.parse(hashtagdata);
-        // console.log(test);
-        // var hashtagData="";
-        // for (var i in test){
-        //     hashtagData+=test[i].value+",";
-        // }
-        // console.log(hashtagData);
-        var data = {
+        const form = $('#excelForm')[0];
+        const formData = new FormData(form);
+        const hashtagdata = $('input[name=hashtag]').val();
+        console.log(hashtagdata);
+        let hashtagData = "empty";
+        if(hashtagdata != ""){
+            const test = JSON.parse(hashtagdata);
+            hashtagData = "";
+            for (const i in test) {
+                hashtagData += test[i].value + ",";
+            }
+        }
+        const data = {
             title: $('#title').val(),
             author: $('#author').val(),
+            authorname: $('#authorname').val(),
             content: $('#content').val(),
             mvtitle: $('#mvtitle').text(),
-            //hashtag: hashtagData,
+            hashtag: hashtagData,
         };
+        console.log("해시태그="+data.hashtag);
         formData.append('file', $('#file'));
         var filename=formData.get('file').name;
 

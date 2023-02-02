@@ -17,16 +17,22 @@
     <th>제목</th>
     <th>내용</th>
     <th>이미지</th>
+    <th>해시태그</th>
   </tr>
   <!-- th: each를 이용하면 반복문을 이용할 수 있다. -->
   <!-- th:each="student, studentStat: ${studentList}" 와 동일하며
             status를 명시하지 않더라도 앞의 "오브젝트명stat" 를 이용하여 접근 가능하다. -->
-  <tr th:each="Posts: ${Posts}">
-<!--    <td th:text="${Posts.user.nickname}"></td>-->
+  <tr th:each="Posts: ${Posts}" th:if="${Posts != null}">
+    <td th:text="${Posts.author}"></td>
     <td th:text="${Posts.mvtitle}"></td>
     <td th:text="${Posts.title}"></td>
     <td th:text="${Posts.content}"></td>
     <img id="image" th:src="${Posts.url}">
+    <td>
+      <th:block th:each="Hashtags: ${Posts.getHashtags()}" th:if="${Posts.getHashtags() != null}">
+        <p th:text="${Hashtags.content} "></p>
+      </th:block>
+    </td>
   </tr>
   <div th:if="${writer==true}"> <!--본인일때 수정하기 버튼보이게-->
     <form method="post" th:action="@{/update/{id} (id=${id})}" >

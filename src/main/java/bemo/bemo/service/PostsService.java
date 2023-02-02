@@ -30,17 +30,25 @@ public class PostsService {
 
     @Transactional
     public Long save(PostsDto requestDto) {
-        System.out.println("전달갑:"+requestDto.getHashtag());
-        String[] data = StringUtils.split(requestDto.getHashtag(), " ");
-        System.out.println("전달값:"+data);
-        List<Hashtags> hashtags= new ArrayList<>();
-        for(int i = 0; i < data.length; i++) {
-            Hashtags hashtag = new Hashtags(data[i], requestDto.getMvtitle());
-            hashtagsRepository.save(hashtag);
-            hashtags.add(hashtag);
+        Posts posts;
+        String hash = requestDto.getHashtag();
+        System.out.println("해시"+hash);
+        if(hash.equals("empty")) {
+            posts = postsRepository.save(requestDto.toEntityWithoutHashtag());
         }
-        requestDto.setHashtags(hashtags);
-        Posts posts = postsRepository.save(requestDto.toEntity());
+        else {
+            String[] data = StringUtils.split(requestDto.getHashtag(), ",");
+            data[data.length - 1] = data[data.length - 1].replaceAll(",$", "");
+            System.out.println("전달값:" + data);
+            List<Hashtags> hashtags = new ArrayList<>();
+            for (int i = 0; i < data.length; i++) {
+                Hashtags hashtag = new Hashtags(data[i], requestDto.getMvtitle());
+                hashtagsRepository.save(hashtag);
+                hashtags.add(hashtag);
+            }
+            requestDto.setHashtags(hashtags);
+            posts = postsRepository.save(requestDto.toEntity());
+        }
         userRepository.findByUsername(requestDto.getAuthor()).addPosts(posts);
         return posts.getPost_id();
     }
@@ -80,7 +88,7 @@ public class PostsService {
     public List<Posts> findAllDesc(){
         return postsRepository.findAllDesc(Sort.by(Sort.Direction.ASC, "post_id"));
     }
-
+    public List<Hashtags> findHashtags(String title) {return hashtagsRepository.findByMvtitle(title);}
     public List<Posts> findByMvtitle(String mvtitle) {
         return postsRepository.findByMvtitle(mvtitle);
     }

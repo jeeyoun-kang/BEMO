@@ -20,14 +20,14 @@
             border: 0;
         }
 
-        .tagify--outside .tagify__input{
+        .tagify--outside{
             order: -1;
             flex: 100%;
             border: 1px solid;
             margin-bottom: 1em;
             transition: .1s;
         }
-        .tagify--outside.tagify--focus .tagify__input{
+        .tagify--outside.tagify--focus{
             transition:0s;
         }
     </style>
@@ -46,6 +46,7 @@
             <div class="form-group">
                 <label for="author"> 작성자: [[${nickname}]] </label>
                 <input type="hidden" id="author" name="author" th:name="userinfo" th:value="${userinfo}">
+                <input type="hidden" id="authorname" name="authorname" th:name="nickname" th:value="${nickname}">
             </div>
             <div class="form-group">
                 <label for="content"> 내용 </label>
@@ -55,10 +56,9 @@
                 <label for="file"> 파일 </label>
                 <input type="file" name="file" id="file"> <br>
             </div>
-            <!--            <div class="form-group">-->
-            <!--                <input id="hashtag" name="hashtag" class='tagify&#45;&#45;outside'>-->
-            <!--            </div>-->
-
+            <div class="form-group">
+                <input id="hashtag" name="hashtag" class='tagify--outside'>
+            </div>
         </form>
 
         <a href="/" role="button" class="btn btn-secondary">취소</a>

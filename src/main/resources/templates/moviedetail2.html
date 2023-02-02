@@ -36,7 +36,7 @@
     <!-- th:each="student, studentStat: ${studentList}" 와 동일하며
               status를 명시하지 않더라도 앞의 "오브젝트명stat" 를 이용하여 접근 가능하다. -->
     <tr th:each="Posts: ${Posts}">
-        <td th:text="${Posts.user.nickname}"></td>
+        <td th:text="${Posts.author}"></td>
         <td th:text="${Posts.title}"></td>
         <td th:text="${Posts.content}"></td>
 
