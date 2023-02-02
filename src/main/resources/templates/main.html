@@ -1,7 +1,8 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <title>JAVA MOVIE PROJECT</title>
+    <title>BEMO</title>
+    <link rel="short icon" href="/img/bemo.ico"/>
     <link href="/css/main.css" rel="stylesheet" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,8 +16,7 @@
 <body>
 <div class = "btn">
     <button type="submit" onclick="location.href='./hashtag'">해시태그</button>
-    <button type="submit" onclick="location.href='./searchfirst'">검색</button>
-    <button type="submit" onclick="location.href='./'">홈</button>
+    <button type="submit" onclick="location.href='./'">BEMO</button>
     <button sec:authorize="isAnonymous()" id="show">로그인</button>
     <button sec:authorize="isAnonymous()" type="submit" onclick="location.href='./signup'">회원가입</button>
     <button sec:authorize="isAuthenticated()" id="logoutBt" type="submit" onclick="location.href='./logout'">로그아웃</button>
@@ -50,10 +50,13 @@
         </div>
     </div>
 </div>
-<!--<form action="send1" method="GET">-->
-<!--    <input type="text" name="moviename" >-->
-<!--    <button type="submit">검색</button>-->
-<!--</form>-->
+<div class="search">
+<form action="send" method="GET">
+    <input type="text" name="moviename" >
+    <button type="submit">검색</button>
+</form>
+</div>
+<br>
 <h2>박스오피스</h2>
 <div class="movies">
     <div class="slide">
@@ -128,10 +131,13 @@
     </div>
     <button class="back">❮</button>
     <button class="next">❯</button>
-
+    <br>
+    <h2>HASHTAG</h2>
+    <br>
+    <h2>REVIEW</h2>
     <div class="post">
         <table id="PostsTable">
-            <h3>Review</h3>
+
             <tr>
 
                 <th>작성자</th>

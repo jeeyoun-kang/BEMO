@@ -104,12 +104,20 @@
     padding-right: 25%;
 }
 
+
+
 h2{
     text-align: center;
     width: 100px;
     margin: 0 auto;
 }
-
+.search{
+    text-align: center;
+}
+.search1{
+    position: absolute;
+    left: 150%;
+}
 .movies h4{
     padding : 40px 20px;
     font-size: 20px;
@@ -201,14 +209,14 @@ h2{
 
 .movies .back{
     position:relative;
-    bottom: 120px; right: 350px;
+    bottom: 120px; right: 50px;
     width: 30px; height: 30px;
     color: white;
     background: #646464;
 }
 .movies .next{
     position:relative;
-    bottom: 120px; left: 560px;
+    bottom: 120px; left: 840px;
     width: 30px; height: 30px;
     color: white;
     background: #646464;
