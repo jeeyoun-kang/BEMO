@@ -27,12 +27,6 @@ public class ReviewController {
         return "review";
     }
 
-    @GetMapping("suggest")
-    public String suggest(Model model) {
-        model.addAttribute("data", "hello!!");
-        return "suggest";
-    }
-
     @RequestMapping("/comments/{id}")
     public String comments(Model model, @PathVariable Long id, @AuthenticationPrincipal PrincipalDetails principalDetails) {
         PostsDto postsSaveDto = postsService.findById(id);
