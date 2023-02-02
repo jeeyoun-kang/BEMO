@@ -177,16 +177,16 @@ h2{
     opacity: 1;
 }
 .movies .jb-a:hover .jb-b1{
-    filter: brightness(70%);
+    filter: brightness(50%);
 }
 .movies .jb-a:hover .jb-b2{
-    filter: brightness(70%);
+    filter: brightness(50%);
 }
 .movies .jb-a:hover .jb-b3{
-    filter: brightness(70%);
+    filter: brightness(50%);
 }
 .movies .jb-a:hover .jb-b4{
-    filter: brightness(70%);
+    filter: brightness(50%);
 }
 .post{
     float:left;
