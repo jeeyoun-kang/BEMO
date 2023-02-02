@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>JAVA MOVIE PROJECT</title>
+    <title>BEMO</title>
     <link href="/css/main.css" rel="stylesheet" />
     <link href="/image/empty.png" rel="stylesheet" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -14,24 +14,25 @@
     </style>
 </head>
 <body>
-<form action="send1" method="GET">
+<div class="search">
+<form action="send" method="GET">
     <input type="text" name="moviename" >
     <button type="submit">검색</button>
 </form>
-<div>
+</div>
+<br><br>
     <div class="movies">
         <div class="jb-a">
+            <div class="search1">
             <form th:action="@{/moviedetail/{detail} (detail=${title1})}" >
                 <button type="submit" style="background-color:transparent; border:0; outline:0;" >
-                    <img class="jb-b1" th:src = "${image1}"/>
+                    <img class="jb-b1" th:if="${image1}!=''" th:src = "${image1}"/>
+                    <img class="jb-b1" th:if="${image1}==''" src="/img/bemo.JPG" />
                     <h4 class="jb-c1" th:text = "${title1}"/>
                 </button>
             </form>
+            </div>
         </div>
-
-
     </div>
-</div>
-<img style=" visibility : hidden ;" src="/img/bemo.JPG" alt="bemo" id="bemo">
 </body>
 </html>

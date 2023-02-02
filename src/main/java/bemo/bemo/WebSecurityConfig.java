@@ -48,7 +48,7 @@ public class WebSecurityConfig{
         http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/login","/profile", "/signup", "/", "/review", "/searchfirst","/search", "/hashtag",
-                        "/ticketmain", "/suggest", "/send1", "/send2","/join", "/error", "/loginSuccess","/moviedetail",
+                        "/ticketmain", "/suggest", "/send", "/send2","/join", "/error", "/loginSuccess","/moviedetail",
                         "/moviedetail/{detail}","/moviedetail/{detail}/{code}","/{movie_title}/review",
                         "/{movie_title}/review/posts","/comments/{id}","/hello","/api/upload","/api/list", "/review/posts/{id}"
                         ,"/{postid}/review/posts","/{update_id}/review/posts","/{update_id}/update/posts","/{id}/update/posts",
