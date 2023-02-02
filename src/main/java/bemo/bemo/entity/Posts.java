@@ -26,6 +26,7 @@ public class Posts {
     @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
     private String author;
+    private String authorname;
     private String mvtitle;
     private String upload_date;
     private String update_date;
@@ -39,10 +40,11 @@ public class Posts {
     private List<Hashtags> hashtags = new ArrayList<>();
 
     @Builder
-    public Posts(String title, String content, String author, String mvtitle, String upload_date, String update_date,String url, List<Hashtags> hashtags) {
+    public Posts(String title, String content, String author, String authorname, String mvtitle, String upload_date, String update_date,String url, List<Hashtags> hashtags) {
         this.title = title;
         this.content = content;
         this.author = author;
+        this.authorname = authorname;
         this.mvtitle=mvtitle;
         this.upload_date = upload_date;
         this.update_date = update_date;
@@ -50,6 +52,17 @@ public class Posts {
         for(int i = 0; i<hashtags.size(); i++) {
             addHashtags(hashtags.get(i));
         }
+    }
+    @Builder(builderMethodName = "builderWithoutHashtag", buildMethodName = "buildWithoutHashtag")
+    public Posts(String title, String content, String author, String authorname, String mvtitle, String upload_date, String update_date,String url) {
+        this.title = title;
+        this.content = content;
+        this.author = author;
+        this.authorname = authorname;
+        this.mvtitle=mvtitle;
+        this.upload_date = upload_date;
+        this.update_date = update_date;
+        this.url = url;
     }
     public void update(String title, String content, String url) {
         this.title = title;

@@ -24,7 +24,7 @@
     <form  id="excelForm" enctype="multipart/form-data">
         <p style="display: none" name="update_id" id="update_id" th:text="${update_id}"></p>
         <tr th:each="Posts: ${Posts}">
-<!--            <td th:text="${Posts.user.nickname}"></td>-->
+            <td th:text="${Posts.author}"></td>
             <td th:text="${Posts.mvtitle}" name="mvtitle" id="mvtitle"></td>
             <div class="form-group">
                 <label for="title">제목</label>

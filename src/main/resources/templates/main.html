@@ -155,7 +155,7 @@
             <tr th:each="Posts: ${Posts}">
                 <form th:action="@{/comments/{id} (id=${Posts.post_id})}" >
 
-                    <td th:text="${Posts.user.nickname}"></td>
+                    <td th:text="${Posts.author}"></td>
                     <td th:text="${Posts.mvtitle}"></td>
                     <td><button type="submit" th:text="${Posts.title}"></button></td>
                     <td th:text="${Posts.content}"></td>

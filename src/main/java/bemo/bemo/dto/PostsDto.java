@@ -24,6 +24,7 @@ public class PostsDto {
     private String title;
     private String content;
     private String author;
+    private String authorname;
     private String mvtitle;
     private String now = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     private String url;
@@ -32,10 +33,11 @@ public class PostsDto {
     private List<Hashtags> hashtags;
 
     @Builder
-    public PostsDto(String title, String content, String author, String mvtitle,String url,MultipartFile file, String hashtag){
+    public PostsDto(String title, String content, String author, String authorname, String mvtitle,String url,MultipartFile file, String hashtag){
         this.title=title;
         this.content=content;
         this.author=author;
+        this.authorname=authorname;
         this.mvtitle = mvtitle;
         this.url=url;
         this.file=file;
@@ -46,6 +48,7 @@ public class PostsDto {
                 .title(title)
                 .content(content)
                 .author(author)
+                .authorname(authorname)
                 .mvtitle(mvtitle)
                 .upload_date(now)
                 .update_date(now)
@@ -53,12 +56,25 @@ public class PostsDto {
                 .hashtags(hashtags)
                 .build();
     }
+    public Posts toEntityWithoutHashtag(){
+        return Posts.builderWithoutHashtag()
+                .title(title)
+                .content(content)
+                .author(author)
+                .authorname(authorname)
+                .mvtitle(mvtitle)
+                .upload_date(now)
+                .update_date(now)
+                .url(url)
+                .buildWithoutHashtag();
+    }
 
     public PostsDto(Posts entity){
         this.id = entity.getPost_id();
         this.title = entity.getTitle();
         this.content = entity.getContent();
         this.author = entity.getAuthor();
+        this.authorname = entity.getAuthorname();
         this.mvtitle = entity.getMvtitle();
         this.url=entity.getUrl();
         this.hashtags = entity.getHashtags();
