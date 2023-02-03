@@ -44,7 +44,7 @@ public class MovieDetailController {
     PostsService postsService;
     @RequestMapping("/moviedetail/{detail}/{code}")
     public String moviedetail(Model model, @PathVariable String detail, @PathVariable String code) {
-        //System.out.println(fromDTO);
+
         model.addAttribute("Posts",postsService.findByMvtitle(Collections.singletonList(detail))); // Service 접근
         model.addAttribute("movie_title",detail);
         model.addAttribute("code",code);
