@@ -21,13 +21,13 @@
     <button sec:authorize="isAnonymous()" type="submit" onclick="location.href='./signup'">회원가입</button>
     <button sec:authorize="isAuthenticated()" id="logoutBt" type="submit" onclick="location.href='./logout'">로그아웃</button>
     <!--    <button sec:authorize="isAuthenticated()" type="submit" onclick="location.href='./profile'">프로필</button>-->
-    <form sec:authorize="isAuthenticated()" action="getUser()" th:action="@{profile}" method="post">
+    <form style="display: inline;" sec:authorize="isAuthenticated()" action="getUser()" th:action="@{profile}" method="post">
         <input type="hidden" id="profile" th:name="userinfo" th:value="${userinfo}">
         <input type="submit" value="프로필">
     </form>
-    <div sec:authorize="isAuthenticated()">
-        <strong> 로그인 유저 : <span sec:authentication="principal.nickname"/></strong>
-    </div>
+<!--    <div sec:authorize="isAuthenticated()">-->
+<!--        <strong> 로그인 유저 : <span sec:authentication="principal.nickname"/></strong>-->
+<!--    </div>-->
 </div><br>
 <div class="background">
     <div class="window">

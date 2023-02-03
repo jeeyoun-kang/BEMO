@@ -64,10 +64,13 @@ public class Posts {
         this.update_date = update_date;
         this.url = url;
     }
-    public void update(String title, String content, String url) {
+    public void update(String title, String content, String url,List<Hashtags> hashtags) {
         this.title = title;
         this.content = content;
         this.url=url;
+        for(int i = 0; i<hashtags.size(); i++) {
+            addHashtags(hashtags.get(i));
+        }
     }
     public void setUser(User user) {
         this.user = user;

@@ -69,15 +69,26 @@ var main = {
         });
     },
     update : function (){
-        var form = $('#excelForm')[0];
-        var formData = new FormData(form);
+        const form = $('#excelForm')[0];
+        const formData = new FormData(form);
+        const hashtagdata = $('input[name=hashtag]').val();
+        console.log(hashtagdata);
+        let hashtagData = "empty";
+        if(hashtagdata != ""){
+            const test = JSON.parse(hashtagdata);
+            hashtagData = "";
+            for (const i in test) {
+                hashtagData += test[i].value + ",";
+            }
+        }
         var data = {
             title: $('#title').val(),
             content: $('#content').val(),
-            id: $('#update_id').text()
+            id: $('#update_id').text(),
+            hashtag: hashtagData,
         };
         //var update_id=$('#update_id').text()
-        console.log(data.id);
+        console.log("해시태그="+data.hashtag);
         formData.append('file', $('#file'));
         formData.append('key', new Blob([ JSON.stringify(data) ], {type : "application/json"}));
 
