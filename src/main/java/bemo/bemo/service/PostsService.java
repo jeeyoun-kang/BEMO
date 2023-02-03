@@ -6,6 +6,7 @@ import bemo.bemo.entity.Posts;
 import bemo.bemo.repository.HashtagsRepository;
 import bemo.bemo.repository.PostsRepository;
 import bemo.bemo.repository.UserRepository;
+import org.hibernate.query.criteria.internal.expression.function.AggregationFunction;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -88,10 +89,16 @@ public class PostsService {
     public List<Posts> findAllDesc(){
         return postsRepository.findAllDesc(Sort.by(Sort.Direction.ASC, "post_id"));
     }
-    public List<Hashtags> findHashtags(String title) {return hashtagsRepository.findByMvtitle(title);}
-    public List<Posts> findByMvtitle(String mvtitle) {
-        return postsRepository.findByMvtitle(mvtitle);
+//    public List<Hashtags> findAllHashtags(String title) {return hashtagsRepository.findAll(Sort.by(AggregationFunction.COUNT.COUNT));}
+//    public List<Hashtags> findHashtags(String hashtag) {return hashtagsRepository.findAllByContent(hashtag);}
+    public List<Posts> findByMvtitle(List<String> mvtitle) {
+        return postsRepository.findPostsByMvtitle(mvtitle);
     }
 
+    public List<Posts> findPostsByHashtag(String hashtag) {
+        List<String> title = hashtagsRepository.findMvtitleByContentContaining(hashtag);
+        System.out.println("mvtitle"+title);
+        return findByMvtitle(title);
 
+    }
 }

@@ -1,7 +1,7 @@
 var input =document.querySelector('input[name=hashtag]');
 var tagify = new Tagify(input, {
     whitelist:  ["반전", "감동", "액션", "역사"],
-    maxTags: 3,
+    maxTags: 2,
     userInput: false,
 
     dropdown: {

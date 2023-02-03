@@ -43,10 +43,10 @@ public class MovieDetailController {
     @Autowired
     PostsService postsService;
     @RequestMapping("/moviedetail/{detail}/{code}")
-    public String moviedetail(Model model, @PathVariable String detail, @PathVariable String code) {
+    public String moviedetail(Model model, @PathVariable List<String> detail, @PathVariable String code) {
         //System.out.println(fromDTO);
         model.addAttribute("Posts",postsService.findByMvtitle(detail)); // Service 접근
-        model.addAttribute("movie_title",detail);
+        model.addAttribute("movie_title",detail.get(0));
         model.addAttribute("code",code);
 
         String apiURL = searchApiURL1 + code;    // json 결과
@@ -304,13 +304,13 @@ public class MovieDetailController {
     }
 
     @RequestMapping("/moviedetail/{detail}")
-    public String moviedetail(Model model, @PathVariable String detail)
+    public String moviedetail(Model model, @PathVariable List<String> detail)
     {
         model.addAttribute("Posts",postsService.findByMvtitle(detail)); // Service 접근
         model.addAttribute("movie_title",detail);
 
         String text = null;
-        text = URLEncoder.encode(detail, StandardCharsets.UTF_8);
+        text = URLEncoder.encode(detail.get(0), StandardCharsets.UTF_8);
 
         String apiURL = searchApiURL2 + text;    // json 결과
 
