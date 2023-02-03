@@ -99,7 +99,7 @@ public class PostsService {
             posts.update(requestDto.getTitle(), requestDto.getContent(), requestDto.getUrl(), requestDto.getHashtags(), now);
         }
 
-        return id;
+            return id;
     }
 
 
@@ -116,7 +116,7 @@ public class PostsService {
     public List<Posts> findAllDesc(){
         return postsRepository.findAllDesc(Sort.by(Sort.Direction.ASC, "post_id"));
     }
-    //    public List<Hashtags> findAllHashtags(String title) {return hashtagsRepository.findAll(Sort.by(AggregationFunction.COUNT.COUNT));}
+//    public List<Hashtags> findAllHashtags(String title) {return hashtagsRepository.findAll(Sort.by(AggregationFunction.COUNT.COUNT));}
 //    public List<Hashtags> findHashtags(String hashtag) {return hashtagsRepository.findAllByContent(hashtag);}
     public List<Posts> findByMvtitle(List<String> mvtitle) {
         return postsRepository.findPostsByMvtitle(mvtitle);
