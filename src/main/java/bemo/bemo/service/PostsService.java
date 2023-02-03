@@ -69,10 +69,36 @@ public class PostsService {
                 .orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. id=" + id));
         String now = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
         posts.setUpdate_date(now);
-        posts.update(requestDto.getTitle(), requestDto.getContent(),requestDto.getUrl());
+        System.out.println(requestDto.getTitle());
+//        List<Hashtags> hashtagsList=hashtagsRepository.findByPosts(id);
+
+//        System.out.println(hashtagsList);
+
+        String hash = requestDto.getHashtag();
+        System.out.println("해시"+hash);
+
+        if(hash.equals("empty")) {
+            posts = postsRepository.save(requestDto.toEntityWithoutHashtag());
+        }
+        else {
+            String[] data = StringUtils.split(requestDto.getHashtag(), ",");
+            data[data.length - 1] = data[data.length - 1].replaceAll(",$", "");
+            System.out.println("전달값:" + data);
+            List<Hashtags> hashtags = new ArrayList<>();
+
+            for (int i = 0; i < data.length; i++) {
+                Hashtags hashtag = new Hashtags(data[i], requestDto.getMvtitle());
+                hashtagsRepository.save(hashtag);
+                hashtags.add(hashtag);
+            }
+            System.out.println(hashtags);
+            requestDto.setHashtags(hashtags);
+
+            posts.update(requestDto.getTitle(), requestDto.getContent(), requestDto.getUrl(), requestDto.getHashtags());
+        }
 
 
-        return id;
+            return id;
     }
 
 

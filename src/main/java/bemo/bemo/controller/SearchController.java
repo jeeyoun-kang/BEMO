@@ -6,6 +6,7 @@ import bemo.bemo.service.PostsService;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,6 +31,12 @@ import java.util.Map;
 public class SearchController {
     @Autowired
     PostsService postsService;
+
+    @Value("${search.client.id}")
+    private String searchClientId;
+
+    @Value("${search.client.secret}")
+    private String searchClientSecret;
     @GetMapping("search")
     public String ticket(Model model) {
             model.addAttribute("data", "search");
@@ -38,6 +45,13 @@ public class SearchController {
 
     @RequestMapping("/send")
     public String send(String moviename,Model model){
+
+        if (moviename.isEmpty()) {
+            model.addAttribute("msg", "검색어를 다시 입력해주세요.");
+            model.addAttribute("url", "/");
+            return "alert";
+        }
+
         if(moviename.contains("#")){
             moviename = moviename.substring(1, moviename.length());
             System.out.println("해시태그"+moviename);
@@ -48,8 +62,6 @@ public class SearchController {
             return "hashtag";
         }
         else {
-            String clientId = "******"; //애플리케이션 클라이언트 아이디값"
-            String clientSecret = "******"; //애플리케이션 클라이언트 시크릿값"
 
             String text = null;
             text = URLEncoder.encode(moviename, StandardCharsets.UTF_8);
@@ -59,8 +71,8 @@ public class SearchController {
 
 
             Map<String, String> requestHeaders = new HashMap<>();
-            requestHeaders.put("X-Naver-Client-Id", clientId);
-            requestHeaders.put("X-Naver-Client-Secret", clientSecret);
+            requestHeaders.put("X-Naver-Client-Id", searchClientId);
+            requestHeaders.put("X-Naver-Client-Secret", searchClientSecret);
             String responseBody = get(apiURL, requestHeaders);
 
             model.addAttribute("jsonbody", responseBody);
