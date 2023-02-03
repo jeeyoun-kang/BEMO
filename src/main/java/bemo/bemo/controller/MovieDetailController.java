@@ -7,9 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -17,14 +20,12 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 @Controller
 public class MovieDetailController {
+
     @Value("${search.client.id}")
     private String searchClientId;
     @Value("${search.client.secret}")
@@ -39,17 +40,17 @@ public class MovieDetailController {
     private String dataclientSecret;
     @Value("${data.apiURL}")
     private String dataApiURL;
-
     @Autowired
     PostsService postsService;
     @RequestMapping("/moviedetail/{detail}/{code}")
-    public String moviedetail(Model model, @PathVariable List<String> detail, @PathVariable String code) {
+    public String moviedetail(Model model, @PathVariable String detail, @PathVariable String code) {
         //System.out.println(fromDTO);
-        model.addAttribute("Posts",postsService.findByMvtitle(detail)); // Service 접근
-        model.addAttribute("movie_title",detail.get(0));
+        model.addAttribute("Posts",postsService.findByMvtitle(Collections.singletonList(detail))); // Service 접근
+        model.addAttribute("movie_title",detail);
         model.addAttribute("code",code);
 
-        String apiURL = searchApiURL1 + code;    // json 결과
+
+        String apiURL = "https://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key=f5eef3421c602c6cb7ea224104795888&movieCd=" + code;    // json 결과
 
         Map<String, String> requestHeaders2 = new HashMap<>();//
         requestHeaders2.put("X-Naver-Client-Id", searchClientId);
@@ -102,6 +103,11 @@ public class MovieDetailController {
         String actorstr = String.join(",", jsonlistactor);
         model.addAttribute("actorNm",actorstr);
 
+        //네이버 트렌드 데이터
+
+
+        String apiUrl = "https://openapi.naver.com/v1/datalab/search";
+
         Map<String, String> requestHeaders = new HashMap<>();
         requestHeaders.put("X-Naver-Client-Id", dataclientId);
         requestHeaders.put("X-Naver-Client-Secret", dataclientSecret);
@@ -122,14 +128,14 @@ public class MovieDetailController {
                 "\"ages\":[\"1\"]," +
                 "\"gender\":\"\"}";
 
-        String responseBody2 = post(dataApiURL, requestHeaders, requestBody);
+        String responseBody2 = post(apiUrl, requestHeaders, requestBody);
         System.out.println(responseBody2);
         JSONObject jObject2 = new JSONObject(responseBody2);
         JSONArray batter = jObject2.getJSONArray("results");
         JSONObject inner_json = batter.getJSONObject(0);
 
         JSONArray jObject3 = inner_json.getJSONArray("data");
-
+        System.out.println(jObject3);
 
         List<String> jsonperiod = new ArrayList<String>();
         List<String> jsonratio = new ArrayList<String>();
@@ -300,25 +306,33 @@ public class MovieDetailController {
             model.addAttribute("ratio1",ratio1);
 
         }
+
+
+
         return "moviedetail";
+
+
     }
 
     @RequestMapping("/moviedetail/{detail}")
-    public String moviedetail(Model model, @PathVariable List<String> detail)
+    public String moviedetail(Model model, @PathVariable String detail)
     {
-        model.addAttribute("Posts",postsService.findByMvtitle(detail)); // Service 접근
+        model.addAttribute("Posts",postsService.findByMvtitle(Collections.singletonList(detail))); // Service 접근
         model.addAttribute("movie_title",detail);
 
-        String text = null;
-        text = URLEncoder.encode(detail.get(0), StandardCharsets.UTF_8);
 
+
+        String text = null;
+        text = URLEncoder.encode(detail, StandardCharsets.UTF_8);
+        System.out.println(text);
         String apiURL = searchApiURL2 + text;    // json 결과
+        //String apiURL = "https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchWeeklyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt=" + text;
+
 
         Map<String, String> requestHeaders = new HashMap<>();
         requestHeaders.put("X-Naver-Client-Id", searchClientId);
         requestHeaders.put("X-Naver-Client-Secret", searchClientSecret);
         String responseBody = get(apiURL,requestHeaders);
-
         model.addAttribute("jsonbody",responseBody);
         System.out.println(responseBody);
 
@@ -346,6 +360,10 @@ public class MovieDetailController {
             actor=actor.replaceAll("\\|",",");
             actor=actor.replaceAll("\\<.*?>","");
 
+
+
+
+
             jsonlisttitle.add(title);
             jsonlistimage.add(image);
             jsonlistdi.add(director);
@@ -359,6 +377,11 @@ public class MovieDetailController {
         model.addAttribute("actorNm",actorstr);
         model.addAttribute("movie_title",jsonlisttitle.get(0));
         model.addAttribute("image1",jsonlistimage.get(0));
+
+        //네이버 트렌드 데이터
+
+
+        String apiUrl = "https://openapi.naver.com/v1/datalab/search";
 
         Map<String, String> requestHeaders2 = new HashMap<>();
         requestHeaders2.put("X-Naver-Client-Id", dataclientId);
@@ -379,7 +402,7 @@ public class MovieDetailController {
                 "\"ages\":[\"1\"]," +
                 "\"gender\":\"\"}";
 
-        String responseBody2 = post(dataApiURL, requestHeaders2, requestBody);
+        String responseBody2 = post(apiUrl, requestHeaders2, requestBody);
 
         JSONObject jObject2 = new JSONObject(responseBody2);
 
@@ -558,9 +581,13 @@ public class MovieDetailController {
             model.addAttribute("ratio1",ratio1);
 
         }
-        return "moviedetail2";
-    }
 
+
+
+        return "moviedetail2";
+
+
+    }
     private static String post(String apiUrl, Map<String, String> requestHeaders, String requestBody) {
         HttpURLConnection con = connect(apiUrl);
 
@@ -588,7 +615,6 @@ public class MovieDetailController {
             con.disconnect(); // Connection을 재활용할 필요가 없는 프로세스일 경우
         }
     }
-
     private static String get(String apiUrl, Map<String, String> requestHeaders){
         HttpURLConnection con = connect(apiUrl);
         try {
