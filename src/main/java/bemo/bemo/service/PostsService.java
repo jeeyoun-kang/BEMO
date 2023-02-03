@@ -98,7 +98,7 @@ public class PostsService {
 
             posts.update(requestDto.getTitle(), requestDto.getContent(), requestDto.getUrl(), requestDto.getHashtags(), now);
         }
-        
+
             return id;
     }
 
