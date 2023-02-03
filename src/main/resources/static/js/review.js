@@ -85,6 +85,7 @@ var main = {
             title: $('#title').val(),
             content: $('#content').val(),
             id: $('#update_id').text(),
+            mvtitle: $('#mvtitle').text(),
             hashtag: hashtagData,
         };
         //var update_id=$('#update_id').text()

@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-@Setter
 @NoArgsConstructor
 @Entity
 @Table(name = "posts")
@@ -64,13 +63,20 @@ public class Posts {
         this.update_date = update_date;
         this.url = url;
     }
-    public void update(String title, String content, String url,List<Hashtags> hashtags) {
+    public void update(String title, String content, String url,List<Hashtags> hashtags, String update_date) {
         this.title = title;
         this.content = content;
         this.url=url;
+        this.update_date = update_date;
         for(int i = 0; i<hashtags.size(); i++) {
             addHashtags(hashtags.get(i));
         }
+    }
+    public void updateWithoutHashtags(String title, String content, String url, String update_date) {
+        this.title = title;
+        this.content = content;
+        this.url = url;
+        this.update_date = update_date;
     }
     public void setUser(User user) {
         this.user = user;
