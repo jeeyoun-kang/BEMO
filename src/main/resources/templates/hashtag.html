@@ -1,13 +1,37 @@
 <!doctype html>
 <html lang="en">
 <head>
+    <link rel="short icon" href="/img/bemo.ico"/>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+        *{font-family: 'Jua', sans-serif;}
+    </style>
+    <title>BEMO</title>
 </head>
 <body>
-
+<table id="PostsTable">
+    <h1>#[[hashtag]]</h1>
+    <tr>
+        <th>작성자</th>
+        <th>영화</th>
+        <th>제목</th>
+        <th>내용</th>
+        <th>이미지</th>
+    </tr>
+    <tr th:each="Posts: ${Posts}" th:if="${Posts != null}">
+        <td th:text="${Posts.authorname}"></td>
+        <td th:text="${Posts.mvtitle}"></td>
+        <td th:text="${Posts.title}"></td>
+        <td th:text="${Posts.content}"></td>
+        <img id="image" th:src="${Posts.url}">
+    </tr>
+</table>
 </body>
 </html>
