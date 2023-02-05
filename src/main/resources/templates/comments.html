@@ -42,7 +42,7 @@
     </td>
   </tr>
   <div th:if="${writer==true}"> <!--본인일때 수정하기 버튼보이게-->
-    <form method="post" th:action="@{/update/{id} (id=${id})}" >
+    <form method="post" th:action="@{/modify/{id} (id=${id})}" >
       <button type="submit">수정하기</button></form>
   </div>
 </table>

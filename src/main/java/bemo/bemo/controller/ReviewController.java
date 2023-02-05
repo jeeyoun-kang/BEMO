@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.websocket.server.PathParam;
+
 @Controller
 public class ReviewController {
     @Autowired
@@ -27,18 +29,7 @@ public class ReviewController {
         return "review";
     }
 
-    @RequestMapping("/comments/{id}")
-    public String comments(Model model, @PathVariable Long id, @AuthenticationPrincipal PrincipalDetails principalDetails) {
-        PostsDto postsSaveDto = postsService.findById(id);
-        model.addAttribute("Posts", postsService.findById(id)); //id값을 기준으로 한 post 데이터들
-        if (principalDetails != null) { // 본인이면 수정 가능
-            if (postsSaveDto.getAuthor().equals(principalDetails.getUsername())) model.addAttribute("writer", true);
-        }
-        model.addAttribute("id",id);
-        return "comments";
-    }
-
-    @RequestMapping("/update/{id}")
+    @RequestMapping("/modify/{id}")
     public String update(Model model, @PathVariable Long id) {
 
         model.addAttribute("Posts", postsService.findById(id));

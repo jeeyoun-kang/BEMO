@@ -25,8 +25,26 @@ var main = {
         $('#btn-update').on('click', function () {
             _this.update();
         });
+        $('#btn-comment').on('click', function () {
+            _this.comment();
+        });
     },
-    save : function (name) {
+    comment : function (){
+
+        var id = $('#id').text();
+        console.log(id);
+        $.ajax({
+            type:'GET',
+            url:'/users/'+id,
+            dataType:'json',
+            contentType:'application/json; charset=utf-8'
+        }).done(function(){
+            alert("성공");
+        }).fail(function(error){
+            alert(JSON.stringify(error));
+        });
+    },
+    save : function () {
         const form = $('#excelForm')[0];
         const formData = new FormData(form);
         const hashtagdata = $('input[name=hashtag]').val();
@@ -50,13 +68,12 @@ var main = {
         console.log("해시태그="+data.hashtag);
         formData.append('file', $('#file'));
         var filename=formData.get('file').name;
-
-
         formData.append('key', new Blob([ JSON.stringify(data) ], {type : "application/json"}));
         console.log(formData);
+
         $.ajax({
             type: 'POST',
-            url: '/{movie_title}/review/posts',
+            url: '/users/',
             data: formData,
             contentType: false,               // * 중요 *
             processData: false,               // * 중요 *
@@ -84,18 +101,19 @@ var main = {
         var data = {
             title: $('#title').val(),
             content: $('#content').val(),
-            id: $('#update_id').text(),
             mvtitle: $('#mvtitle').text(),
             hashtag: hashtagData,
         };
+        var id = $('#update_id').text();
+        console.log(id);
         //var update_id=$('#update_id').text()
         console.log("해시태그="+data.hashtag);
         formData.append('file', $('#file'));
         formData.append('key', new Blob([ JSON.stringify(data) ], {type : "application/json"}));
 
         $.ajax({
-            type: 'POST',
-            url: '/{title}/update/posts',
+            type: 'PUT',
+            url: '/users/'+id,
             data: formData,
             contentType: false,               // * 중요 *
             processData: false,               // * 중요 *
@@ -111,13 +129,11 @@ var main = {
     delete : function (){
 
 
-        var id = $('#id').val();
+        var id = $('#update_id').text();
 
         $.ajax({
             type:'DELETE',
-            url:'/posts/'+id,
-            dataType:'json',
-            contentType:'application/json; charset=utf-8'
+            url:'/users/'+id,
         }).done(function(){
             alert('글이 삭제되었습니다.');
             window.location.href='/';

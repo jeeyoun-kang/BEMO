@@ -52,7 +52,7 @@
     <!-- th:each="student, studentStat: ${studentList}" 와 동일하며
               status를 명시하지 않더라도 앞의 "오브젝트명stat" 를 이용하여 접근 가능하다. -->
     <form  id="excelForm" enctype="multipart/form-data">
-        <p style="display: none" name="update_id" id="update_id" th:text="${update_id}"></p>
+        <p style="display: none" name="update_id" id="update_id" th:text="${id}"></p>
         <tr th:each="Posts: ${Posts}">
             <td th:text="${Posts.authorname}"></td>
             <td th:text="${Posts.mvtitle}" name="mvtitle" id="mvtitle"></td>
