@@ -59,7 +59,8 @@ public class PostsService {
     public void delete (Long id) {
         Posts posts = postsRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. id=" + id));
-
+        List<Hashtags> hashtagsList=hashtagsRepository.findByPosts(posts);
+        hashtagsRepository.deleteAll(hashtagsList);
         postsRepository.delete(posts);
     }
 
@@ -79,9 +80,7 @@ public class PostsService {
             posts.updateWithoutHashtags(requestDto.getTitle(), requestDto.getContent(), requestDto.getUrl(), now);
         }
         else {
-            for(int i = 0; i < hashtagsList.size(); i++) {
-                hashtagsRepository.delete(hashtagsList.get(i));
-            }
+            hashtagsRepository.deleteAll(hashtagsList);
 
             String[] data = StringUtils.split(requestDto.getHashtag(), ",");
             data[data.length - 1] = data[data.length - 1].replaceAll(",$", "");

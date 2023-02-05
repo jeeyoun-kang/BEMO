@@ -12,26 +12,39 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <style>
         *{font-family: 'Jua', sans-serif;}
+        td {
+            padding: 15px;
+            border: 1px solid black;
+            transform:scale(1.0);
+            transition: transform .5s;
+
+        }
+        td:hover{
+            box-shadow: 5px 5px ;
+            transform:scale(1.03);     /* 이미지 확대 */
+            transition: transform .5s; 	/*  시간 설정  */
+        }
     </style>
     <title>BEMO</title>
 </head>
 <body>
-<table id="PostsTable">
-    <h1>#[[hashtag]]</h1>
-    <tr>
-        <th>작성자</th>
-        <th>영화</th>
-        <th>제목</th>
-        <th>내용</th>
-        <th>이미지</th>
-    </tr>
-    <tr th:each="Posts: ${Posts}" th:if="${Posts != null}">
-        <td th:text="${Posts.authorname}"></td>
-        <td th:text="${Posts.mvtitle}"></td>
-        <td th:text="${Posts.title}"></td>
-        <td th:text="${Posts.content}"></td>
-        <img id="image" th:src="${Posts.url}">
-    </tr>
-</table>
+
+<div class="post" >
+    <h1 th:text="'#'+${hashtag}"></h1>
+    <table>
+        <td id="id" name="id" th:each="Posts: ${Posts}">
+            <form th:method="GET" th:action="@{/users/{id} (id=${Posts.post_id})}" >
+                <button type="submit"><img id="image" th:src="${Posts.url}"></button>
+                <p><button type="submit" th:text="${Posts.title}" ></button></p>
+                <th:block th:each="Hashtags: ${Posts.getHashtags()}" th:if="${Posts.getHashtags() != null}">
+                    <span th:text="'#'+ ${Hashtags.content} "></span>
+                </th:block>
+                <p th:text="${Posts.mvtitle}"></p>
+                <p th:text="${Posts.authorname}"></p>
+                <p th:text="${Posts.update_date}"></p>
+            </form>
+        </td>
+    </table>
+</div>
 </body>
 </html>
