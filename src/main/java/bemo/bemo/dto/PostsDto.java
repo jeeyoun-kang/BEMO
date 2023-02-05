@@ -28,18 +28,21 @@ public class PostsDto {
     private String mvtitle;
     private String now = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     private String url;
+
+    private String mvurl;
     private MultipartFile file;
     private String hashtag;
     private List<Hashtags> hashtags;
 
     @Builder
-    public PostsDto(String title, String content, String author, String authorname, String mvtitle,String url,MultipartFile file, String hashtag){
+    public PostsDto(String title, String content, String author, String authorname, String mvtitle,String url,String mvurl,MultipartFile file, String hashtag){
         this.title=title;
         this.content=content;
         this.author=author;
         this.authorname=authorname;
         this.mvtitle = mvtitle;
         this.url=url;
+        this.mvurl=mvurl;
         this.file=file;
         this.hashtag = hashtag;
     }
@@ -53,6 +56,7 @@ public class PostsDto {
                 .upload_date(now)
                 .update_date(now)
                 .url(url)
+                .mvurl(mvurl)
                 .hashtags(hashtags)
                 .build();
     }
@@ -66,6 +70,7 @@ public class PostsDto {
                 .upload_date(now)
                 .update_date(now)
                 .url(url)
+                .mvurl(mvurl)
                 .buildWithoutHashtag();
     }
 
@@ -77,6 +82,7 @@ public class PostsDto {
         this.authorname = entity.getAuthorname();
         this.mvtitle = entity.getMvtitle();
         this.url=entity.getUrl();
+        this.mvurl=entity.getMvurl();
         this.hashtags = entity.getHashtags();
     }
     public void setHashtags(List<Hashtags> hashtags) {

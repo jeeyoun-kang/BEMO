@@ -6,7 +6,6 @@ import bemo.bemo.entity.Posts;
 import bemo.bemo.repository.HashtagsRepository;
 import bemo.bemo.repository.PostsRepository;
 import bemo.bemo.repository.UserRepository;
-import org.hibernate.query.criteria.internal.expression.function.AggregationFunction;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +14,9 @@ import org.springframework.util.StringUtils;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class PostsService {
@@ -43,7 +44,8 @@ public class PostsService {
             System.out.println("전달값:" + data);
             List<Hashtags> hashtags = new ArrayList<>();
             for (int i = 0; i < data.length; i++) {
-                Hashtags hashtag = new Hashtags(data[i], requestDto.getMvtitle());
+                Hashtags hashtag = new Hashtags(data[i],requestDto.getMvtitle());
+
                 hashtagsRepository.save(hashtag);
                 hashtags.add(hashtag);
             }
@@ -123,8 +125,18 @@ public class PostsService {
 
     public List<Posts> findPostsByHashtag(String hashtag) {
         List<String> title = hashtagsRepository.findMvtitleByContentContaining(hashtag);
+
         System.out.println("mvtitle"+title);
         return findByMvtitle(title);
 
     }
+
+    public List<String> findPostsByHashtags(String hashtag) {
+        List<String> title = hashtagsRepository.findMvtitleByContentContaining(hashtag);
+        System.out.println("mvtitle"+title);
+        return title;
+
+    }
+
+
 }

@@ -372,9 +372,15 @@ public class MovieDetailController {
         }
 
         String actorstr = String.join(",", jsonlistac.get(0));
-        actorstr = actorstr.substring(0, actorstr.length() - 1);
+        if (actorstr.isEmpty()){
+            model.addAttribute("actorNm","");
+        }
+        else{
+            actorstr = actorstr.substring(0, actorstr.length() - 1);
+            model.addAttribute("actorNm",actorstr);
+
+        }
         model.addAttribute("peopleNm",jsonlistdi.get(0));
-        model.addAttribute("actorNm",actorstr);
         model.addAttribute("movie_title",jsonlisttitle.get(0));
         model.addAttribute("image1",jsonlistimage.get(0));
 

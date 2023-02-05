@@ -28,23 +28,25 @@
     <title>BEMO</title>
 </head>
 <body>
-
-<div class="post" >
-    <h1 th:text="'#'+${hashtag}"></h1>
-    <table>
-        <td id="id" name="id" th:each="Posts: ${Posts}">
-            <form th:method="GET" th:action="@{/users/{id} (id=${Posts.post_id})}" >
-                <button type="submit"><img id="image" th:src="${Posts.url}"></button>
-                <p><button type="submit" th:text="${Posts.title}" ></button></p>
-                <th:block th:each="Hashtags: ${Posts.getHashtags()}" th:if="${Posts.getHashtags() != null}">
-                    <span th:text="'#'+ ${Hashtags.content} "></span>
-                </th:block>
-                <p th:text="${Posts.mvtitle}"></p>
-                <p th:text="${Posts.authorname}"></p>
-                <p th:text="${Posts.update_date}"></p>
-            </form>
-        </td>
-    </table>
+<div class="movies">
+    <div class="slide">
+        <div class="images">
+            <div class="jb-a">
+                <h1 th:text="'#'+${hashtag}"></h1>
+                <table>
+                <td id="id" name="id" th:each="Posts: ${Posts}">
+                <form th:action="@{/moviedetail/{detail} (detail=${Posts.mvtitle})}" >
+                    <button type="submit" style="background-color:transparent; border:0; outline:0;" >
+                    <img class="jb-b1" id="image" th:src="${Posts.mvurl}">
+                    <h4 class="jb-c1" th:text="${Posts.mvtitle}"></h4>
+                    </button>
+                </form>
+                </td>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
+
 </body>
 </html>

@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,10 +22,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
 
 
 @Controller
@@ -37,6 +36,9 @@ public class SearchController {
 
     @Value("${search.client.secret}")
     private String searchClientSecret;
+
+    @Value("${search.apiURL2}")
+    private String searchapiURL2;
     @GetMapping("search")
     public String ticket(Model model) {
             model.addAttribute("data", "search");
@@ -56,9 +58,14 @@ public class SearchController {
             moviename = moviename.substring(1, moviename.length());
             System.out.println("해시태그"+moviename);
             List<Posts> posts = postsService.findPostsByHashtag(moviename);
-            System.out.println("Posts"+posts);
+            HashSet<String> test= new HashSet<>();
             model.addAttribute("hashtag", moviename);
             model.addAttribute("Posts", posts);
+            for(int i = 0; i < posts.size(); i++) {
+                System.out.println(posts.get(i));
+            }
+
+
             return "hashtag";
         }
         else {
@@ -66,7 +73,7 @@ public class SearchController {
             String text = null;
             text = URLEncoder.encode(moviename, StandardCharsets.UTF_8);
 
-            String apiURL = "https://openapi.naver.com/v1/search/movie.json?query=" + text;    // json 결과
+            String apiURL = searchapiURL2+ text;    // json 결과
             //String apiURL = "https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchWeeklyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt=" + text;
 
 

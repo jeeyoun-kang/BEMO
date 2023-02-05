@@ -20,6 +20,8 @@ public class Hashtags {
     private String content;
     private String mvtitle;
 
+    private String mvurl;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="post_id")
     private Posts posts;
@@ -29,6 +31,9 @@ public class Hashtags {
         this.content = content;
         this.mvtitle = mvtitle;
     }
+
+
+
     public Hashtags update(String content, String mvtitle){
         this.content = content;
         this.mvtitle = mvtitle;
