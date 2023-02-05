@@ -12,6 +12,19 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <style>
         *{font-family: 'Jua', sans-serif;}
+
+        td {
+            padding: 15px;
+            border: 1px solid black;
+            transform:scale(1.0);
+            transition: transform .5s;
+
+        }
+        td:hover{
+            box-shadow: 5px 5px ;
+            transform:scale(1.03);     /* 이미지 확대 */
+            transition: transform .5s; 	/*  시간 설정  */
+        }
     </style>
     <title>BEMO</title>
 </head>
@@ -24,25 +37,22 @@
 
     <button type="submit" >리뷰</button>
 </form>
-<table id="PostsTable">
-    <tr>
-
-        <th>작성자</th>
-        <th>제목</th>
-        <th>내용</th>
-    </tr>
-
-    <!-- th: each를 이용하면 반복문을 이용할 수 있다. -->
-    <!-- th:each="student, studentStat: ${studentList}" 와 동일하며
-              status를 명시하지 않더라도 앞의 "오브젝트명stat" 를 이용하여 접근 가능하다. -->
-    <tr th:each="Posts: ${Posts}">
-        <td th:text="${Posts.authorname}"></td>
-        <td th:text="${Posts.title}"></td>
-        <td th:text="${Posts.content}"></td>
-
-
-    </tr>
-</table>
+<div class="post" >
+    <table>
+        <td id="id" name="id" th:each="Posts: ${Posts}">
+            <form th:method="GET" th:action="@{/users/{id} (id=${Posts.post_id})}" >
+                <button type="submit"><img id="image" th:src="${Posts.url}"></button>
+                <p><button type="submit" th:text="${Posts.title}" ></button></p>
+                <th:block th:each="Hashtags: ${Posts.getHashtags()}" th:if="${Posts.getHashtags() != null}">
+                    <span th:text="'#'+ ${Hashtags.content} "></span>
+                </th:block>
+                <p th:text="${Posts.mvtitle}"></p>
+                <p th:text="${Posts.authorname}"></p>
+                <p th:text="${Posts.update_date}"></p>
+            </form>
+        </td>
+    </table>
+</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
 <div style="width: 500px; height: 500px;">
