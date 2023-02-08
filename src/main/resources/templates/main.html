@@ -78,24 +78,24 @@
             <div class="jb-a">
                 <form th:action="@{/moviedetail/{detail}/{code} (detail=${boxtitle1},code=${code1})}" >
                     <button type="submit" style="background-color:transparent; border:0; outline:0;" >
-                        <img class="jb-b1" th:src = "${boximage1}"/>
-                        <h4 class="jb-c1" th:text = "${boxtitle1}"/>
+                        <img class="jb-b" th:src = "${boximage1}"/>
+                        <h4 class="jb-c" th:text = "${boxtitle1}"/>
                     </button>
                 </form>
             </div>
             <div class="jb-a">
                 <form th:action="@{/moviedetail/{detail}/{code} (detail=${boxtitle2},code=${code2})}" >
                     <button type="submit" style="background-color:transparent; border:0; outline:0;" >
-                        <img class="jb-b2" th:src = "${boximage2}"/>
-                        <h4 class="jb-c2"  th:text = "${boxtitle2}"/>
+                        <img class="jb-b" th:src = "${boximage2}"/>
+                        <h4 class="jb-c"  th:text = "${boxtitle2}"/>
                     </button>
                 </form>
             </div>
             <div class="jb-a">
                 <form th:action="@{/moviedetail/{detail}/{code} (detail=${boxtitle3},code=${code3})}" >
                     <button type="submit" style="background-color:transparent; border:0; outline:0;" >
-                        <img class="jb-b3" th:src = "${boximage3}"/>
-                        <h4 class="jb-c3" th:text = "${boxtitle3}"/>
+                        <img class="jb-b" th:src = "${boximage3}"/>
+                        <h4 class="jb-c" th:text = "${boxtitle3}"/>
                     </button>
                 </form>
 
@@ -103,32 +103,32 @@
             <div class="jb-a">
                 <form th:action="@{/moviedetail/{detail}/{code} (detail=${boxtitle4},code=${code4})}" >
                     <button type="submit" style="background-color:transparent; border:0; outline:0;" >
-                        <img class="jb-b4" th:src = "${boximage4}"/>
-                        <h4 class="jb-c4"  th:text = "${boxtitle4}"/>
+                        <img class="jb-b" th:src = "${boximage4}"/>
+                        <h4 class="jb-c"  th:text = "${boxtitle4}"/>
                     </button>
                 </form>
             </div>
             <div class="jb-a">
                 <form th:action="@{/moviedetail/{detail}/{code} (detail=${boxtitle5},code=${code5})}" >
                     <button type="submit" style="background-color:transparent; border:0; outline:0;" >
-                        <img class="jb-b1" th:src = "${boximage5}"/>
-                        <h4 class="jb-c1" th:text = "${boxtitle5}"/>
+                        <img class="jb-b" th:src = "${boximage5}"/>
+                        <h4 class="jb-c" th:text = "${boxtitle5}"/>
                     </button>
                 </form>
             </div>
             <div class="jb-a">
                 <form th:action="@{/moviedetail/{detail}/{code} (detail=${boxtitle6},code=${code6})}" >
                     <button type="submit" style="background-color:transparent; border:0; outline:0;" >
-                        <img class="jb-b2" th:src = "${boximage6}"/>
-                        <h4 class="jb-c2"  th:text = "${boxtitle6}"/>
+                        <img class="jb-b" th:src = "${boximage6}"/>
+                        <h4 class="jb-c"  th:text = "${boxtitle6}"/>
                     </button>
                 </form>
             </div>
             <div class="jb-a">
                 <form th:action="@{/moviedetail/{detail}/{code} (detail=${boxtitle7},code=${code7})}" >
                     <button type="submit" style="background-color:transparent; border:0; outline:0;" >
-                        <img class="jb-b3" th:src = "${boximage7}"/>
-                        <h4 class="jb-c3" th:text = "${boxtitle7}"/>
+                        <img class="jb-b" th:src = "${boximage7}"/>
+                        <h4 class="jb-c" th:text = "${boxtitle7}"/>
                     </button>
                 </form>
 
@@ -136,8 +136,8 @@
             <div class="jb-a">
                 <form th:action="@{/moviedetail/{detail}/{code} (detail=${boxtitle8},code=${code8})}" >
                     <button type="submit" style="background-color:transparent; border:0; outline:0;" >
-                        <img class="jb-b4" th:src = "${boximage8}"/>
-                        <h4 class="jb-c4"  th:text = "${boxtitle8}"/>
+                        <img class="jb-b" th:src = "${boximage8}"/>
+                        <h4 class="jb-c"  th:text = "${boxtitle8}"/>
                     </button>
                 </form>
             </div>
@@ -146,7 +146,15 @@
     <button class="back">❮</button>
     <button class="next">❯</button>
     <br>
-    <h2>HASHTAG</h2>
+    <h2>자주 사용한 해시태그</h2>
+    <div class="hashtag">
+        <th:block th:each="hashtags: ${hashtag}" th:if="${hashtags != null}">
+            <form action="send" method="GET">
+                <input type="hidden" name="moviename" th:value="'#'+ ${hashtags}">
+                <button th:text="'#'+ ${hashtags}"></button>
+            </form>
+        </th:block>
+    </div>
     <br>
     <h2>REVIEW</h2>
     <div class="post" >

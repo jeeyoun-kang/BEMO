@@ -27,9 +27,9 @@
             <div class="search1">
             <form th:action="@{/moviedetail/{detail} (detail=${title1})}" >
                 <button type="submit" style="background-color:transparent; border:0; outline:0;" >
-                    <img class="jb-b1" th:if="${image1}!=''" th:src = "${image1}"/>
-                    <img class="jb-b1" th:if="${image1}==''" src="/img/bemo.JPG" />
-                    <h4 class="jb-c1" th:text = "${title1}"/>
+                    <img class="jb-b" th:if="${image1}!=''" th:src = "${image1}"/>
+                    <img class="jb-b" th:if="${image1}==''" src="/img/bemo.JPG" />
+                    <h4 class="jb-c" th:text = "${title1}"/>
                 </button>
             </form>
             </div>

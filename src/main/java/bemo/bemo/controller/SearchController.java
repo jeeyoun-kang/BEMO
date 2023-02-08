@@ -57,24 +57,58 @@ public class SearchController {
         if(moviename.contains("#")){
             moviename = moviename.substring(1, moviename.length());
             System.out.println("해시태그"+moviename);
-            List<Posts> posts = postsService.findPostsByHashtag(moviename);
-            HashSet<String> test= new HashSet<>();
+            List<String> mvtitles = postsService.findMvtitleByHashtag(moviename);
             model.addAttribute("hashtag", moviename);
-            model.addAttribute("Posts", posts);
-            for(int i = 0; i < posts.size(); i++) {
-                System.out.println(posts.get(i));
+            model.addAttribute("Movies", mvtitles);
+            List<String> jsontitle= new ArrayList<>();
+            List<String> jsonimage = new ArrayList<>();
+            for(int i = 0; i < mvtitles.size(); i++) {
+                System.out.println("posts"+mvtitles.get(i));
+
+                String text = null;
+                text = URLEncoder.encode(mvtitles.get(i), StandardCharsets.UTF_8);
+
+                String apiURL = searchapiURL2+ text;    // json 결과
+
+                Map<String, String> requestHeaders = new HashMap<>();
+                requestHeaders.put("X-Naver-Client-Id", searchClientId);
+                requestHeaders.put("X-Naver-Client-Secret", searchClientSecret);
+                String responseBody = get(apiURL, requestHeaders);
+
+                model.addAttribute("jsonbody", responseBody);
+
+                JSONObject jObject = new JSONObject(responseBody);
+                JSONArray jArray = jObject.getJSONArray("items");
+
+                List<String> jsonlisttitle = new ArrayList<String>();
+                List<String> jsonlistimage = new ArrayList<String>();
+
+                for (int k = 0; k < jArray.length(); k++) {
+                    JSONObject obj = jArray.getJSONObject(k);
+                    String title = obj.getString("title");
+                    title = title.replaceAll("\\<.*?>", "");
+                    title = title.replaceAll("&amp;", "&");
+                    String image = obj.getString("image");
+
+                    jsonlisttitle.add(title);
+                    jsonlistimage.add(image);
+
+                }
+                    jsontitle.add(jsonlisttitle.get(0));
+                    jsonimage.add(jsonlistimage.get(0));
             }
+            System.out.println(jsontitle);
+            System.out.println(jsonimage);
 
-
+            model.addAttribute("jsontitle", jsontitle);
+            model.addAttribute("jsonimage", jsonimage);
             return "hashtag";
         }
         else {
 
             String text = null;
             text = URLEncoder.encode(moviename, StandardCharsets.UTF_8);
-
             String apiURL = searchapiURL2+ text;    // json 결과
-            //String apiURL = "https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchWeeklyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt=" + text;
 
 
             Map<String, String> requestHeaders = new HashMap<>();
@@ -85,16 +119,12 @@ public class SearchController {
             model.addAttribute("jsonbody", responseBody);
             System.out.println(responseBody);
 
-            // 가장 큰 JSONObject를 가져옵니다.
             JSONObject jObject = new JSONObject(responseBody);
-            // 배열을 가져옵니다.
             JSONArray jArray = jObject.getJSONArray("items");
 
             List<String> jsonlisttitle = new ArrayList<String>();
             List<String> jsonlistimage = new ArrayList<String>();
-            List<String> jsonlistdi = new ArrayList<String>();
 
-            // 배열의 모든 아이템을 출력합니다.
             for (int i = 0; i < jArray.length(); i++) {
                 JSONObject obj = jArray.getJSONObject(i);
                 String title = obj.getString("title");
@@ -102,14 +132,8 @@ public class SearchController {
                 title = title.replaceAll("&amp;", "&");
                 String image = obj.getString("image");
 
-//            boolean draft = obj.getBoolean("draft");
-                //System.out.println("title(" + i + "): " + title);
-                //System.out.println("image(" + i + "): " + image);
-//            System.out.println("draft(" + i + "): " + draft);
                 jsonlisttitle.add(title);
-
                 jsonlistimage.add(image);
-                System.out.println();
             }
             model.addAttribute("title1", jsonlisttitle.get(0));
             model.addAttribute("image1", jsonlistimage.get(0));

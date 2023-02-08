@@ -1,12 +1,141 @@
 <!DOCTYPE HTML>
-<html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <title>Hello</title>
+    <title>BEMO</title>
+    <link rel="short icon" href="/img/bemo.ico"/>
+    <link href="/css/main.css" rel="stylesheet" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+        *{font-family: 'Jua', sans-serif;}
+
+        td {
+            padding: 15px;
+            border: 1px solid black;
+            transform:scale(1.0);
+            transition: transform .5s;
+
+        }
+        td:hover{
+            box-shadow: 5px 5px ;
+            transform:scale(1.03);     /* 이미지 확대 */
+            transition: transform .5s; 	/*  시간 설정  */
+        }
+
+    </style>
 </head>
 <body>
-<a href="/hello">hello</a>
+<div class = "btn">
+    <button type="submit" onclick="location.href='./hashtag'">해시태그</button>
+    <button type="submit" onclick="location.href='./'">BEMO</button>
+    <button sec:authorize="isAnonymous()" id="show">로그인</button>
+    <button sec:authorize="isAnonymous()" type="submit" onclick="location.href='./signup'">회원가입</button>
+    <button sec:authorize="isAuthenticated()" id="logoutBt" type="submit" onclick="location.href='./logout'">로그아웃</button>
+    <!--    <button sec:authorize="isAuthenticated()" type="submit" onclick="location.href='./profile'">프로필</button>-->
+    <form style="display: inline;" sec:authorize="isAuthenticated()" action="getUser()" th:action="@{profile}" method="post">
+        <input type="hidden" id="profile" th:name="userinfo" th:value="${userinfo}">
+        <input type="submit" value="프로필">
+    </form>
+    <!--    <div sec:authorize="isAuthenticated()">-->
+    <!--        <strong> 로그인 유저 : <span sec:authentication="principal.nickname"/></strong>-->
+    <!--    </div>-->
+</div><br>
+<div class="background">
+    <div class="window">
+        <div class="popup">
+            <div class="loginHeader">로그인<button id="close">X</button></div>
+            <div class="loginMain">
+                <form action="login" method="post">
+                    <div><input type = "text" name ="username" placeholder="아이디" id = "username"></div>
+                    <div><input type = "password" name = "password" placeholder="비밀번호" id="password"></div>
+                    <div><input type = "checkbox" name = "preserve">아이디 저장</div>
+                    <!--                    <button id="loginBt" type="submit">로그인</button>-->
+                    <div><button id="loginBt" type="submit">로그인</button></div>
+                </form>
+            </div>
+            <div class="loginFooter">
+                <a id="naverIdLogin_loginButton" href="/oauth2/authorization/naver">
+                    <img src="https://static.nid.naver.com/oauth/big_g.PNG?version=js-2.0.1" height="60">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="search">
+    <form action="send" method="GET">
+        <input type="text" name="moviename" >
+        <button type="submit">검색</button>
+    </form>
+</div>
+<br>
+<h2 th:text="'#'+${hashtag}"></h2>
+<div class="movies">
+    <div class="slide">
+        <div class="images">
+            <div class="jb-a">
+                <td class="hashtd" id="id" name="id" th:each="string,i: ${jsontitle}">
+                <form th:action="@{/moviedetail/{detail} (detail=${jsontitle.get(i.index)})}" >
+                    <button type="submit" style="background-color:transparent; border:0; outline:0;" >
+                        <img class="jb-b" id="image" th:src="${jsonimage.get(i.index)}"/>
+                        <h4 class="jb-c" th:text="${jsontitle.get(i.index)}"/>
+                    </button>
+                </form>
+                </td>
+            </div>
+        </div>
+    </div>
+    <button class="back">❮</button>
+    <button class="next">❯</button>
+    <br>
 
-<a href="/ticket">ticket</a>
+</div>
+<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js"
+        charSet="utf-8"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script>
+    let pages = 0;//현재 인덱스 번호
+    let positionValue = 0;//images 위치값
+    const IMAGE_WIDTH = 212;//한번 이동 시 IMAGE_WIDTH만큼 이동한다.
+    //DOM
+    const backBtn = document.querySelector(".back")
+    const nextBtn = document.querySelector(".next")
+    const images = document.querySelector(".images")
+
+    function next() {
+        if (pages< 4) {
+            backBtn.removeAttribute('disabled')//뒤로 이동해 더이상 disabled가 아니여서 속성을 삭제한다.
+            positionValue -= IMAGE_WIDTH;//IMAGE_WIDTH의 증감을 positionValue에 저장한다.
+            images.style.transform = `translateX(${positionValue}px)`;
+            //x축으로 positionValue만큼의 px을 이동한다.
+            pages += 1; //다음 페이지로 이동해서 pages를 1증가 시킨다.
+        }
+        if (pages === 4) { //
+            nextBtn.setAttribute('disabled', 'true')//마지막 장일 때 next버튼이 disabled된다.
+        }
+    }
+
+    function back() {
+        if (pages > 0) {
+            nextBtn.removeAttribute('disabled')
+            positionValue += IMAGE_WIDTH;
+            images.style.transform = `translateX(${positionValue}px)`;
+            pages -= 1; //이전 페이지로 이동해서 pages를 1감소 시킨다.
+        }
+        if (pages === 0) {
+            backBtn.setAttribute('disabled', 'true')//마지막 장일 때 back버튼이 disabled된다.
+        }
+    }
+
+    function init() {  //초기 화면 상태
+        backBtn.setAttribute('disabled', 'true'); //속성이 disabled가 된다.
+        backBtn.addEventListener("click", back); //클릭시 다음으로 이동한다.
+        nextBtn.addEventListener("click", next);//클릭시 이전으로 이동한다.
+    }
+    init();
+</script>
+
 </body>
 </html>

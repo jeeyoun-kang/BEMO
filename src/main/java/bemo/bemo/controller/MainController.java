@@ -40,9 +40,8 @@ public class MainController {
             model.addAttribute("userinfo", principalDetails.getUsername());
         }
         model.addAttribute("Posts",postsService.findAllDesc());
-
-
-        // 어제 날짜 구하기 (시스템 시계, 시스템 타임존)
+        List<String> hashtag = postsService.sortHashtags();
+        model.addAttribute("hashtag", hashtag);        // 어제 날짜 구하기 (시스템 시계, 시스템 타임존)
         Calendar c1 = new GregorianCalendar();
         c1.add(Calendar.DATE, -1); // 오늘날짜로부터 -1
 

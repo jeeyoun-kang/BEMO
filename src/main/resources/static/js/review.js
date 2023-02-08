@@ -56,6 +56,8 @@ var main = {
             for (const i in test) {
                 hashtagData += test[i].value + ",";
             }
+            hashtagData = hashtagData.substring(0, hashtagData.length - 1);
+
         }
         const data = {
             title: $('#title').val(),
@@ -65,7 +67,14 @@ var main = {
             mvtitle: $('#mvtitle').text(),
             hashtag: hashtagData,
         };
-        console.log("해시태그="+data.hashtag);
+        if (data.title === ""){
+            alert("제목을 입력해주세요");
+            return
+        }
+        if (data.content === ""){
+            alert("내용을 입력해주세요");
+            return
+        }
         formData.append('file', $('#file'));
         var filename=formData.get('file').name;
         formData.append('key', new Blob([ JSON.stringify(data) ], {type : "application/json"}));
@@ -97,6 +106,7 @@ var main = {
             for (const i in test) {
                 hashtagData += test[i].value + ",";
             }
+            hashtagData = hashtagData.substring(0, hashtagData.length - 1);
         }
         var data = {
             title: $('#title').val(),
