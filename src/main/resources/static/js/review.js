@@ -56,6 +56,7 @@ var main = {
             for (const i in test) {
                 hashtagData += test[i].value + ",";
             }
+            hashtagData = hashtagData.substring(0, hashtagData.length - 1);
         }
         const data = {
             title: $('#title').val(),
@@ -97,6 +98,7 @@ var main = {
             for (const i in test) {
                 hashtagData += test[i].value + ",";
             }
+            hashtagData = hashtagData.substring(0, hashtagData.length - 1);
         }
         var data = {
             title: $('#title').val(),

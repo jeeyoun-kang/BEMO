@@ -146,7 +146,15 @@
     <button class="back">❮</button>
     <button class="next">❯</button>
     <br>
-    <h2>HASHTAG</h2>
+    <h2>자주 사용한 해시태그</h2>
+    <div class="hashtag">
+        <th:block th:each="hashtags: ${hashtag}" th:if="${hashtags != null}">
+            <form action="send" method="GET">
+                <input type="hidden" name="moviename" th:value="'#'+ ${hashtags}">
+                <button th:text="'#'+ ${hashtags}"></button>
+            </form>
+        </th:block>
+    </div>
     <br>
     <h2>REVIEW</h2>
     <div class="post" >
