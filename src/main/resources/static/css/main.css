@@ -136,58 +136,21 @@ h2{
     float:left;
     position: relative
 }
-.movies .jb-c1 {
+
+.movies .jb-c {
     position: absolute;
     top: 0px;
     left: 0px;
     opacity: 0;
     transition: opacity 0.5s linear;
 }
-.movies .jb-a:hover .jb-c1 {
+.movies .jb-a:hover .jb-c {
     opacity: 1;
 }
-.movies .jb-c2 {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    opacity: 0;
-    transition: opacity 0.5s linear;
-}
-.movies .jb-a:hover .jb-c2 {
-    opacity: 1;
-}
-.movies .jb-c3 {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    opacity: 0;
-    transition: opacity 0.5s linear;
-}
-.movies .jb-a:hover .jb-c3 {
-    opacity: 1;
-}
-.movies .jb-c4 {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    opacity: 0;
-    transition: opacity 0.5s linear;
-}
-.movies .jb-a:hover .jb-c4 {
-    opacity: 1;
-}
-.movies .jb-a:hover .jb-b1{
+.movies .jb-a:hover .jb-b{
     filter: brightness(50%);
 }
-.movies .jb-a:hover .jb-b2{
-    filter: brightness(50%);
-}
-.movies .jb-a:hover .jb-b3{
-    filter: brightness(50%);
-}
-.movies .jb-a:hover .jb-b4{
-    filter: brightness(50%);
-}
+
 .post{
     float:left;
 }
@@ -234,4 +197,24 @@ h2{
 }
 .movies .back:disabled{/**버튼 속성이 disabled되면 색을 바꾼다.**/
     background: #cbcaca;
+}
+
+/**해시태그  **/
+
+.movies .hash_td {
+    text-align: center;
+    margin: 5px 10px 5px 10px;
+    width: 200px;
+    float:left;
+    position: relative
+}
+
+.movies .hash_td:hover .jb-c {
+    opacity: 1;
+}
+.movies .hash_td:hover .jb-b{
+    filter: brightness(50%);
+}
+.movies .hash_tr{
+    height:100px;
 }
