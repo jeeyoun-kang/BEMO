@@ -57,12 +57,11 @@ public class SearchController {
         if(moviename.contains("#")){
             moviename = moviename.substring(1, moviename.length());
             System.out.println("해시태그"+moviename);
-            List<Posts> posts = postsService.findPostsByHashtag(moviename);
-            HashSet<String> test= new HashSet<>();
+            List<String> mvtitles = postsService.findMvtitleByHashtag(moviename);
             model.addAttribute("hashtag", moviename);
-            model.addAttribute("Posts", posts);
-            for(int i = 0; i < posts.size(); i++) {
-                System.out.println(posts.get(i));
+            model.addAttribute("Movies", mvtitles);
+            for(int i = 0; i < mvtitles.size(); i++) {
+                System.out.println("posts"+mvtitles.get(i));
             }
 
 
