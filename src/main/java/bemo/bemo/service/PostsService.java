@@ -6,8 +6,6 @@ import bemo.bemo.entity.Posts;
 import bemo.bemo.repository.HashtagsRepository;
 import bemo.bemo.repository.PostsRepository;
 import bemo.bemo.repository.UserRepository;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +13,10 @@ import org.springframework.util.StringUtils;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Service
 public class PostsService {
@@ -38,20 +39,15 @@ public class PostsService {
             posts = postsRepository.save(requestDto.toEntityWithoutHashtag());
         }
         else {
-            List<Hashtags> hashtags = new ArrayList<>();
-
             String[] data = StringUtils.split(requestDto.getHashtag(), ",");
-            if(data == null){
-                Hashtags hashtag = new Hashtags(requestDto.getHashtag(),requestDto.getMvtitle());
+            data[data.length - 1] = data[data.length - 1].replaceAll(",$", "");
+            System.out.println("전달값:" + data);
+            List<Hashtags> hashtags = new ArrayList<>();
+            for (int i = 0; i < data.length; i++) {
+                Hashtags hashtag = new Hashtags(data[i],requestDto.getMvtitle());
+
                 hashtagsRepository.save(hashtag);
                 hashtags.add(hashtag);
-            }
-            else {
-                for (int i = 0; i < data.length; i++) {
-                    Hashtags hashtag = new Hashtags(data[i], requestDto.getMvtitle());
-                    hashtagsRepository.save(hashtag);
-                    hashtags.add(hashtag);
-                }
             }
             requestDto.setHashtags(hashtags);
             posts = postsRepository.save(requestDto.toEntity());
@@ -88,20 +84,15 @@ public class PostsService {
         else {
             hashtagsRepository.deleteAll(hashtagsList);
 
+            String[] data = StringUtils.split(requestDto.getHashtag(), ",");
+            data[data.length - 1] = data[data.length - 1].replaceAll(",$", "");
+            System.out.println("전달값:" + data);
             List<Hashtags> hashtags = new ArrayList<>();
 
-            String[] data = StringUtils.split(requestDto.getHashtag(), ",");
-            if(data == null){
-                Hashtags hashtag = new Hashtags(requestDto.getHashtag(),requestDto.getMvtitle());
+            for (int i = 0; i < data.length; i++) {
+                Hashtags hashtag = new Hashtags(data[i], requestDto.getMvtitle());
                 hashtagsRepository.save(hashtag);
                 hashtags.add(hashtag);
-            }
-            else {
-                for (int i = 0; i < data.length; i++) {
-                    Hashtags hashtag = new Hashtags(data[i], requestDto.getMvtitle());
-                    hashtagsRepository.save(hashtag);
-                    hashtags.add(hashtag);
-                }
             }
             System.out.println(hashtags);
             requestDto.setHashtags(hashtags);
@@ -126,39 +117,25 @@ public class PostsService {
     public List<Posts> findAllDesc(){
         return postsRepository.findAllDesc(Sort.by(Sort.Direction.ASC, "post_id"));
     }
-
-
+//    public List<Hashtags> findAllHashtags(String title) {return hashtagsRepository.findAll(Sort.by(AggregationFunction.COUNT.COUNT));}
+//    public List<Hashtags> findHashtags(String hashtag) {return hashtagsRepository.findAllByContent(hashtag);}
     public List<Posts> findByMvtitle(List<String> mvtitle) {
         return postsRepository.findPostsByMvtitle(mvtitle);
     }
 
+    public List<Posts> findPostsByHashtag(String hashtag) {
+        List<String> title = hashtagsRepository.findMvtitleByContentContaining(hashtag);
 
+        System.out.println("mvtitle"+title);
+        return findByMvtitle(title);
 
-    public List<String> findMvtitleByHashtag(String hashtag) {
-        return hashtagsRepository.findMvtitleByContentContaining(hashtag);
     }
 
-    public List<String> sortHashtags() {
-        List<String> contents = hashtagsRepository.findContent();
-        if (contents != null) {
-            List<Long> contentCount = new ArrayList<>();
-            for (int i = 0; i < contents.size(); i++) {
-                contentCount.add(hashtagsRepository.countByContent(contents.get(i)));
-            }
-            for (int i = 0; i < contents.size() - 1; i++) {
-                Long tmpCount = contentCount.get(i);
-                String tmpContent = contents.get(i);
-                if (tmpCount < contentCount.get(i + 1)) {
-                    contentCount.set(i, contentCount.get(i + 1));
-                    contentCount.set(i + 1, tmpCount);
-                    contents.set(i, contents.get(i + 1));
-                    contents.set(i + 1, tmpContent);
-                }
-            }
-            System.out.println("contentCount : " + contentCount);
-            System.out.println("content : " + contents);
-            return contents;
-        } else return null;
+    public List<String> findPostsByHashtags(String hashtag) {
+        List<String> title = hashtagsRepository.findMvtitleByContentContaining(hashtag);
+        System.out.println("mvtitle"+title);
+        return title;
+
     }
 
 

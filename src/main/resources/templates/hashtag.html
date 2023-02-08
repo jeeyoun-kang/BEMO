@@ -1,39 +1,52 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<!doctype html>
+<html lang="en">
 <head>
-    <title>BEMO</title>
     <link rel="short icon" href="/img/bemo.ico"/>
-    <link href="/css/main.css" rel="stylesheet" />
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <style>
         *{font-family: 'Jua', sans-serif;}
+        td {
+            padding: 15px;
+            border: 1px solid black;
+            transform:scale(1.0);
+            transition: transform .5s;
+
+        }
+        td:hover{
+            box-shadow: 5px 5px ;
+            transform:scale(1.03);     /* 이미지 확대 */
+            transition: transform .5s; 	/*  시간 설정  */
+        }
     </style>
+    <title>BEMO</title>
 </head>
-
-<h2 th:text="'#'+${hashtag}"></h2>
+<body>
 <div class="movies">
+    <div class="slide">
         <div class="images">
-            <table>
-                <td class="hash_td" id="id" name="id" th:each="string,i: ${jsontitle}">
-                    <form th:action="@{/moviedetail/{detail} (detail=${jsontitle.get(i.index)})}" >
-                        <button type="submit" style="background-color:transparent; border:0; outline:0;" >
-                            <img class="jb-b" id="image" th:src="${jsonimage.get(i.index)}"/>
-                            <h4 class="jb-c" th:text="${jsontitle.get(i.index)}"/>
-                        </button>
-                    </form>
+            <div class="jb-a">
+                <h1 th:text="'#'+${hashtag}"></h1>
+                <table>
+                <td id="id" name="id" th:each="Posts: ${Posts}">
+                <form th:action="@{/moviedetail/{detail} (detail=${Posts.mvtitle})}" >
+                    <button type="submit" style="background-color:transparent; border:0; outline:0;" >
+                    <img class="jb-b1" id="image" th:src="${Posts.mvurl}">
+                    <h4 class="jb-c1" th:text="${Posts.mvtitle}"></h4>
+                    </button>
+                </form>
                 </td>
-            </table>
+                </table>
+            </div>
         </div>
-    <br>
+    </div>
 </div>
-<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js"
-        charSet="utf-8"></script>
-<script type="text/javascript" src="/js/main.js"></script>
-
 
 </body>
 </html>
