@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>회원가입 페이지</title>
 <!-- https://cocoon1787.tistory.com/700 가져옴 -->
@@ -13,51 +13,48 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <style>
-        *{font-family: 'Jua', sans-serif;}
-    </style>
 </head>
 
 <body>
-<div class="wrapper">
-    <div class="title"><h1 style="font-size: 21px;">회원가입</h1></div>
-    <form action="join" method="post">
-        <div class="username">
-            <input id="username" name ="username"  type="text" placeholder="아이디를 입력해 주세요.">
-            <div id="nameError" class="error"></div>
-        </div>
-        <div class="nickname">
-            <input id="nickname" name ="nickname"  type="text" placeholder="닉네임을 입력해 주세요.">
-            <div id="nicknameError" class="error"></div>
-        </div>
-        <div class="password">
-            <input id="password" name="password" type="password" placeholder="비밀번호를 입력해 주세요.">
-            <div id="passwordError" class="error"></div>
-        </div>
-        <div class="passwordCheck">
-            <input id="passwordCheck" type="password" placeholder="비밀번호를 다시 입력해 주세요.">
-            <div id="passwordCheckError" class="error"></div>
-        </div>
-        <div class="cellphone">
-            <input id = "cellphone" name="cellphone" type="text" placeholder="전화번호를 입력해 주세요. 010-000-0000" maxlength="13">
-            <div id="cellphoneError" class="error"></div>
-        </div>
-        <div class="birthday">생일을 입력해 주세요:
-            <input type="date"
-                   name="birthday"
-                   id="birthday"
-                   max="2022-12-08"
-                   min="1800-01-01"
-                   value="2022-12-08">
-        </div>
-        <div id="birthdayError" class="error"></div>
-        <div class="line">
-            <hr>
-        </div>
-        <div class="signUp">
-            <button type="submit" id="signUpButton">가입하기</button>
-        </div>
-    </form>
+<div class="container">
+    <div class="wrapper">
+        <h2 class="title">회원가입</h2>
+        <p class="text">SNS 계정으로 간편 회원가입</p>
+        <p class="badge-wrap">
+            <a class="badge"><i class="fab fa-facebook-f"></i></a>
+            <a class="badge"><i class="fab fa-google"></i></a>
+            <a class="badge"><i class="fab fa-twitter"></i></a>
+            <a class="badge"><i class="fab fa-github"></i></a>
+        </p>
+        <p class="text">또는 이메일로 회원가입</p>
+        <form class="form">
+            <div class="form-group">
+                <input class="form-control" id="username" name ="username"  type="text" placeholder="아이디">
+            </div>
+            <div class="form-group">
+                <input class="form-control" id="nickname" name ="nickname"  type="text" placeholder="닉네임">
+            </div>
+            <div class="form-group">
+                <input class="form-control" id="password" name="password" type="password" placeholder="비밀번호 (영문자+숫자+특수문자 조합 8~25)">
+            </div>
+            <div class="form-group">
+                <input class="form-control" id="passwordCheck" type="password" placeholder="비밀번호 확인">
+            </div>
+            <div class="form-group">
+                <input class="form-control" id="cellphone" name="cellphone" type="text" placeholder="전화번호 (010-000-0000)" maxlength="13">
+            </div>
+            <div class="form-group birthday">생일 입력 :
+                <input class="form-control" type="date"
+                       name="birthday"
+                       id="birthday"
+                       th:max="${now}"
+                       min="1870-01-01"
+                       value="2000-01-01">
+            </div>
+            <button class="btn btn-lg" onclick="joinCheck();">가입하기</button>
+        </form>
+    </div>
 </div>
+<script type="text/javascript" src="/js/signup.js"></script>
 </body>
 </html>

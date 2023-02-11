@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
@@ -31,14 +33,16 @@ public class UserController {
     }
 
     @GetMapping("/signup")
-    public String signup() {
+    public String signup(Model model) {
+        String now = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        model.addAttribute("now", now);
+
         return "signup";
     }
     @RequestMapping(value = "/join", method=RequestMethod.POST)
     public String join(RequestDto request){
         System.out.println(request.getUsername()+request.getNickname()+request.getPassword()+request.getCellphone()+request.getBirthday());
-        principalDetailsService.create(request);
-        return "redirect:/";
+        return principalDetailsService.create(request);
     }
 
     @RequestMapping(value = "/profile")

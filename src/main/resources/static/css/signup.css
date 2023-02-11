@@ -1,90 +1,128 @@
-* {
-    margin: 0px;
+body{
+    display:flex;
+    height:100vh;
+    min-height:35rem;
+    align-items:center;
+    justify-content:center;
+    font-family:'Jua', sans-serif;
+    flex-direction:column;
+    text-align:center;
+    transition:background 3s ease;
+    background: linear-gradient(to right, #ffdde1, #ee9ca7) 50% 50%;
+}
+
+p{
+    font-size:1.1rem;
+}
+
+.title{
+    font-weight:bold;
+    font-size:1.8rem;
+    color:#ee9ca7;
+}
+.container{
+    position:absolute;
+    top:50%;
+    left:50%;
+    width:100%;
+    transform:translate(-50%,-50%);
+}
+.wrapper{
+    position:relative;
+    border : 0;
+    border-radius : 20px 20px;
+    box-shadow:0 0 0 0.2rem #3e3e3e;
+    margin:0 auto;
+    padding-top : 1rem;
+    padding-bottom:2rem;
+    background-color: white;
+}
+@media (min-width: 769px) {
+
+    .wrapper {
+        max-width: 450px
+    }
+}
+.badge-wrap{
+    display:flex;
+    justify-content:center;
+}
+
+.badge-wrap a.badge{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:2.5rem;
+    height:2.5rem;
+    margin:0.2rem;
+    padding:0;
+    opacity:.7;
+    border-radius:50%;
+    transition:opacity .3s ease-in;
+    font-size:1rem;
+    color:#fff;
+    background-color:#ee9ca7;
+    text-decoration:none;
+    cursor:pointer
+}
+
+.badge-wrap a.badge:hover{
+    opacity:1;
+    color:#fff;
+}
+
+.btn{
+    color:#fff !important;
+    background-color:#ee9ca7;
+    width:10em;
+    transition:all .4s;
+    border-radius:20px;
+    border:2px solid transparent;
+}
+.btn:hover{
+    background-color:#fff;
+    color:#ee9ca7 !important;
+    font-weight:bold;
+    border:2px solid rgba(238,156,167,.25);
+}
+.btn:focus{
+    box-shadow:0 0 0 0.2rem rgba(238,156,167,.25);
+}
+.form input {
+    width: 70%;
+    border-radius: 4px;
     box-sizing: border-box;
-    font-size: 11px;
+    padding: 10px 10px;
+    transition: 0.3s ease;
+}
+.form-group{
+    padding:5px 0 5px;
 }
 
-html {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    padding-top: 20px;
-    padding-bottom: 20px;
+.form-control{
+    color:#ee9ca7;
+    border-color:rgba(238,156,167,.25);
+    font-family:'Josefin Sans', sans-serif;
+}
+#birthday {
+    display: inline;
+    width: 54%;
+    margin-bottom: 0.5rem;
+}
+.form-control::-moz-placeholder{
+    letter-spacing:.1em;
+    font-size:.75rem;
 }
 
-body {
-    width: 45%;
-    border: 1px solid black;
+.form-control:-ms-input-placeholder{
+    letter-spacing:.1em;
+    font-size:.75rem;
 }
 
-input{
-    border: 1px solid black;
-    border-radius: 3px;
-    line-height: 35px;
-    font-size: 12px;
-    padding-left: 10px;
-    padding-right: 10px;
+.form-control::placeholder{
+    letter-spacing:.1em;
+    font-size:.75rem;
 }
-
-
-.wrapper {
-    padding: 10px;
-}
-
-div {
-    padding-top: 3px;
-    padding-bottom: 8px;
-}
-
-.title {
-    text-align: center;
-    font-weight: 700;
-}
-
-.username input {
-    width: 100%;
-}
-
-.nickname input {
-    width: 100%;
-}
-
-.password input {
-    width: 100%;
-}
-
-.passwordCheck input {
-    width: 100%;
-}
-
-.cellphone input {
-    width: 100%;
-}
-
-.birthday input {
-    width: 100%;
-}
-
-.phone {
-    display: flex;
-    justify-content: space-between;
-    line-height: 35px;
-}
-
-.signUp button {
-    width: 100%;
-    cursor:pointer;
-    background-color:yellow;
-}
-
-button{
-    cursor: pointer;
-    height: 30px;
-}
-
-.error{
-    font-size: 1px;
-    height: 20px;
-    color:red;
-    font-weight: 700;
+.form-control:focus{
+    box-shadow:0 0 0 0.2rem rgba(238,156,167,.25);
 }

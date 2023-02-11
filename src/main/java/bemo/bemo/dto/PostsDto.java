@@ -26,7 +26,7 @@ public class PostsDto {
     private String author;
     private String authorname;
     private String mvtitle;
-    private String now = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+    private String now = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     private String url;
 
     private String mvurl;
