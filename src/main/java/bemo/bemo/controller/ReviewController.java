@@ -1,6 +1,7 @@
 package bemo.bemo.controller;
 
 import bemo.bemo.auth.PrincipalDetails;
+import bemo.bemo.dto.PostsDto;
 import bemo.bemo.service.PostsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -10,13 +11,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.websocket.server.PathParam;
+
 @Controller
 public class ReviewController {
     @Autowired
     PostsService postsService;
 
     @GetMapping("/{movie_title}/review")
-    public String review(Model model, @PathVariable String movie_title, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+    public String review(Model model, @PathVariable String movie_title, @AuthenticationPrincipal PrincipalDetails principalDetails, HttpServletRequest request) {
+        if(principalDetails==null){
+            request.setAttribute("msg","로그인이 필요합니다.");
+            request.setAttribute("url","/");
+            return "alert";
+        }
+
         if (principalDetails != null) {
             model.addAttribute("userinfo", principalDetails.getUsername());
             model.addAttribute("nickname", principalDetails.getNickname());

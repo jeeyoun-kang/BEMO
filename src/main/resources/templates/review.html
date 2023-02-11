@@ -6,16 +6,12 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
-    <!-- 소스 다운 -->
+    <link href="/css/review.css" rel="stylesheet">
     <script src="https://unpkg.com/@yaireo/tagify"></script>
-    <!-- 폴리필 (구버젼 브라우저 지원) -->
     <script src="https://unpkg.com/@yaireo/tagify/dist/tagify.polyfills.min.js"></script>
     <link href="https://unpkg.com/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
     <style>
-        *{font-family: 'Jua', sans-serif;}
         .tagify--outside{
             border: 0;
         }
@@ -30,6 +26,7 @@
         .tagify--outside.tagify--focus .tagify__input{
             transition:0s;
         }
+
     </style>
     <title>BEMO</title>
 </head>
@@ -37,35 +34,61 @@
 
 <div class="col-md-12">
     <div class="col-md-4">
-        <form  id="excelForm" enctype="multipart/form-data">
-            <span id = "mvtitle" name="mvtitle" th:text="${movie_title}"></span></br>
-            <div class="form-group">
-                <label for="title">제목</label>
-                <input type="text" class="form-control" name="title" id="title" placeholder="제목을 입력하세요">
-            </div>
-            <div class="form-group">
-                <label for="author"> 작성자: [[${nickname}]] </label>
-                <input type="hidden" id="author" name="author" th:name="userinfo" th:value="${userinfo}">
-                <input type="hidden" id="authorname" name="authorname" th:name="nickname" th:value="${nickname}">
-            </div>
-            <div class="form-group">
-                <label for="content"> 내용 </label>
-                <textarea class="form-control" name="content" id="content" placeholder="내용을 입력하세요"></textarea>
-            </div>
-            <div class="form-group">
-                <label for="file"> 파일 </label>
-                <input type="file" name="file" id="file"> <br>
-            </div>
-            <div class="form-group">
-                <input id="hashtag" name="hashtag" class='tagify--outside'>
-            </div>
-        </form>
+        <div class="container">
+            <form id="excelForm" enctype="multipart/form-data">
+                <div class="row header">
+                    <span style="font-size:30px;" id="mvtitle" name="mvtitle" th:text="${movie_title}"></span></br>
+                </div>
+                <div class="row body">
 
-        <a href="/" role="button" class="btn btn-secondary">취소</a>
-        <button type="button" class="btn btn-primary" id="btn-save">등록</button>
+                    <ul>
+
+                        <li>
+                            <div class="form-group">
+                                <label for="author"> 작성자: [[${nickname}]] </label>
+                                <input type="hidden" id="author" name="author" th:name="userinfo" th:value="${userinfo}">
+                                <input type="hidden" id="authorname" name="authorname" th:name="nickname"
+                                       th:value="${nickname}">
+                            </div>
+                            <div class="form-group">
+                                <label style="white-space:nowrap;" for="title">제목</label>
+                                <input type="text" class="form-control" name="title" id="title" placeholder="제목을 입력하세요">
+                            </div>
+
+                        </li>
+
+                        <li>
+                            <div class="form-group">
+                                <label for="content"> 내용 </label>
+                                <textarea class="form-control" name="content" id="content" placeholder="내용을 입력하세요"></textarea>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="divider"></div>
+                        </li>
+                        <li>
+                            <div class="form-group">
+                                <label for="file"> 파일 </label>
+                                <input type="file" name="file" id="file"> <br>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="form-group">
+                                <label for="hashtag">해시태그</label>
+                                <input id="hashtag" name="hashtag" class='tagify--outside'>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="/" role="button" class="btn btn-secondary">취소</a>
+                            <button type="button" class="btn btn-primary" id="btn-save">등록</button>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
-<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<script type="text/javascript" th:src="@{/js/review.js}"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script type="text/javascript" th:src="@{/js/review.js}"></script>
 </body>
 </html>

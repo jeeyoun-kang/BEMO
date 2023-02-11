@@ -1,30 +1,108 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link rel="short icon" href="/img/bemo.ico"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>BEMO</title>
-    <link href="/css/main.css" rel="stylesheet" />
-    <link href="/image/empty.png" rel="stylesheet" />
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="short icon" href="/img/bemo.ico"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <style>
-        *{font-family: 'Jua', sans-serif;}
-    </style>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="/css/main.css" rel="stylesheet"/>
+    <link href="/css/template.css" rel="stylesheet"/>
+    <script>
+        $(document).ready(function () {
+            var slider = $("#slider");
+            slider.owlCarousel({
+                items: 1,
+                slideSpeed: 2000,
+                nav: false,
+                autoplay: false,
+                dots: false,
+                loop: true,
+                responsiveRefreshRate: 200
+            }).on('changed.owl.carousel', syncPosition);
+
+            function syncPosition(el) {
+                var count = el.item.count - 1;
+                var current = Math.round(el.item.index - (el.item.count / 2) - .5);
+                if (current < 0) {
+                    current = count;
+                }
+                if (current > count) {
+                    current = 0;
+                }
+            }
+
+        });
+    </script>
+    <script th:inline="javascript">
+        $(document).ready(function () {
+            // typing animation
+            (function ($) {
+                $.fn.writeText = function (content) {
+                    var contentArray = content.split(""),
+                        current = 0,
+                        elem = this;
+                    setInterval(function () {
+                        if (current < contentArray.length) {
+                            elem.text(elem.text() + contentArray[current++]);
+                        }
+                    }, 80);
+                };
+            })(jQuery);
+
+            var movie_title = [[${title1}]];
+
+            $("#holder").writeText(movie_title);
+
+            // initialize wow.js
+            new WOW().init();
+
+
+            $(document).ready(main);
+        });
+
+    </script>
 </head>
-<body>
-<div class="search">
-<form action="send" method="GET">
-    <input type="text" name="moviename" >
-    <button type="submit">검색</button>
-</form>
+<div class="nav-header">
+    <div class="nav-brand">
+        <img src="/img/bemo.ico">
+    </div>
+    <i class="fa fa-bars fa-3x"></i>
+    <div class="header-links">
+        <ul>
+            <li data-menuanchor="secondPage">
+                <form action="/">
+                    <button type="submit">BEMO</button>
+                </form>
+            </li>
+        </ul>
+    </div>
 </div>
+
+<div id="fullpage">
+    <div class="section aboutme" data-anchor="aboutme">
+        <div class="opaque-bg animated fadeInDown">
+            <h1 style="color:white">BEMO</h1>
+            <p><span id="holder"></span><span class="blinking-cursor">|</span></p>
+        </div>
+        <i id="moveDown" class="fa fa-chevron-down fa-3x bounce"></i>
+    </div>
+</div>
+<br>
+<div class="search">
+    <form action="/send" class="search-container" method="GET">
+        <input type="text" name="moviename" id="search-bar" placeholder="영화 또는 해시태그(#반전)를 검색해주세요">
+        <input type="image" class="search-icon" src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png">
+    </form>
+</div>
+
 <br><br>
-    <div class="movies">
-        <div class="jb-a">
-            <div class="search1">
+<div class="movies">
+    <div class="jb-a">
+        <div class="search1">
             <form th:action="@{/moviedetail/{detail} (detail=${title1})}" >
                 <button type="submit" style="background-color:transparent; border:0; outline:0;" >
                     <img class="jb-b" th:if="${image1}!=''" th:src = "${image1}"/>
@@ -32,8 +110,8 @@
                     <h4 class="jb-c" th:text = "${title1}"/>
                 </button>
             </form>
-            </div>
         </div>
     </div>
+</div>
 </body>
 </html>

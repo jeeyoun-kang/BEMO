@@ -1,143 +1,211 @@
 <!doctype html>
 <html lang="en">
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>BEMO</title>
     <link rel="short icon" href="/img/bemo.ico"/>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="/css/main.css" rel="stylesheet"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <style>
-        *{font-family: 'Jua', sans-serif;}
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="/css/main.css" rel="stylesheet"/>
+    <link href="/css/movie.css" rel="stylesheet"/>
+    <link href="/css/template.css" rel="stylesheet"/>
+    <script>
+        $(document).ready(function() {
+            var slider = $("#slider");
+            slider.owlCarousel({
+                items: 1,
+                slideSpeed: 2000,
+                nav: false,
+                autoplay: false,
+                dots: false,
+                loop: true,
+                responsiveRefreshRate: 200
+            }).on('changed.owl.carousel', syncPosition);
 
-        td {
-            padding: 15px;
-            border: 1px solid black;
-            transform:scale(1.0);
-            transition: transform .5s;
+            function syncPosition(el) {
+                var count = el.item.count - 1;
+                var current = Math.round(el.item.index - (el.item.count / 2) - .5);
+                if (current < 0) {
+                    current = count;
+                }
+                if (current > count) {
+                    current = 0;
+                }
+            }
 
-        }
-        td:hover{
-            box-shadow: 5px 5px ;
-            transform:scale(1.03);     /* 이미지 확대 */
-            transition: transform .5s; 	/*  시간 설정  */
-        }
-    </style>
+        });
+    </script>
     <title>BEMO</title>
+    <script th:inline="javascript">
+        $(document).ready(function () {
+            // typing animation
+            (function ($) {
+                $.fn.writeText = function (content) {
+                    var contentArray = content.split(""),
+                        current = 0,
+                        elem = this;
+                    setInterval(function () {
+                        if (current < contentArray.length) {
+                            elem.text(elem.text() + contentArray[current++]);
+                        }
+                    }, 80);
+                };
+            })(jQuery);
+
+            var movie_title=[[${movie_title}]];
+
+            $("#holder").writeText(movie_title);
+
+            // initialize wow.js
+            new WOW().init();
+
+
+            $(document).ready(main);
+        });
+
+    </script>
 </head>
 <body>
-<h2 th:text="${movie_title}"></h2>
-<img th:src="${image1}"/></br>
-감독: <span th:text="${peopleNm}"></span></br>
-배우: <span th:text="${actorNm}"></span></br>
-<form th:action="@{/{movie_title}/review (movie_title=${movie_title})}"  >
 
-    <button type="submit" >리뷰</button>
-</form>
-<div class="post" >
-    <table>
-        <td id="id" name="id" th:each="Posts: ${Posts}">
-            <form th:method="GET" th:action="@{/users/{id} (id=${Posts.post_id})}" >
-                <button type="submit"><img id="image" th:src="${Posts.url}"></button>
-                <p><button type="submit" th:text="${Posts.title}" ></button></p>
-                <th:block th:each="Hashtags: ${Posts.getHashtags()}" th:if="${Posts.getHashtags() != null}">
-                    <span th:text="'#'+ ${Hashtags.content} "></span>
-                </th:block>
-                <p th:text="${Posts.mvtitle}"></p>
-                <p th:text="${Posts.authorname}"></p>
-                <p th:text="${Posts.update_date}"></p>
-            </form>
-        </td>
-    </table>
+<div class="nav-header">
+    <div class="nav-brand">
+        <img src="/img/bemo.ico">
+    </div>
+    <i class="fa fa-bars fa-3x"></i>
+    <div class="header-links">
+        <ul>
+            <li data-menuanchor="secondPage">
+                <form action="/">
+                    <button type="submit" >BEMO</button>
+                </form></li>        </ul>
+    </div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
-<div style="width: 500px; height: 500px;">
-    <!--차트가 그려질 부분-->
-    <canvas id="myChart"></canvas>
+<div id="fullpage">
+
+    <div class="section aboutme" data-anchor="aboutme">
+        <div class="opaque-bg animated fadeInDown">
+            <h1 style="color:white">BEMO</h1>
+            <p style="color: black;"><span id="holder"></span><span class="blinking-cursor">|</span></p>
+        </div>
+        <i id="moveDown" class="fa fa-chevron-down fa-3x bounce"></i>
+    </div>
 </div>
-<script th:inline="javascript">
-    var mvtitle=[[${movie_title}]];
+<br><br>
+<div class="movie_detail">
+    <div class="movie_image">
+        <img style="width: 250px; height: 250px; margin: auto; display: block;" th:src="${image1}"/>
+        <form th:action="@{/{movie_title}/review (movie_title=${movie_title})}"><br>
+            <button class="review_btn" type="submit">리뷰 작성하기</button>
+        </form>
+    </div>
+    <div class="movie_chart">
+        <h3 th:text="${movie_title}"></h3>
+        감독: <span th:text="${peopleNm}"></span><br>
+        배우: <span th:text="${actorNm}"></span><br><br>
 
-    const period1 = [[${period1}]];
-    const period2 = [[${period2}]];
-    const period3 = [[${period3}]];
-    const period4 = [[${period4}]];
-    const period5 = [[${period5}]];
-    const period6 = [[${period6}]];
-    const period7 = [[${period7}]];
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+        <div style="width: 500px; height: 300px;">
+            <!--차트가 그려질 부분-->
+            <canvas id="myChart"></canvas>
+            <script th:inline="javascript">
+                var mvtitle = [[${movie_title}]];
 
-    const ratio1 = [[${ratio1}]];
-    const ratio2 = [[${ratio2}]];
-    const ratio3 = [[${ratio3}]];
-    const ratio4 = [[${ratio4}]];
-    const ratio5 = [[${ratio5}]];
-    const ratio6 = [[${ratio6}]];
-    const ratio7 = [[${ratio7}]];
+                const period1 = [[${period1}]];
+                const period2 = [[${period2}]];
+                const period3 = [[${period3}]];
+                const period4 = [[${period4}]];
+                const period5 = [[${period5}]];
+                const period6 = [[${period6}]];
+                const period7 = [[${period7}]];
 
-    var context = document
-        .getElementById('myChart')
-        .getContext('2d');
-    var myChart = new Chart(context, {
-        type: 'line', // 차트의 형태
-        data: { // 차트에 들어갈 데이터
-            labels: [
-                //x 축
-                period1,period2,period3,period4,period5,period6,period7
-            ],
-            datasets: [
-                { //데이터
-                    label: mvtitle+" 검색량", //차트 제목
-                    fill: false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
-                    data: [
-                        ratio1,ratio2,ratio3,ratio4,ratio5,ratio6,ratio7//x축 label에 대응되는 데이터 값
-                    ],
-                    backgroundColor: [
-                        //색상
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
-                    ],
-                    borderColor: [
-                        //경계선 색상
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
-                    ],
-                    borderWidth: 1 //경계선 굵기
-                }/* ,
-                        {
-                            label: 'test2',
-                            fill: false,
-                            data: [
-                                8, 34, 12, 24
-                            ],
-                            backgroundColor: 'rgb(157, 109, 12)',
-                            borderColor: 'rgb(157, 109, 12)'
-                        } */
-            ]
-        },
-        options: {
-            scales: {
-                yAxes: [
-                    {
-                        ticks: {
-                            beginAtZero: true
+                const ratio1 = [[${ratio1}]];
+                const ratio2 = [[${ratio2}]];
+                const ratio3 = [[${ratio3}]];
+                const ratio4 = [[${ratio4}]];
+                const ratio5 = [[${ratio5}]];
+                const ratio6 = [[${ratio6}]];
+                const ratio7 = [[${ratio7}]];
+
+                var context = document
+                    .getElementById('myChart')
+                    .getContext('2d');
+                var myChart = new Chart(context, {
+                    type: 'line', // 차트의 형태
+                    data: { // 차트에 들어갈 데이터
+                        labels: [
+                            //x 축
+                            period1, period2, period3, period4, period5, period6, period7
+                        ],
+                        datasets: [
+                            { //데이터
+                                label: mvtitle + " 검색량", //차트 제목
+                                fill: false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
+                                data: [
+                                    ratio1, ratio2, ratio3, ratio4, ratio5, ratio6, ratio7//x축 label에 대응되는 데이터 값
+                                ],
+                                backgroundColor: [
+                                    //색상
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(54, 162, 235, 0.2)',
+                                    'rgba(255, 206, 86, 0.2)',
+                                    'rgba(75, 192, 192, 0.2)',
+                                    'rgba(153, 102, 255, 0.2)',
+                                    'rgba(255, 159, 64, 0.2)'
+                                ],
+                                borderColor: [
+                                    //경계선 색상
+                                    'rgba(255, 99, 132, 1)',
+                                    'rgba(54, 162, 235, 1)',
+                                    'rgba(255, 206, 86, 1)',
+                                    'rgba(75, 192, 192, 1)',
+                                    'rgba(153, 102, 255, 1)',
+                                    'rgba(255, 159, 64, 1)'
+                                ],
+                                borderWidth: 1 //경계선 굵기
+                            }
+                        ]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [
+                                {
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }
+                            ]
                         }
                     }
-                ]
-            }
-        }
-    });
-</script>
+                });
+            </script>
+            <br>
+
+        </div>
+    </div>
+</div>
+<div class="reviews">
+    <h2>Reviews</h2>
+    <div style="text-align: center;">
+        <table style="margin-left:auto;margin-right:auto;">
+            <td class="shadow2" id="id" name="id" th:each="Posts: ${Posts}">
+                <form th:method="GET" th:action="@{/users/{id} (id=${Posts.post_id})}">
+                    <button type="submit"><img style="border-radius: 10%; width:180px;height:180px;" id="image" th:src="${Posts.url}"></button>
+                    <th:block style="width:200px; overflow: hidden;white-space: nowrap;text-overflow: ellipsis;" th:each="Hashtags: ${Posts.getHashtags()}" th:if="${Posts.getHashtags() != null}">
+                        <span th:text="'#'+ ${Hashtags.content} "></span>
+                    </th:block><br>
+                    <div style="width:200px; overflow: hidden;white-space: nowrap;text-overflow: ellipsis;" th:text="${Posts.mvtitle}"></div>
+                    <button type="submit" style="width:200px; overflow: hidden;white-space: nowrap;text-overflow: ellipsis;" class="review_title" th:text="${Posts.title}" ></button>
+                    <span th:text="${Posts.authorname}"></span>
+                    <span th:text="${Posts.update_date}"></span>
+                </form>
+            </td>
+        </table>
+    </div>
+</div>
 </body>
 </html>

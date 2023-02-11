@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-@RestController
+@Controller
 public class UserController {
     private final PrincipalDetailsService principalDetailsService;
 
@@ -33,13 +33,8 @@ public class UserController {
     public String signup(Model model) {
         String now = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         model.addAttribute("now", now);
-
         return "signup";
-    }
-    @RequestMapping(value = "/join", method=RequestMethod.POST)
-    public Long join(@RequestBody RequestDto request){
-        System.out.println(request.getUsername()+request.getNickname()+request.getPassword()+request.getCellphone()+request.getBirthday());
-        return principalDetailsService.create(request);
+
     }
 
     @RequestMapping(value = "/profile")

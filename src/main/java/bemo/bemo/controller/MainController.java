@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.io.BufferedReader;
@@ -34,6 +35,8 @@ public class MainController {
 
     @Autowired
     PostsService postsService;
+
+
     @RequestMapping(value="/")
     public String main(Model model, @AuthenticationPrincipal PrincipalDetails principalDetails) {
         if (principalDetails != null) {
@@ -41,9 +44,7 @@ public class MainController {
         }
         model.addAttribute("Posts",postsService.findAllDesc());
         List<String> hashtag = postsService.sortHashtags();
-        model.addAttribute("hashtag", hashtag);
-
-        // 어제 날짜 구하기 (시스템 시계, 시스템 타임존)
+        model.addAttribute("hashtag", hashtag);        // 어제 날짜 구하기 (시스템 시계, 시스템 타임존)
         Calendar c1 = new GregorianCalendar();
         c1.add(Calendar.DATE, -1); // 오늘날짜로부터 -1
 
