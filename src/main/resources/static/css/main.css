@@ -1,9 +1,14 @@
+h2{
+    text-align: center;
+    width: 500px;
+    margin: 0 auto;
+}
 /*로그인 팝업 관련 css*/
 .background {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 100vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.3);
 
@@ -27,73 +32,135 @@
 
 .popup {
     position: absolute;
-    top: 17%;
-    left: 40%;
     background-color: white;
     box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
 
     /* 임시 지정 */
-    width: 400px;
-    height: 480px;
+    top: 10%;
+    left: 30%;
+    height: 350px;
 }
 
 /*로그인 화면 관련 css*/
-.popup .loginHeader{
+.overlay, .form:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+    background: rgba(0, 0, 0, 0.8);
+    width: 100%;
+    height: 100%;
+}
+.form {
+    position: relative;
+    background: #FFFFFF;
+    width: 600px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+.form-group {
     display: flex;
-    height:10%;
-    background-color: rebeccapurple;
-    color: white;
-    font-family: "맑은 고딕";
+    flex-wrap: wrap;
     justify-content: space-between;
-    align-items: center;
-    font-weight: bold;
-    padding-left:20px;
-    padding-right:20px;
+    margin: 0 0 20px;
+}
+.form-group label {
+    display: block;
+    margin: 0 0 10px;
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: 0.2em;
+}
+.form-group input {
+    outline: none;
+    display: block;
+    background: rgba(0, 0, 0, 0.1);
+    width: 100%;
+    border: 0;
+    border-radius: 4px;
+    box-sizing: border-box;
+    padding: 12px 20px;
+    color: rgba(0, 0, 0, 0.6);
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: 500;
+    line-height: inherit;
+    transition: 0.3s ease;
+}
+.form-group input:focus {
+    color: rgba(0, 0, 0, 0.8);
+}
+.form-group button {
+    outline: none;
+    background: #4285F4;
+    width: 100%;
+    border: 0;
+    border-radius: 4px;
+    padding: 12px 20px;
+    color: #FFFFFF;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: 500;
+    line-height: inherit;
+    cursor: pointer;
 }
 
-.popup #close{
+.form-group .form-remember {
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0;
+    text-transform: none;
+}
+.form-group .form-remember input[type='checkbox'] {
+    display: inline-block;
+    width: auto;
+    margin: 0 10px 0 0;
+}
+.form {
+    padding: 30px calc(5% + 60px) 60px 60px;
+    box-sizing: border-box;
+}
+.form-header {
+    display: flex;
+    margin: 0 0 30px;
+    justify-content: space-between;
+    align-items: center;
+}
+.form-header h1 {
+    display: inline;
+    padding: 4px 0;
+    color: #4285F4;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.form-header #close{
+    display: inline;
     font-size:20px;
-    color: white;
-    background-color: rebeccapurple;
+    color: black;
+    background-color: white;
     border:0;
     outline:0;
 }
 
-.popup .loginMain{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    margin: 30px 20px 20px 10px;
-}
-.popup #username{
+.form-footer{
     width:100%;
-    height:40px;
-    border-width: thin;
-    border-color: whitesmoke #CCCCCC #CCCCCC whitesmoke;
-}
-.popup #password{
-    width:100%;
-    height:40px;
-    margin-top:20px;
-    margin-bottom: 20px;
-    border-width: thin;
-    border-color: whitesmoke #CCCCCC #CCCCCC whitesmoke;
-}
-.popup #loginBt{
-    width:100%;
-    height:40px;
-    margin:40px 0px 40px 0px;
-    justify-content: center;
-    color: #444444;
-    background-color:lightgray;
-    border-radius: 5px;
-    border-style:none;
-}
-
-.popup .loginFooter{
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 30px 0px 0px;
+}
+.form-footer h2 {
+    display: inline;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: bold;
+    line-height: inherit;
+    margin: 0px 5px 0px;
+    color: rgba(0, 0, 0, 0.6);
 }
 
 .btn{ /* 메인페이지 버튼 관련 */
@@ -105,12 +172,6 @@
 }
 
 
-
-h2{
-    text-align: center;
-    width: 100px;
-    margin: 0 auto;
-}
 .search{
     text-align: center;
 }

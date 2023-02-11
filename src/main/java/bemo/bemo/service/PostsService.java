@@ -74,7 +74,7 @@ public class PostsService {
     public Long update (Long id, PostsDto requestDto) {
         Posts posts = postsRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. id=" + id));
-        String now = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        String now = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         System.out.println(requestDto.getTitle());
         List<Hashtags> hashtagsList=hashtagsRepository.findByPosts(posts);
         System.out.println(hashtagsList);
