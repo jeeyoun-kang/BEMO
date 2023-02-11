@@ -22,9 +22,9 @@ import java.util.List;
 @Service
 public class PrincipalDetailsService implements UserDetailsService {
     private final UserRepository userRepository;
-    private AuthRepository authRepository;
-    private PassRepository passRepository;
-    private SocialRepository socialRepository;
+    private final AuthRepository authRepository;
+    private final PassRepository passRepository;
+    private final SocialRepository socialRepository;
 
     public PrincipalDetailsService(UserRepository userRepository, AuthRepository authRepository, PassRepository passRepository, SocialRepository socialRepository) {
         this.userRepository = userRepository;
@@ -46,7 +46,7 @@ public class PrincipalDetailsService implements UserDetailsService {
     }
 
     @Transactional
-    public String create(RequestDto request) {
+    public Long create(RequestDto request) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         LocalDateTime now =  LocalDateTime.now();
         boolean existMember = userRepository.existsUserByUsername(request.getUsername());
@@ -61,7 +61,7 @@ public class PrincipalDetailsService implements UserDetailsService {
         userRepository.save(user);
 
 
-        return user.getUsername();
+        return user.getUserNo();
     }
     @Transactional
     public PrincipalDetails loadPrincipalByUsername(String username) throws UsernameNotFoundException {

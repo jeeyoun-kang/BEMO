@@ -12,22 +12,22 @@ var main = {
         const pwd = document.getElementById("password");
         const repwd = document.getElementById("passwordCheck");
         const nickname = document.getElementById("nickname");
-        const mobile = document.getElementById("mobile");
+        const cellphone = document.getElementById("cellphone");
         const birthday = document.getElementById("birthday");
 
-        if (id.value === "") {
+        if (id.value == "") {
             alert("아이디를 입력하세요.")
             id.focus();
             return false;
         }
 
-        if (nickname.value === "") {
+        if (nickname.value == "") {
             alert("닉네임을 입력하세요.")
             nickname.focus();
             return false;
         }
 
-        if (pwd.value === "") {
+        if (pwd.value == "") {
             alert("비밀번호를 입력하세요.")
             pwd.focus();
             return false;
@@ -40,31 +40,32 @@ var main = {
             return false;
         }
 
-        if (pwd.value !== repwd.value) {
+        if (pwd.value != repwd.value) {
             alert("비밀번호가 일치하지 않습니다.")
             repwd.focus();
             return false;
         }
 
-        const mobileCheck = /\d{3}-\d{4}-\d{4}/;
-        if (mobile.value === "" || !mobileCheck.test(mobile.value)) {
+        const cellphoneCheck = /\d{3}-\d{4}-\d{4}/;
+        if (cellphone.value == "" || !cellphoneCheck.test(cellphone.value)) {
             alert("전화번호가 올바르지 않습니다.")
-            mobile.focus();
+            cellphone.focus();
             return false;
         }
 
         const data = {
-            username: $('#id').val(),
-            password: $('#pwd').val(),
-            mobile: $('#mobile').val(),
+            username: $('#username').val(),
+            password: $('#password').val(),
+            cellphone: $('#cellphone').val(),
             birthday: $('#birthday').val(),
             nickname: $('#nickname').val(),
         };
+        console.log(JSON.stringify(data));
 
         $.ajax({
             type: 'POST',
             url: '/join',
-            data: data,
+            data: JSON.stringify(data),
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
         }).done(function () {
