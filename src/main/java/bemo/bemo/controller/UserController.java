@@ -7,10 +7,7 @@ import bemo.bemo.service.PrincipalDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDateTime;
@@ -39,10 +36,11 @@ public class UserController {
 
         return "signup";
     }
-    @RequestMapping(value = "/join", method=RequestMethod.POST)
+    @PostMapping("/join")
     public String join(RequestDto request){
         System.out.println(request.getUsername()+request.getNickname()+request.getPassword()+request.getCellphone()+request.getBirthday());
         return principalDetailsService.create(request);
+
     }
 
     @RequestMapping(value = "/profile")
