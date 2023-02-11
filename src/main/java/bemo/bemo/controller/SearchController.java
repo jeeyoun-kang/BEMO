@@ -41,10 +41,20 @@ public class SearchController {
     private String searchapiURL2;
     @GetMapping("search")
     public String ticket(Model model) {
-            model.addAttribute("data", "search");
+        model.addAttribute("data", "search");
         return "search";//
     }
 
+    @GetMapping("/test")
+    public String test(Model model){
+        model.addAttribute("data", "search");
+        return "test";
+    }
+    @GetMapping("/index")
+    public String index(Model model){
+        model.addAttribute("data", "search");
+        return "index";
+    }
     @RequestMapping("/send")
     public String send(String moviename,Model model){
 
@@ -94,8 +104,8 @@ public class SearchController {
                     jsonlistimage.add(image);
 
                 }
-                    jsontitle.add(jsonlisttitle.get(0));
-                    jsonimage.add(jsonlistimage.get(0));
+                jsontitle.add(jsonlisttitle.get(0));
+                jsonimage.add(jsonlistimage.get(0));
             }
             System.out.println(jsontitle);
             System.out.println(jsonimage);

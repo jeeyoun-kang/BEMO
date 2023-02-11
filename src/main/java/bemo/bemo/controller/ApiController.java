@@ -2,6 +2,8 @@ package bemo.bemo.controller;
 
 import bemo.bemo.auth.PrincipalDetails;
 import bemo.bemo.dto.PostsDto;
+import bemo.bemo.dto.RequestDto;
+import bemo.bemo.service.PrincipalDetailsService;
 import bemo.bemo.service.S3Service;
 import com.nimbusds.jose.shaded.json.parser.ParseException;
 import bemo.bemo.service.PostsService;
@@ -42,6 +44,8 @@ public class ApiController {
     private final S3Service s3Service;
 
     private final PostsService postsService;
+
+    private final PrincipalDetailsService principalDetailsService;
 
     @GetMapping("/users/{id}")
     public ModelAndView comments(Model model, @PathVariable Long id, @AuthenticationPrincipal PrincipalDetails principalDetails) {
@@ -130,6 +134,12 @@ public class ApiController {
     public Long delete(@PathVariable Long id) {
         postsService.delete(id);
         return id;
+    }
+
+    @RequestMapping(value = "/join", method=RequestMethod.POST)
+    public Long join(@RequestBody RequestDto request){
+        System.out.println(request.getUsername()+request.getNickname()+request.getPassword()+request.getCellphone()+request.getBirthday());
+        return principalDetailsService.create(request);
     }
     private static String get(String apiUrl, Map<String, String> requestHeaders){
         HttpURLConnection con = connect(apiUrl);

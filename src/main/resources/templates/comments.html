@@ -6,40 +6,78 @@
   <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link href="/css/review.css" rel="stylesheet">
   <style>
-    *{font-family: 'Jua', sans-serif;}
     img {
       border-radius: 10%;
-      width:200px;
-      height:200px;
+      width: 200px;
+      height: 200px;
     }
+
   </style>
   <title>BEMO</title>
 </head>
 <body>
-<table id="PostsTable">
-  <tr th:each="Posts: ${Posts}" th:if="${Posts != null}">
-    작성자 : <tr th:text="${Posts.authorname}"></tr><br>
-    영화 : <tr th:text="${Posts.mvtitle}"></tr><br>
-    제목 : <tr th:text="${Posts.title}"></tr><br>
-    내용 : <tr th:text="${Posts.content}"></tr><br>
-    이미지 :<img id="image" th:src="${Posts.url}"><br>
-    해시태그 :
-    <tr>
-      <th:block th:each="Hashtags: ${Posts.getHashtags()}" th:if="${Posts.getHashtags() != null}">
-        <p th:text="${Hashtags.content} "></p>
-      </th:block>
-    </tr>
-  </tr>
-  <div th:if="${writer==true}"> <!--본인일때 수정하기 버튼보이게-->
-    <form method="post" th:action="@{/modify/{id} (id=${id})}" >
-      <button type="submit">수정하기</button></form>
-  </div>
-</table>
+<div class="col-md-12">
+  <div class="col-md-4">
+    <div class="container">
+      <div class="row header">
+      </div>
+      <div class="row body">
 
+        <span style="font-size:30px;" id="mvtitle" name="mvtitle" th:text="${movie_title}"></span></br>
+        <tr th:each="Posts: ${Posts}" th:if="${Posts != null}"></tr>
+        <ul>
+          <li>
+            <label>작성자 :</label>
+            <tr th:text="${Posts.authorname}"></tr>
+            <br>
+          </li>
+          <li>
+            <label>영화 :</label>
+            <tr th:text="${Posts.mvtitle}"></tr>
+            <br>
+          </li>
+          <li>
+            <label>제목 :</label>
+            <tr th:text="${Posts.title}"></tr>
+            <br>
+          </li>
+          <li>
+            <label> 내용 </label>
+            <tr th:text="${Posts.content}"></tr>
+            <br>
+          </li>
+          <li>
+            <div class="divider"></div>
+          </li>
+          <li>
+            <label>
+              이미지 :<img id="image" th:src="${Posts.url}"><br>
+            </label>
+          </li>
+          <li>
+            <label>해시태그 :</label>
+            <tr>
+              <th:block th:each="Hashtags: ${Posts.getHashtags()}"
+                        th:if="${Posts.getHashtags() != null}">
+                <p th:text="${Hashtags.content} "></p>
+              </th:block>
+            </tr>
+
+          </li>
+        </ul>
+        </tr>
+        <div th:if="${writer==true}"> <!--본인일때 수정하기 버튼보이게-->
+          <form method="post" th:action="@{/modify/{id} (id=${id})}">
+            <button class="btn btn-primary" type="submit">수정하기</button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>

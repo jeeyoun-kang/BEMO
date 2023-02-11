@@ -50,6 +50,7 @@ public class MovieDetailController {
         model.addAttribute("code",code);
 
 
+
         String apiURL = "https://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key=f5eef3421c602c6cb7ea224104795888&movieCd=" + code;    // json 결과
 
         Map<String, String> requestHeaders2 = new HashMap<>();//
@@ -102,6 +103,43 @@ public class MovieDetailController {
         }
         String actorstr = String.join(",", jsonlistactor);
         model.addAttribute("actorNm",actorstr);
+
+
+        //영화 이미지 가져오기
+
+        String text = null;
+        text = URLEncoder.encode(detail, StandardCharsets.UTF_8);
+        System.out.println(text);
+        String image_apiURL = searchApiURL2 + text;    // json 결과
+
+
+        Map<String, String> requestHeaders3 = new HashMap<>();
+        requestHeaders3.put("X-Naver-Client-Id", searchClientId);
+        requestHeaders3.put("X-Naver-Client-Secret", searchClientSecret);
+        String responseBody3 = get(image_apiURL,requestHeaders3);
+        model.addAttribute("jsonbody",responseBody3);
+        System.out.println(responseBody3);
+
+        // 가장 큰 JSONObject를 가져옵니다.
+        JSONObject jObject4 = new JSONObject(responseBody3);
+        // 배열을 가져옵니다.
+        JSONArray jArray3 = jObject4.getJSONArray("items");
+
+
+        List<String> jsonlistimage = new ArrayList<String>();
+
+
+        // 배열의 모든 아이템을 출력합니다.
+        for (int i = 0; i < jArray3.length(); i++) {
+            JSONObject obj = jArray3.getJSONObject(i);
+            String image = obj.getString("image");
+            image=image.replaceAll("\\\\","");
+            jsonlistimage.add(image);
+            System.out.println();
+        }
+
+
+        model.addAttribute("image1",jsonlistimage.get(0));
 
         //네이버 트렌드 데이터
 
@@ -326,7 +364,6 @@ public class MovieDetailController {
         text = URLEncoder.encode(detail, StandardCharsets.UTF_8);
         System.out.println(text);
         String apiURL = searchApiURL2 + text;    // json 결과
-        //String apiURL = "https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchWeeklyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt=" + text;
 
 
         Map<String, String> requestHeaders = new HashMap<>();
@@ -359,10 +396,6 @@ public class MovieDetailController {
             String actor = obj.getString("actor");
             actor=actor.replaceAll("\\|",",");
             actor=actor.replaceAll("\\<.*?>","");
-
-
-
-
 
             jsonlisttitle.add(title);
             jsonlistimage.add(image);

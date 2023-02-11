@@ -5,72 +5,242 @@
 <link href="/css/error.css" rel="stylesheet" />
 <title>BEMO</title>
 <style>
-    .header-menu, #Header1, #LinkList72, #FollowByEmail1, .footer, .back-top {display:none !important;padding:0px !important;margin:0px !important;}
+    html, body {
+        height: 100%;
+        overflow: hidden;
+    }
 
-    .header-header{height:0px !important;}
+    .error-page {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        height: 100%;
+        font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    }
+    .error-page h1 {
+        font-size: 30vh;
+        font-weight: bold;
+        position: relative;
+        margin: -8vh 0 0;
+        padding: 0;
+    }
+    .error-page h1:after {
+        content: attr(data-h1);
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        color: transparent;
+        /* webkit only for graceful degradation to IE */
+        background: -webkit-repeating-linear-gradient(-45deg, #71b7e6, #69a6ce, #b98acc, #ee8176, #b98acc, #69a6ce, #9b59b6);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-size: 400%;
+        text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.25);
+        animation: animateTextBackground 10s ease-in-out infinite;
+    }
+    .error-page h1 + p {
+        color: #d6d6d6;
+        font-size: 8vh;
+        font-weight: bold;
+        line-height: 10vh;
+        max-width: 600px;
+        position: relative;
+    }
+    .error-page h1 + p:after {
+        content: attr(data-p);
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        color: transparent;
+        text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+        -webkit-background-clip: text;
+        -moz-background-clip: text;
+        background-clip: text;
+    }
 
-    #content-wrapper{margin:auto !important;padding:0px !important;border:0px !important;}
+    #particles-js {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
 
-    #sub-footer-wrapper{padding:0px !important;border:0px !important;height:0px !important;}
+    @keyframes animateTextBackground {
+        0% {
+            background-position: 0 0;
+        }
+        25% {
+            background-position: 100% 0;
+        }
+        50% {
+            background-position: 100% 100%;
+        }
+        75% {
+            background-position: 0 100%;
+        }
+        100% {
+            background-position: 0 0;
+        }
+    }
+    @media (max-width: 767px) {
+        .error-page h1 {
+            font-size: 32vw;
+        }
+        .error-page h1 + p {
+            font-size: 8vw;
+            line-height: 10vw;
+            max-width: 70vw;
+        }
+    }
+    a.back {
+        position: fixed;
+        right: 40px;
+        bottom: 40px;
+        background: -webkit-repeating-linear-gradient(-45deg, #71b7e6, #69a6ce, #b98acc, #ee8176);
+        border-radius: 5px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        color: #fff;
+        font-size: 16px;
+        font-weight: bold;
+        line-height: 24px;
+        padding: 15px 30px;
+        text-decoration: none;
+        transition: 0.25s all ease-in-out;
+    }
+    a.back:hover {
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
 
-    .row{width:100% !important;}
+    @import url(https://fonts.googleapis.com/css?family=Ubuntu:700&subset=latin,latin-ext);
+    html {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
 
-    .copyright-area{font-size:0px;height:0px;line-height:0px;}
+    *, *:before, *:after {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
 
-    #footer-wrapper{background:transparent;}
+    body {
+        background: url("http://thecodeplayer.com/uploads/media/geometry.png");
+        font-family: "Ubuntu", sans-serif;
+        color: #4f4f4f;
+        text-align: center;
+        padding: 200px 0;
+    }
 
-    #outer-wrapper{background-color: transparent; height:100%;}
+    a {
+        text-decoration: none;
+        color: #4f4f4f;
+    }
 
-    body{background: #413163; background: linear-gradient(328deg, #6e366e 0%, #3f3162 100%) !important;}
+    .button {
 
 
-    /* Small devices (portrait tablets and large phones, 200px and up) */
-    @media only screen and (min-width: 200px) {
-        .image-404{width:45%;}
-        .object_earth{width:15%;}
-        .object_moon{width:15%;}
-        .object_astronaut{width:40%;}}
-
-    /* Medium devices (landscape tablets, 768px and up) */
-    @media only screen and (min-width: 768px) {
-        .image-404{width:45%;}
-        .object_earth{width:15%;}
-        .object_moon{width:15%;}
-        .object_astronaut{width:40%;}}
-
-    /* Large devices (laptops/desktops, 992px and up) */
-    @media only screen and (min-width: 992px) {
-        .image-404{width:300px;}
-        .object_earth{width:100px;}
-        .object_moon{width:80px;}
-        .object_astronaut{width:140px;}}
-
+        display: inline-block;
+        padding: 15px 50px;
+        position: relative;
+        -webkit-box-shadow: inset 0px 0px 0px 2px #efefef;
+        -moz-box-shadow: inset 0px 0px 0px 2px #efefef;
+        box-shadow: inset 0px 0px 0px 2px10px #efefef;
+        transition: all 0.2s ease-in;
+    }
+    .button:before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 2px;
+        width: 0;
+        display: block;
+        background-color: #39bda7;
+        transition: all, 0.3s 0.3s, cubic-bezier(0.55, 0, 0.1, 1);
+    }
+    .button:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 2px;
+        width: 0;
+        display: block;
+        background-color: #39bda7;
+        transition: all, 0.3s, cubic-bezier(0.55, 0, 0.1, 1);
+    }
+    .button:hover {
+        color: #39bda7;
+    }
+    .button:hover:before {
+        width: 100%;
+        transition: all, 0.3s, cubic-bezier(0.55, 0, 0.1, 1);
+    }
+    .button:hover:after {
+        width: 100%;
+        transition: all, 0.3s 0.3s, cubic-bezier(0.55, 0, 0.1, 1);
+    }
+    .button:hover i:before {
+        height: 100%;
+        transition: all, 0.3s, cubic-bezier(0.55, 0, 0.1, 1);
+    }
+    .button:hover i:after {
+        height: 100%;
+        transition: all, 0.3s 0.3s, cubic-bezier(0.55, 0, 0.1, 1);
+    }
+    .button i {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+    .button i:before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 0;
+        width: 2px;
+        display: block;
+        background-color: #39bda7;
+        transition: all, 0.3s 0.3s, cubic-bezier(0.55, 0, 0.1, 1);
+    }
+    .button i:after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        height: 0;
+        width: 2px;
+        display: block;
+        background-color: #39bda7;
+        transition: all, 0.3s, cubic-bezier(0.55, 0, 0.1, 1);
+    }
 </style>
 
 
-
-
-<div class='stars'>
-    <div class='central-body'>
-        <img class='image-404' src='https://1.bp.blogspot.com/-dLWU1VT2e1I/X0z3uM4RuTI/AAAAAAAAA38/MnBKrTfMVm0td3Z6OFXnZ50ciCyBFslXwCLcBGAsYHQ/s438/404.png'/>
-        <a class='btn-go-home' href='http://localhost:8080/'>GO BACK HOME</a>
+<div class="error-page">
+    <div>
+        <!--h1(data-h1='400') 400-->
+        <!--p(data-p='BAD REQUEST') BAD REQUEST-->
+        <!--h1(data-h1='401') 401-->
+        <!--p(data-p='UNAUTHORIZED') UNAUTHORIZED-->
+        <!--h1(data-h1='403') 403-->
+        <!--p(data-p='FORBIDDEN') FORBIDDEN-->
+        <h1 data-h1="404">404</h1>
+        <p data-p="NOT FOUND">NOT FOUND</p>
+        <!--h1(data-h1='500') 500-->
+        <!--p(data-p='SERVER ERROR') SERVER ERROR-->
+        <a href="http://localhost:8080/" class="button">
+            <i></i>
+            Go Back Home
+        </a>
     </div>
-    <div class='objects'>
-        <img class='object_rocket' src='https://1.bp.blogspot.com/-2Wx_I52zY3s/X0z4a5YL5pI/AAAAAAAAA4Q/S3C6fv81CDUsOMPuDkJMZB62S8AWU3D4ACLcBGAsYHQ/s58/rocket%2B%25281%2529.png' width='40px'/>
-        <div class='earth-moon'>
-            <img class='object_earth' src='https://1.bp.blogspot.com/-02QfCnHqpEY/X0z4vDT0UUI/AAAAAAAAA4c/5oYrVkuOz94mCcFgIGj3C5mR6uJD9fNQQCLcBGAsYHQ/s140/earth%2B%25281%2529.png'/>
-            <img class='object_moon' src='https://1.bp.blogspot.com/-PaaUIcDOlcU/X0z2bHdZ5UI/AAAAAAAAA3g/UHIjiKs_eg4xusjWsjAey1AKztYgE7K7wCLcBGAsYHQ/s92/moon.png'/>
-        </div>
-        <div class='box_astronaut'>
-            <img class='object_astronaut' src='https://1.bp.blogspot.com/-rScobp7Mf5E/X0z1vb2NrMI/AAAAAAAAA3Y/Fph8pYiIt74xz5W4lzoR1bHyV_XMjWBQwCLcBGAsYHQ/s228/astronaut.png'/>
-        </div>
-    </div>
-    <div class='glowing_stars'>
-        <div class='star'/>
-        <div class='star'/>
-        <div class='star'/>
-        <div class='star'/>
-        <div class='star'/>
-
-    </div></div>
-
+</div>

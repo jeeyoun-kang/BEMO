@@ -1,3 +1,8 @@
+
+*{font-family: 'Jua', sans-serif;}
+html{
+    height: 100vh;
+}
 h2{
     text-align: center;
     width: 500px;
@@ -60,7 +65,6 @@ h2{
     overflow: hidden;
 }
 .form-group {
-    display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     margin: 0 0 20px;
@@ -146,6 +150,7 @@ h2{
     outline:0;
 }
 
+
 .form-footer{
     width:100%;
     display: flex;
@@ -166,12 +171,28 @@ h2{
 .btn{ /* 메인페이지 버튼 관련 */
     text-align: center;
 }
+
+.movies .review_img{
+    width:180px;
+    height:180px;
+}
+
+.movies .review_title:hover{
+    color:green;
+}
 .movies{
-    padding-left: 25%;
-    padding-right: 25%;
+    padding-left: 20%;
+    padding-right: 20%;
 }
 
 
+
+.boxoffice{
+    text-align: center;
+    width: 100px;
+    margin: 0 auto;
+
+}
 .search{
     text-align: center;
 }
@@ -187,13 +208,13 @@ h2{
 /*이미지크기 동일화*/
 .movies img {
     border-radius: 10%;
-    width:200px;
-    height:200px;
+    width:230px;
+    height:230px;
 }
 .movies .jb-a {
     text-align: center;
     margin: 5px 5px 5px 5px;
-    width: 200px;
+    width: 230px;
     float:left;
     position: relative
 }
@@ -217,61 +238,69 @@ h2{
 }
 
 .movies .slide{
-    width:840px; height:200px;/**사진보다 크면 다음 사진까지 표시되어 img와 slide크기를 맞춘다.**/
+    width:970px; height:230px;/**사진보다 크면 다음 사진까지 표시되어 img와 slide크기를 맞춘다.**/
     overflow: hidden;/
 }
 
 .movies .images {
 
     display: flex; /**좌우 슬라이드를 위해 flex로 사진을 가로정렬한다.**/
-    height:200px; /**slide와 images의 높이가 다르면 부자연스럽게 표시돼 slide의 높이에 맞게 높이를 바꾼다.**/
+    height:230px; /**slide와 images의 높이가 다르면 부자연스럽게 표시돼 slide의 높이에 맞게 높이를 바꾼다.**/
     transition: transform 0.5s;
     /**어떤 속성에 대해 애니메이션 효과를 주는 속성이다.
     tranform속성에 0.5초의 듀레이션(동작의 시작해서 끝나는 시간)을 준다.**/
 
 }
 
-.movies .back{
+.movies .arrow1{
+    box-sizing: border-box;
     position:relative;
     bottom: 120px; right: 50px;
     width: 30px; height: 30px;
-    color: white;
-    background: #646464;
+    border-style: solid;
+    border-color: grey;
+    border-width: 0px 1px 1px 0px;
+    transform: rotate(135deg);
+    transition: border-width 150ms ease-in-out;
+
+
 }
-.movies .next{
+.movies .arrow2{
+    box-sizing: border-box;
     position:relative;
-    bottom: 120px; left: 840px;
+    bottom: 150px; left: 1000px;
     width: 30px; height: 30px;
-    color: white;
-    background: #646464;
+    border-style: solid;
+    border-color: grey;
+    border-width: 0px 1px 1px 0px;
+    transform: rotate(-45deg);
+    transition: border-width 150ms ease-in-out;
+
+}
+.movies .arrow1:hover{
+    border-bottom-width: 4px;
+    border-right-width: 4px;
 }
 
-.movies .next:active{/**버튼을 클릭하는 동안 색을 바꾼다.**/
-    background:#3e3e3e;
-}
-.movies .next:disabled{/**버튼 속성이 disabled되면 색을 바꾼다.**/
-    background: #cbcaca;
+.movies .arrow2:hover{
+    border-bottom-width: 4px;
+    border-right-width: 4px;
 }
 
-.movies .back:active{/**버튼을 클릭하는 동안 색을 바꾼다.**/
-    background:#3e3e3e;
-}
-.movies .back:disabled{/**버튼 속성이 disabled되면 색을 바꾼다.**/
-    background: #cbcaca;
-}
 
 /**해시태그  **/
 
 .movies .hash_td {
     text-align: center;
     margin: 5px 10px 5px 10px;
-    width: 200px;
+    width: 230px;
     float:left;
     position: relative
 }
 
 .movies .hash_td:hover .jb-c {
     opacity: 1;
+
 }
 .movies .hash_td:hover .jb-b{
     filter: brightness(50%);
@@ -279,3 +308,85 @@ h2{
 .movies .hash_tr{
     height:100px;
 }
+
+/** 검색바 **/
+.search-container {
+    width: 490px;
+    display: block;
+    margin: 0 auto;
+}
+
+input#search-bar {
+    margin: 0 auto;
+    width: 100%;
+    height: 45px;
+    padding: 0 20px;
+    font-size: 1rem;
+    border: 1px solid #D0CFCE;
+    outline: none;
+}
+input#search-bar:focus {
+    border: 1px solid #008ABF;
+    transition: 0.35s ease;
+    color: #008ABF;
+}
+input#search-bar:focus::-webkit-input-placeholder {
+    transition: opacity 0.45s ease;
+    opacity: 0;
+}
+input#search-bar:focus::-moz-placeholder {
+    transition: opacity 0.45s ease;
+    opacity: 0;
+}
+input#search-bar:focus:-ms-placeholder {
+    transition: opacity 0.45s ease;
+    opacity: 0;
+}
+
+.search-icon {
+    position: relative;
+    float: right;
+    width: 75px;
+    height: 75px;
+    top: -62px;
+    right: -45px;
+}
+
+/** 해시태그 버튼 **/
+/* Outline Outward */
+.outline-outward {
+    display: inline-block;
+    position: relative;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    transform: translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+
+    padding: 1em;
+    cursor: pointer;
+    background: #ececec;
+    text-decoration: none;
+    color: #666;
+    margin:5px 5px 5px 5px;
+
+}
+.outline-outward:before {
+    content: "";
+    position: absolute;
+    border: #ececec solid 4px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transition-duration: 0.3s;
+    transition-property: top right bottom left;
+}
+.outline-outward:hover:before {
+    top: -8px;
+    right: -8px;
+    bottom: -8px;
+    left: -8px;
+}
+
+
+
+

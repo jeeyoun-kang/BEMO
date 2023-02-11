@@ -48,9 +48,9 @@ public class WebSecurityConfig{
         http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/login","/profile", "/signup", "/", "/review", "/search",
-                         "/send", "/join", "/error", "/loginSuccess","/moviedetail/{detail}",
+                        "/send", "/join", "/error", "/loginSuccess","/moviedetail/{detail}",
                         "/moviedetail/{detail}/{code}","/{movie_title}/review",
-                        "/comments/{id}","/modify/{id}","/users/{id}","/users").permitAll() // 누구나 접근 허용
+                        "/comments/{id}","/modify/{id}","/users/{id}","/users","/test","/index").permitAll() // 누구나 접근 허용
                 .antMatchers("/user").hasRole("USER") // USER, ADMIN만 접근 가능
                 .antMatchers("/admin").hasRole("ADMIN") // ADMIN만 접근 가능
                 .anyRequest().authenticated() // 나머지 요청들은 권한의 종류에 상관 없이 권한이 있어야 접근 가능
