@@ -40,9 +40,7 @@
                     <span style="font-size:30px;" id="mvtitle" name="mvtitle" th:text="${movie_title}"></span></br>
                 </div>
                 <div class="row body">
-
                     <ul>
-
                         <li>
                             <div class="form-group">
                                 <label for="author"> 작성자: [[${nickname}]] </label>
@@ -80,7 +78,7 @@
                             </div>
                         </li>
                         <li>
-                            <a href="/" role="button" class="btn btn-secondary">취소</a>
+                            <a href="/" role="button" class="btn btn-cancel">취소</a>
                             <button type="button" class="btn btn-primary" id="btn-save">등록</button>
                         </li>
                     </ul>
@@ -88,7 +86,8 @@
             </form>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-    <script type="text/javascript" th:src="@{/js/review.js}"></script>
+</div>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script type="text/javascript" th:src="@{/js/review.js}"></script>
 </body>
 </html>

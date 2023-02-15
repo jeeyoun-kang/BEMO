@@ -51,8 +51,7 @@ public class MovieDetailController {
 
 
 
-        String apiURL = "https://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key=f5eef3421c602c6cb7ea224104795888&movieCd=" + code;    // json 결과
-
+        String apiURL =  searchApiURL1+ code;    // json 결과
         Map<String, String> requestHeaders2 = new HashMap<>();//
         requestHeaders2.put("X-Naver-Client-Id", searchClientId);
         requestHeaders2.put("X-Naver-Client-Secret", searchClientSecret);
@@ -134,7 +133,12 @@ public class MovieDetailController {
             JSONObject obj = jArray3.getJSONObject(i);
             String image = obj.getString("image");
             image=image.replaceAll("\\\\","");
-            jsonlistimage.add(image);
+            String title = obj.getString("title");
+            title = title.replaceAll("\\<.*?>","");
+            title = title.replaceAll("&amp;","&");
+            if (title.equals(detail)){
+                jsonlistimage.add(image);
+            }
             System.out.println();
         }
 
@@ -143,8 +147,8 @@ public class MovieDetailController {
 
         //네이버 트렌드 데이터
 
+        String apiUrl = dataApiURL;
 
-        String apiUrl = "https://openapi.naver.com/v1/datalab/search";
 
         Map<String, String> requestHeaders = new HashMap<>();
         requestHeaders.put("X-Naver-Client-Id", dataclientId);
@@ -397,11 +401,13 @@ public class MovieDetailController {
             actor=actor.replaceAll("\\|",",");
             actor=actor.replaceAll("\\<.*?>","");
 
-            jsonlisttitle.add(title);
-            jsonlistimage.add(image);
-            jsonlistdi.add(director);
-            jsonlistac.add(actor);
-            System.out.println();
+            if (title.equals(detail)) {
+                jsonlisttitle.add(title);
+                jsonlistimage.add(image);
+                jsonlistdi.add(director);
+                jsonlistac.add(actor);
+                System.out.println();
+            }
         }
 
         String actorstr = String.join(",", jsonlistac.get(0));
@@ -419,8 +425,8 @@ public class MovieDetailController {
 
         //네이버 트렌드 데이터
 
+        String apiUrl = dataApiURL;
 
-        String apiUrl = "https://openapi.naver.com/v1/datalab/search";
 
         Map<String, String> requestHeaders2 = new HashMap<>();
         requestHeaders2.put("X-Naver-Client-Id", dataclientId);

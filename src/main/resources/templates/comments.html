@@ -23,50 +23,41 @@
   <div class="col-md-4">
     <div class="container">
       <div class="row header">
+        <span style="font-size:30px;" th:text="${Posts.title}"></span></br>
       </div>
       <div class="row body">
 
         <span style="font-size:30px;" id="mvtitle" name="mvtitle" th:text="${movie_title}"></span></br>
         <tr th:each="Posts: ${Posts}" th:if="${Posts != null}"></tr>
         <ul>
-          <li>
-            <label>작성자 :</label>
-            <tr th:text="${Posts.authorname}"></tr>
-            <br>
-          </li>
-          <li>
-            <label>영화 :</label>
-            <tr th:text="${Posts.mvtitle}"></tr>
-            <br>
-          </li>
-          <li>
-            <label>제목 :</label>
-            <tr th:text="${Posts.title}"></tr>
-            <br>
-          </li>
-          <li>
-            <label> 내용 </label>
-            <tr th:text="${Posts.content}"></tr>
-            <br>
-          </li>
+          <label>
+            작성자 :<tr  th:text="${Posts.authorname}"></tr><br>
+          </label>
+
+          <label >영화 :
+            <tr style="color: black" th:text="${Posts.mvtitle}"></tr>
+            <br></label>
+
+          <label> 내용 </label>
+          <li th:text="${Posts.content}"></li>
+          <br>
           <li>
             <div class="divider"></div>
           </li>
-          <li>
-            <label>
-              이미지 :<img id="image" th:src="${Posts.url}"><br>
-            </label>
-          </li>
-          <li>
-            <label>해시태그 :</label>
+          <label>이미지</label>
+
+          <img id="image" th:src="${Posts.url}"><br>
+
+
+          <label>해시태그
             <tr>
               <th:block th:each="Hashtags: ${Posts.getHashtags()}"
                         th:if="${Posts.getHashtags() != null}">
-                <p th:text="${Hashtags.content} "></p>
+                <p style="color: black" th:text="'#'+${Hashtags.content}"></p>
               </th:block>
             </tr>
+          </label>
 
-          </li>
         </ul>
         </tr>
         <div th:if="${writer==true}"> <!--본인일때 수정하기 버튼보이게-->

@@ -99,19 +99,18 @@
     </form>
 </div>
 <br><br>
-<div class="movies">
-        <div class="images">
-            <table>
-                <td class="hash_td" id="id" name="id" th:each="string,i: ${jsontitle}">
-                    <form th:action="@{/moviedetail/{detail} (detail=${jsontitle.get(i.index)})}" >
-                        <button type="submit" style="background-color:transparent; border:0; outline:0;" >
-                            <img class="jb-b" id="image" th:src="${jsonimage.get(i.index)}"/>
-                            <h4 class="jb-c" th:text="${jsontitle.get(i.index)}"/>
-                        </button>
-                    </form>
-                </td>
-            </table>
-        </div>
+<div class="movies" style="padding-left: 15%; padding-right: 15%;">
+    <table>
+        <td class="hash_td" id="id" name="id" th:each="string,i: ${jsontitle}">
+            <form th:action="@{/moviedetail/{detail} (detail=${jsontitle.get(i.index)})}">
+                <button type="submit" style="background-color:transparent; border:0; outline:0;">
+                    <img class="jb-b" id="image" th:src="${jsonimage.get(i.index)}"/>
+                    <h4 class="jb-c" th:text="${jsontitle.get(i.index)}"/>
+                </button>
+            </form>
+        </td>
+    </table>
+
     <br>
 </div>
 <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js"

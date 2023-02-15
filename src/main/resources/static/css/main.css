@@ -238,8 +238,9 @@ h2{
 }
 
 .movies .slide{
-    width:970px; height:230px;/**사진보다 크면 다음 사진까지 표시되어 img와 slide크기를 맞춘다.**/
-    overflow: hidden;/
+    width:960px; height:230px;/**사진보다 크면 다음 사진까지 표시되어 img와 slide크기를 맞춘다.**/
+    overflow: hidden;
+    margin: auto;
 }
 
 .movies .images {
@@ -268,7 +269,7 @@ h2{
 .movies .arrow2{
     box-sizing: border-box;
     position:relative;
-    bottom: 150px; left: 1000px;
+    bottom: 150px; left: 1050px;
     width: 30px; height: 30px;
     border-style: solid;
     border-color: grey;
@@ -290,7 +291,7 @@ h2{
 
 /**해시태그  **/
 
-.movies .hash_td {
+.hash_td {
     text-align: center;
     margin: 5px 10px 5px 10px;
     width: 230px;
@@ -298,7 +299,7 @@ h2{
     position: relative
 }
 
-.movies .hash_td:hover .jb-c {
+.hash_td:hover .jb-c {
     opacity: 1;
 
 }
@@ -308,7 +309,13 @@ h2{
 .movies .hash_tr{
     height:100px;
 }
-
+.jb-c {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    opacity: 0;
+    transition: opacity 0.5s linear;
+}
 /** 검색바 **/
 .search-container {
     width: 490px;

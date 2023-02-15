@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -55,8 +56,8 @@ public class SearchController {
         model.addAttribute("data", "search");
         return "index";
     }
-    @RequestMapping("/send")
-    public String send(String moviename,Model model){
+    @GetMapping("/send")
+    public String send(String moviename, Model model, HttpServletRequest request){
 
         if (moviename.isEmpty()) {
             model.addAttribute("msg", "검색어를 다시 입력해주세요.");
@@ -100,8 +101,10 @@ public class SearchController {
                     title = title.replaceAll("&amp;", "&");
                     String image = obj.getString("image");
 
-                    jsonlisttitle.add(title);
-                    jsonlistimage.add(image);
+                    if (title.equals(mvtitles.get(i))){
+                        jsonlisttitle.add(title);
+                        jsonlistimage.add(image);
+                    }
 
                 }
                 jsontitle.add(jsonlisttitle.get(0));
@@ -142,11 +145,20 @@ public class SearchController {
                 title = title.replaceAll("&amp;", "&");
                 String image = obj.getString("image");
 
-                jsonlisttitle.add(title);
-                jsonlistimage.add(image);
+                if (title.equals(moviename)){
+                    jsonlisttitle.add(title);
+                    jsonlistimage.add(image);
+                }
             }
-            model.addAttribute("title1", jsonlisttitle.get(0));
-            model.addAttribute("image1", jsonlistimage.get(0));
+            if (jsonlisttitle.isEmpty()){
+                request.setAttribute("msg","검색어를 다시 입력해주세요.");
+                request.setAttribute("url","/");
+                return "alert";
+            }
+            else {
+                model.addAttribute("title1", jsonlisttitle.get(0));
+                model.addAttribute("image1", jsonlistimage.get(0));
+            }
 
             return "search"; //
         }
