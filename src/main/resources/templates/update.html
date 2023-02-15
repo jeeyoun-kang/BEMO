@@ -1,4 +1,4 @@
- <!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
     <link rel="short icon" href="/img/bemo.ico"/>
@@ -9,70 +9,90 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <!-- 소스 다운 -->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="/css/review.css" rel="stylesheet">
     <script src="https://unpkg.com/@yaireo/tagify"></script>
-    <!-- 폴리필 (구버젼 브라우저 지원) -->
     <script src="https://unpkg.com/@yaireo/tagify/dist/tagify.polyfills.min.js"></script>
-    <link href="https://unpkg.com/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
+    <link href="https://unpkg.com/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css"/>
+
     <style>
-        *{font-family: 'Jua', sans-serif;}
-        .tagify--outside{
+        .tagify--outside {
             border: 0;
         }
 
-        .tagify--outside .tagify__input{
+        .tagify--outside .tagify__input {
             order: -1;
             flex: 100%;
             border: 1px solid;
             margin-bottom: 1em;
             transition: .1s;
         }
-        .tagify--outside.tagify--focus .tagify__input{
-            transition:0s;
+
+        .tagify--outside.tagify--focus .tagify__input {
+            transition: 0s;
         }
     </style>
     <style>
-        *{font-family: 'Jua', sans-serif;}
+        * {
+            font-family: 'Jua', sans-serif;
+        }
     </style>
     <title>BEMO</title>
 </head>
-
 <body>
-<table id="PostsTable">
-    <tr>
-        <th>작성자</th>
-        <th>영화</th>
-    </tr>
-    <!-- th: each를 이용하면 반복문을 이용할 수 있다. -->
-    <!-- th:each="student, studentStat: ${studentList}" 와 동일하며
-              status를 명시하지 않더라도 앞의 "오브젝트명stat" 를 이용하여 접근 가능하다. -->
-    <form  id="excelForm" enctype="multipart/form-data">
-        <p style="display: none" name="update_id" id="update_id" th:text="${id}"></p>
-        <tr th:each="Posts: ${Posts}">
-            <td th:text="${Posts.authorname}"></td>
-            <td th:text="${Posts.mvtitle}" name="mvtitle" id="mvtitle"></td>
-            <div class="form-group">
-                <label for="title">제목</label>
-                <input type="text" class="form-control" name="title" id="title" placeholder="제목을 입력하세요">
-            </div>
-            <div class="form-group">
-                <label for="content"> 내용 </label>
-                <textarea class="form-control" name="content" id="content" placeholder="내용을 입력하세요"></textarea>
-            </div>
-            <div class="form-group">
-                <label for="file"> 파일 </label>
-                <input type="file" name="file" id="file"> <br>
-            </div>
-            <div class="form-group">
-                <input id="hashtag" name="hashtag" class='tagify--outside'>
-            </div>
-        </form>
-    </tr>
-</table>
-<a href="/" role="button" class="btn btn-secondary">취소</a>
-<button type="button" class="btn btn-primary" id="btn-update">수정완료</button>
-<button type="button" class="btn btn-danger" id="btn-delete">삭제</button>
+<div class="col-md-12">
+    <div class="col-md-4">
+        <div class="container">
+            <form id="excelForm" enctype="multipart/form-data">
+                <tr th:each="Posts: ${Posts}">
+                    <div class="row header">
+                        <span style="font-size:30px;" id="mvtitle" name="mvtitle" th:text="${Posts.mvtitle}"></span></br>
+                    </div>
+                    <p style="display: none" name="update_id" id="update_id" th:text="${id}"></p>
+                    <div class="row body">
+                        <ul>
+                            <li>
+                                <div class="form-group">
+                                    <label> 작성자:<td th:text="${Posts.authorname}"></td></label>
+                                </div>
+                                <div class="form-group">
+                                    <label for="title">제목</label>
+                                    <input type="text" class="form-control" name="title" id="title" placeholder="제목을 입력하세요">
+                                </div>
+                            </li>
+                            <li>
+                                <div class="form-group">
+                                    <label for="content"> 내용 </label>
+                                    <textarea class="form-control" name="content" id="content"
+                                              placeholder="내용을 입력하세요"></textarea>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="divider"></div>
+                            </li>
+                            <li>
+                                <div class="form-group">
+                                    <label for="file"> 파일 </label>
+                                    <input type="file" name="file" id="file"> <br>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="form-group">
+                                    <input id="hashtag" name="hashtag" class='tagify--outside'>
+                                </div>
+                            </li>
+                            <li>
+                                <a href="/" role="button" class="btn btn-cancel">취소</a>
+                                <button type="button" class="btn btn-primary" id="btn-update">수정완료</button>
+                                <button type="button" class="btn btn-danger" id="btn-delete">삭제</button>
+                            </li>
+                        </ul>
+                    </div>
+            </form>
+        </div>
+    </div>
+</div>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script type="text/javascript" th:src="@{/js/review.js}"></script>
 </body>

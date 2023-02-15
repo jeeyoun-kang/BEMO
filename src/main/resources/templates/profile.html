@@ -1,38 +1,127 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>BEMO</title>
     <link rel="short icon" href="/img/bemo.ico"/>
-    <title>Profile</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <style>
-        *{font-family: 'Jua', sans-serif;}
-    </style>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="/css/template.css" rel="stylesheet"/>
+    <link href="/css/movie.css" rel="stylesheet" />
+    <script>
+        $(document).ready(function () {
+            var slider = $("#slider");
+            slider.owlCarousel({
+                items: 1,
+                slideSpeed: 2000,
+                nav: false,
+                autoplay: false,
+                dots: false,
+                loop: true,
+                responsiveRefreshRate: 200
+            }).on('changed.owl.carousel', syncPosition);
+
+            function syncPosition(el) {
+                var count = el.item.count - 1;
+                var current = Math.round(el.item.index - (el.item.count / 2) - .5);
+                if (current < 0) {
+                    current = count;
+                }
+                if (current > count) {
+                    current = 0;
+                }
+            }
+
+        });
+    </script>
+    <script th:inline="javascript">
+        $(document).ready(function () {
+            // typing animation
+            (function ($) {
+                $.fn.writeText = function (content) {
+                    var contentArray = content.split(""),
+                        current = 0,
+                        elem = this;
+                    setInterval(function () {
+                        if (current < contentArray.length) {
+                            elem.text(elem.text() + contentArray[current++]);
+                        }
+                    }, 80);
+                };
+            })(jQuery);
+
+
+
+            $("#holder").writeText("profile");
+
+            // initialize wow.js
+            new WOW().init();
+
+
+            $(document).ready(main);
+        });
+
+    </script>
 </head>
 <body>
-<h1>프로필</h1>
-<h2>유저 이름 : [[${nickname}]]</h2>
-<h2>전화번호 : [[${cellphone}]]</h2>
-<h2>생년월일 : [[${birthday}]]</h2>
-<h2>작성글 목록</h2>
-<table>
-    <tr>
-        <th>제목</th>
-        <th>내용</th>
-        <th>작성일자</th>
-        <th>수정일자</th>
-    </tr>
-    <tr th:each="Posts: ${Posts}">
-        <form th:action="@{/comments/{id} (id=${Posts.post_id})}" >
-            <td><button type="submit" th:text="${Posts.title}"></button></td>
-            <td th:text="${Posts.content}"></td>
-            <td th:text="${Posts.upload_date}"></td>
-            <td th:text="${Posts.update_date}"></td>
-            <img id="image" th:src="${Posts.url}">
-        </form>
-    </tr>
-</table>
+<div class="nav-header">
+    <div class="nav-brand">
+        <img src="/img/bemo.ico">
+    </div>
+    <i class="fa fa-bars fa-3x"></i>
+    <div class="header-links">
+        <ul>
+            <li data-menuanchor="secondPage">
+                <form action="/">
+                    <button type="submit">BEMO</button>
+                </form>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div id="fullpage">
+    <div class="section aboutme" data-anchor="aboutme">
+        <div class="opaque-bg animated fadeInDown">
+            <h1 style="color:white">BEMO</h1>
+            <p><span id="holder"></span><span class="blinking-cursor">|</span></p>
+        </div>
+        <i id="moveDown" class="fa fa-chevron-down fa-3x bounce"></i>
+    </div>
+</div>
+<br>
+<div class="profile_left" style="width: 50%;float: left;position:relative;left:20%;">
+    <h2>이름 : [[${nickname}]]</h2>
+    <h2>전화번호 : [[${cellphone}]]</h2>
+    <h2>생년월일 : [[${birthday}]]</h2>
+</div>
+<div class="profile_right" style="width: 50%;float: right; position:relative;right:20%;">
+
+    <div style="text-align: center;">
+        <h2>POST LIST</h2>
+        <table style="margin-left:auto;margin-right:auto;">
+            <td class="shadow2" id="id" name="id" th:each="Posts: ${Posts}">
+                <form th:action="@{/users/{id} (id=${Posts.post_id})}">
+                    <button type="submit"><img style="border-radius: 10%;" class="review_img" id="image"
+                                               th:src="${Posts.url}"></button>
+                    <button type="submit" style="width:200px; overflow: hidden;white-space: nowrap;text-overflow: ellipsis;"
+                            class="review_title" th:text="${Posts.title}"></button>
+                    <th:block style="width:200px; overflow: hidden;white-space: nowrap;text-overflow: ellipsis;"
+                              th:each="Hashtags: ${Posts.getHashtags()}" th:if="${Posts.getHashtags() != null}">
+                        <span th:text="'#'+ ${Hashtags.content} "></span>
+                    </th:block>
+                    <br>
+                    <div style="width:200px; overflow: hidden;white-space: nowrap;text-overflow: ellipsis;"
+                         th:text="${Posts.mvtitle}"></div>
+                    <span th:text="${Posts.authorname}"></span><br>
+                    <span th:text="${Posts.update_date}"></span>
+                </form>
+            </td>
+        </table>
+    </div>
+</div>
 </body>
 </html>
