@@ -46,16 +46,6 @@ public class SearchController {
         return "search";//
     }
 
-    @GetMapping("/test")
-    public String test(Model model){
-        model.addAttribute("data", "search");
-        return "test";
-    }
-    @GetMapping("/index")
-    public String index(Model model){
-        model.addAttribute("data", "search");
-        return "index";
-    }
     @GetMapping("/send")
     public String send(String moviename, Model model, HttpServletRequest request){
 
@@ -67,14 +57,12 @@ public class SearchController {
 
         if(moviename.contains("#")){
             moviename = moviename.substring(1, moviename.length());
-            System.out.println("해시태그"+moviename);
             List<String> mvtitles = postsService.findMvtitleByHashtag(moviename);
             model.addAttribute("hashtag", moviename);
             model.addAttribute("Movies", mvtitles);
             List<String> jsontitle= new ArrayList<>();
             List<String> jsonimage = new ArrayList<>();
             for(int i = 0; i < mvtitles.size(); i++) {
-                System.out.println("posts"+mvtitles.get(i));
 
                 String text = null;
                 text = URLEncoder.encode(mvtitles.get(i), StandardCharsets.UTF_8);
@@ -110,8 +98,7 @@ public class SearchController {
                 jsontitle.add(jsonlisttitle.get(0));
                 jsonimage.add(jsonlistimage.get(0));
             }
-            System.out.println(jsontitle);
-            System.out.println(jsonimage);
+
 
             model.addAttribute("jsontitle", jsontitle);
             model.addAttribute("jsonimage", jsonimage);
@@ -130,7 +117,6 @@ public class SearchController {
             String responseBody = get(apiURL, requestHeaders);
 
             model.addAttribute("jsonbody", responseBody);
-            System.out.println(responseBody);
 
             JSONObject jObject = new JSONObject(responseBody);
             JSONArray jArray = jObject.getJSONArray("items");
@@ -148,19 +134,25 @@ public class SearchController {
                 if (title.equals(moviename)){
                     jsonlisttitle.add(title);
                     jsonlistimage.add(image);
+
                 }
             }
             if (jsonlisttitle.isEmpty()){
-                request.setAttribute("msg","검색어를 다시 입력해주세요.");
-                request.setAttribute("url","/");
-                return "alert";
+                for (int i = 0; i < jArray.length(); i++) {
+                    JSONObject obj = jArray.getJSONObject(i);
+                    String title = obj.getString("title");
+                    title = title.replaceAll("\\<.*?>", "");
+                    title = title.replaceAll("&amp;", "&");
+                    String image = obj.getString("image");
+                    jsonlisttitle.add(title);
+                    jsonlistimage.add(image);
+                }
             }
-            else {
                 model.addAttribute("title1", jsonlisttitle.get(0));
                 model.addAttribute("image1", jsonlistimage.get(0));
-            }
 
-            return "search"; //
+
+            return "search";
         }
     }
 

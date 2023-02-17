@@ -95,17 +95,17 @@
 <br>
 <div class="profile_left" style="width: 50%;float: left;position:relative;left:20%;">
     <h2>이름 : [[${nickname}]]</h2>
-    <h2>전화번호 : [[${cellphone}]]</h2>
-    <h2>생년월일 : [[${birthday}]]</h2>
+    <h2 th:if="${cellphone != null}">전화번호 : [[${cellphone}]]</h2>
+    <h2 th:if="${birthday != null}">생년월일 : [[${birthday}]]</h2>
 </div>
-<div class="profile_right" style="width: 50%;float: right; position:relative;right:20%;">
+<div class="profile_right" style="width: 50%;float: right; position:relative;right:10%;">
 
     <div style="text-align: center;">
         <h2>POST LIST</h2>
         <table style="margin-left:auto;margin-right:auto;">
             <td class="shadow2" id="id" name="id" th:each="Posts: ${Posts}">
                 <form th:action="@{/users/{id} (id=${Posts.post_id})}">
-                    <button type="submit"><img style="border-radius: 10%;" class="review_img" id="image"
+                    <button type="submit"><img style="border-radius: 10%; width: 180px; height: 180px;" class="review_img" id="image"
                                                th:src="${Posts.url}"></button>
                     <button type="submit" style="width:200px; overflow: hidden;white-space: nowrap;text-overflow: ellipsis;"
                             class="review_title" th:text="${Posts.title}"></button>
@@ -113,7 +113,6 @@
                               th:each="Hashtags: ${Posts.getHashtags()}" th:if="${Posts.getHashtags() != null}">
                         <span th:text="'#'+ ${Hashtags.content} "></span>
                     </th:block>
-                    <br>
                     <div style="width:200px; overflow: hidden;white-space: nowrap;text-overflow: ellipsis;"
                          th:text="${Posts.mvtitle}"></div>
                     <span th:text="${Posts.authorname}"></span><br>

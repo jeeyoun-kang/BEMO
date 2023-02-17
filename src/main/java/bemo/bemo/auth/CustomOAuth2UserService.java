@@ -44,21 +44,30 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         String provider = userRequest.getClientRegistration().getRegistrationId();
         if(provider.equals("naver")){
             oAuth2UserInfo = new NaverUserInfo(oAuth2User.getAttributes());
+        } else if(provider.equals("kakao")){	//추가
+            oAuth2UserInfo = new KakaoUserInfo(oAuth2User.getAttributes());
+        } else if(provider.equals("google")){
+            oAuth2UserInfo = new GoogleUserInfo(oAuth2User.getAttributes());
         }
         String providerId = oAuth2UserInfo.getProviderId();
         String username = provider+"_"+providerId;
         String nickname = oAuth2UserInfo.getNickname();  			// 사용자가 입력한 적은 없지만 만들어준다
         String uuid = UUID.randomUUID().toString().substring(0, 6);
         String password = bCryptPasswordEncoder.encode("패스워드"+uuid);  // 사용자가 입력한 적은 없지만 만들어준다
+        String birthday = null;
+        if(provider.equals("google") == false) {
+            birthday = oAuth2UserInfo.getBirthday();
+        }
+        String cellphone = null;
+        if(provider.equals("naver")) {
+            cellphone = oAuth2UserInfo.getCellphone();
+            String birthyear = oAuth2UserInfo.getBirthYear();
 
-        String birthday = oAuth2UserInfo.getBirthday();
-        String cellphone = oAuth2UserInfo.getCellphone();
-        String birthyear = oAuth2UserInfo.getBirthYear();
+            birthday = birthyear+"-"+birthday;
+        }
 
-        birthday = birthyear+"-"+birthday;
         Authentication.Role role = Authentication.Role.ROLE_USER;
-        System.out.println("nickname="+nickname+" cellphone="+cellphone+" birthday="+birthday);
-        
+
         // 현재 정보 가져오기
         User byUsername = userRepository.findByUsername(username);
         Password pass = null;

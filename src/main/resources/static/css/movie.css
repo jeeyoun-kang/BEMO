@@ -10,6 +10,10 @@ html {
     left: 100px;
     top:100px;
 }
+.shadow2 .review_title:hover{
+    color:green;
+}
+
 .movie_chart{
     width: 50%;
     float:left;

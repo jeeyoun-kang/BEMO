@@ -20,7 +20,6 @@ class HelloSpringApplicationTests {
 			String[] beans = applicationContext.getBeanDefinitionNames();
 
 			for (String bean : beans) {
-				System.out.println("bean : " + bean);
 			}
 		}
 	}

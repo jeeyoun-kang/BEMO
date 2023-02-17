@@ -39,7 +39,6 @@ public class UserController {
 
     @RequestMapping(value = "/profile")
     public String profile(Model model, @RequestParam("userinfo") String username){
-        System.out.println("아이디="+username);
         PrincipalDetails principalDetails = principalDetailsService.loadPrincipalByUsername(username);
         if(principalDetails != null){
             model.addAttribute("nickname", principalDetails.getNickname());
