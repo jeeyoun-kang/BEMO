@@ -1,6 +1,6 @@
 var input =document.querySelector('input[name=hashtag]');
 var tagify = new Tagify(input, {
-    whitelist:  ["반전", "감동", "액션", "역사"],
+    whitelist:  ["반전", "감동", "액션", "역사","미스터리","로맨스","공포","판타지","코미디","스릴러"],
     maxTags: 2,
     userInput: false,
 
@@ -48,7 +48,6 @@ var main = {
         const form = $('#excelForm')[0];
         const formData = new FormData(form);
         const hashtagdata = $('input[name=hashtag]').val();
-        console.log(hashtagdata);
         let hashtagData = "empty";
         if(hashtagdata != ""){
             const test = JSON.parse(hashtagdata);

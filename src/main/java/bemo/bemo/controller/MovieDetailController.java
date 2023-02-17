@@ -108,7 +108,6 @@ public class MovieDetailController {
 
         String text = null;
         text = URLEncoder.encode(detail, StandardCharsets.UTF_8);
-        System.out.println(text);
         String image_apiURL = searchApiURL2 + text;    // json 결과
 
 
@@ -117,7 +116,6 @@ public class MovieDetailController {
         requestHeaders3.put("X-Naver-Client-Secret", searchClientSecret);
         String responseBody3 = get(image_apiURL,requestHeaders3);
         model.addAttribute("jsonbody",responseBody3);
-        System.out.println(responseBody3);
 
         // 가장 큰 JSONObject를 가져옵니다.
         JSONObject jObject4 = new JSONObject(responseBody3);
@@ -139,7 +137,6 @@ public class MovieDetailController {
             if (title.equals(detail)){
                 jsonlistimage.add(image);
             }
-            System.out.println();
         }
 
 
@@ -171,13 +168,11 @@ public class MovieDetailController {
                 "\"gender\":\"\"}";
 
         String responseBody2 = post(apiUrl, requestHeaders, requestBody);
-        System.out.println(responseBody2);
         JSONObject jObject2 = new JSONObject(responseBody2);
         JSONArray batter = jObject2.getJSONArray("results");
         JSONObject inner_json = batter.getJSONObject(0);
 
         JSONArray jObject3 = inner_json.getJSONArray("data");
-        System.out.println(jObject3);
 
         List<String> jsonperiod = new ArrayList<String>();
         List<String> jsonratio = new ArrayList<String>();
@@ -366,7 +361,6 @@ public class MovieDetailController {
 
         String text = null;
         text = URLEncoder.encode(detail, StandardCharsets.UTF_8);
-        System.out.println(text);
         String apiURL = searchApiURL2 + text;    // json 결과
 
 
@@ -375,7 +369,6 @@ public class MovieDetailController {
         requestHeaders.put("X-Naver-Client-Secret", searchClientSecret);
         String responseBody = get(apiURL,requestHeaders);
         model.addAttribute("jsonbody",responseBody);
-        System.out.println(responseBody);
 
         // 가장 큰 JSONObject를 가져옵니다.
         JSONObject jObject = new JSONObject(responseBody);
@@ -406,7 +399,6 @@ public class MovieDetailController {
                 jsonlistimage.add(image);
                 jsonlistdi.add(director);
                 jsonlistac.add(actor);
-                System.out.println();
             }
         }
 

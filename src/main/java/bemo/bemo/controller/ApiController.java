@@ -3,6 +3,8 @@ package bemo.bemo.controller;
 import bemo.bemo.auth.PrincipalDetails;
 import bemo.bemo.dto.PostsDto;
 import bemo.bemo.dto.RequestDto;
+import bemo.bemo.entity.Posts;
+import bemo.bemo.repository.PostsRepository;
 import bemo.bemo.service.PrincipalDetailsService;
 import bemo.bemo.service.S3Service;
 import com.nimbusds.jose.shaded.json.parser.ParseException;
@@ -45,6 +47,7 @@ public class ApiController {
 
     private final PostsService postsService;
 
+    private final PostsRepository postsRepository;
     private final PrincipalDetailsService principalDetailsService;
 
     @GetMapping("/users/{id}")
@@ -65,20 +68,16 @@ public class ApiController {
     public Long save(Model model,@RequestPart(value = "key") PostsDto requestDto, @RequestPart(value = "file") MultipartFile file) throws IOException, ParseException {
 
         if (file.isEmpty()) {
-            String imgPath = s3Service.getThumbnailPath("BEMO.png");
-            System.out.println(imgPath);
+            String imgPath = s3Service.getThumbnailPath("bemo.JPG");
             requestDto.setUrl(imgPath);
         }
         else {
-            System.out.println(file);
             String url = s3Service.uploadFile(file);
             requestDto.setUrl(url);
         }
         String text = null;
         String apiURL=null;
-        System.out.println(requestDto.getMvtitle());
         text = URLEncoder.encode(requestDto.getMvtitle(), StandardCharsets.UTF_8);
-        System.out.println(text);
 
         apiURL = searchapiURL2+ text;    // json 결과
 
@@ -88,7 +87,6 @@ public class ApiController {
         String responseBody = get(apiURL, requestHeaders);
 
         model.addAttribute("jsonbody", responseBody);
-        System.out.println(responseBody);
 
         // 가장 큰 JSONObject를 가져옵니다.
         JSONObject jObject = new JSONObject(responseBody);
@@ -104,9 +102,7 @@ public class ApiController {
             JSONObject obj = jArray.getJSONObject(j);
             String image = obj.getString("image");
             jsonlistimage.add(image);
-            System.out.println();
         }
-        System.out.println(jsonlistimage.get(0));
         requestDto.setMvurl(jsonlistimage.get(0));
 
         return postsService.save(requestDto);
@@ -115,15 +111,15 @@ public class ApiController {
     @PutMapping ("/users/{id}")
     public Long update(@RequestPart(value = "key") PostsDto requestDto, @RequestPart(value = "file") MultipartFile file,@PathVariable Long id) throws IOException {
         if (file.isEmpty()) {
-            String imgPath = s3Service.getThumbnailPath("BEMO.png");
+            String imgPath = s3Service.getThumbnailPath("bemo.JPG");
             requestDto.setUrl(imgPath);
         }
         else {
-            System.out.println(file);
             String url = s3Service.uploadFile(file);
             requestDto.setUrl(url);
         }
-        System.out.println(id);
+
+
         requestDto.setId(id);
         return postsService.update(id,requestDto);
     }
@@ -131,14 +127,14 @@ public class ApiController {
 
 
     @DeleteMapping("/users/{id}")
-    public Long delete(@PathVariable Long id) {
+    public Long delete(@PathVariable Long id) throws IOException {
+        s3Service.deleteFile(id);
         postsService.delete(id);
         return id;
     }
 
     @RequestMapping(value = "/join", method=RequestMethod.POST)
     public Long join(@RequestBody RequestDto request){
-        System.out.println(request.getUsername()+request.getNickname()+request.getPassword()+request.getCellphone()+request.getBirthday());
         return principalDetailsService.create(request);
     }
     private static String get(String apiUrl, Map<String, String> requestHeaders){

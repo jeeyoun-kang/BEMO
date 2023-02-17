@@ -33,7 +33,6 @@ public class PostsService {
     public Long save(PostsDto requestDto) {
         Posts posts;
         String hash = requestDto.getHashtag();
-        System.out.println("해시"+hash);
         if(hash.equals("empty")) {
             posts = postsRepository.save(requestDto.toEntityWithoutHashtag());
         }
@@ -75,12 +74,9 @@ public class PostsService {
         Posts posts = postsRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. id=" + id));
         String now = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        System.out.println(requestDto.getTitle());
         List<Hashtags> hashtagsList=hashtagsRepository.findByPosts(posts);
-        System.out.println(hashtagsList);
 
         String hash = requestDto.getHashtag();
-        System.out.println("해시"+hash);
 
         if(hash.equals("empty")) {
             posts.updateWithoutHashtags(requestDto.getTitle(), requestDto.getContent(), requestDto.getUrl(), now);
@@ -103,7 +99,6 @@ public class PostsService {
                     hashtags.add(hashtag);
                 }
             }
-            System.out.println(hashtags);
             requestDto.setHashtags(hashtags);
 
             posts.update(requestDto.getTitle(), requestDto.getContent(), requestDto.getUrl(), requestDto.getHashtags(), now);
@@ -155,8 +150,6 @@ public class PostsService {
                     contents.set(i + 1, tmpContent);
                 }
             }
-            System.out.println("contentCount : " + contentCount);
-            System.out.println("content : " + contents);
             return contents;
         } else return null;
     }

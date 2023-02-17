@@ -64,7 +64,7 @@ button{
     color: white;
     display: inline;
     float: right;
-    padding: 15px;
+    margin: 15px 30px 15px 0px;
     font-size: 16px;
 }
 
@@ -82,8 +82,6 @@ button{
 
 .header-links button ::after {
     display: block;
-    margin: 0 auto;
-    margin-top: 5px;
     width: 0;
     height: 2px;
     background-color: #ffffff;

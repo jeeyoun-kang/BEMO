@@ -341,7 +341,6 @@ public class MainController {
                 mainimage8.add(image);
             }
         }
-        //System.out.println(jsonlisttitle.get(1));
         model.addAttribute("boximage1",mainimage1.get(0));
         model.addAttribute("boximage2",mainimage2.get(0));
         model.addAttribute("boximage3",mainimage3.get(0));

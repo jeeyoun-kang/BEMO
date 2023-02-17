@@ -38,11 +38,18 @@ p{
     background-color: white;
 }
 @media (min-width: 769px) {
-
     .wrapper {
         max-width: 450px
     }
 }
+
+img {
+    width:3rem;
+    height:3rem;
+    margin:0.3rem;
+    padding:0;
+}
+
 .badge-wrap{
     display:flex;
     justify-content:center;
@@ -52,24 +59,18 @@ p{
     display:flex;
     align-items:center;
     justify-content:center;
-    width:2.5rem;
-    height:2.5rem;
-    margin:0.2rem;
+    width:3rem;
+    height:3rem;
+    margin:0.4rem;
     padding:0;
-    opacity:.7;
     border-radius:50%;
     transition:opacity .3s ease-in;
     font-size:1rem;
     color:#fff;
-    background-color:#ee9ca7;
     text-decoration:none;
     cursor:pointer
 }
 
-.badge-wrap a.badge:hover{
-    opacity:1;
-    color:#fff;
-}
 
 .btn{
     color:#fff !important;

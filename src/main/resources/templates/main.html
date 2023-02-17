@@ -24,10 +24,10 @@
     <i class="fa fa-bars fa-3x"></i>
     <div class="header-links">
         <ul>
-            <li data-menuanchor="fourthPage"><button sec:authorize="isAnonymous()" type="submit" onclick="location.href='./signup'">회원가입</button></li>
-            <li data-menuanchor="thirdPage"><button sec:authorize="isAnonymous()" id="show">로그인</button></li>
+            <li data-menuanchor="fourthPage" sec:authorize="isAnonymous()" ><button type="submit" onclick="location.href='./signup'">회원가입</button></li>
+            <li data-menuanchor="thirdPage" sec:authorize="isAnonymous()"><button id="show">로그인</button></li>
             <li data-menuanchor="secondPage"><button type="submit" onclick="location.href='./'">BEMO</button></li>
-            <li><button sec:authorize="isAuthenticated()" id="logoutBt" type="submit" onclick="location.href='./logout'">로그아웃</button></li>
+            <li sec:authorize="isAuthenticated()" ><button id="logoutBt" type="submit" onclick="location.href='./logout'">로그아웃</button></li>
             <li>
                 <form style="display: inline;" sec:authorize="isAuthenticated()" action="getUser()" th:action="@{profile}" method="post">
                     <input type="hidden" id="profile" th:name="userinfo" th:value="${userinfo}">
@@ -41,8 +41,6 @@
 
 
 <div id="fullpage">
-
-    <!-- begin section -->
 
     <div class="section aboutme" data-anchor="aboutme">
         <div class="opaque-bg animated fadeInDown">
@@ -80,11 +78,11 @@
                         </div>
                     </form>
                 </div>
+                <div class="textForFooter">SNS 계정으로 간편 로그인</div>
                 <div class="form-footer">
-                    <h2>간편 로그인</h2>
-                    <a id="naverIdLogin_loginButton" href="/oauth2/authorization/naver">
-                        <img src="https://static.nid.naver.com/oauth/big_g.PNG?version=js-2.0.1" height="50">
-                    </a>
+                    <a href="/oauth2/authorization/naver" class="btn"><img src="img/naverLogin.png"></a>
+                    <a href="/oauth2/authorization/kakao" class="btn"><img src="img/kakaoLogin.png"></a>
+                    <a href="/oauth2/authorization/google" class="btn"><img class="google" src="img/googleLogin.png"></a>
                 </div>
             </div>
         </div>

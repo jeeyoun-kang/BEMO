@@ -28,7 +28,8 @@ div, textarea, input {
 .row.header {
     padding: 1.5em 2.5em;
     border-bottom: 1px solid #ccc;
-    background: url(https://images2.imgbox.com/a5/2e/m3lRbCCA_o.jpg) left -80px;
+    /*background: url(https://images2.imgbox.com/a5/2e/m3lRbCCA_o.jpg) left -80px;*/
+    background: #71b7e6;
     color: #fff;
 }
 .row.body {
