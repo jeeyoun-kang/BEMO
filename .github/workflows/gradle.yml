@@ -23,6 +23,15 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - run: touch ./src/main/resources/application.properties
+    - run: echo "${{ secrets.APPLICATION }}" > ./src/main/resources/application.properties
+    - run: cat ./src/main/resources/application.properties
+    - run: touch ./src/main/resources/application.properties
+    - run: echo "${{ secrets.DBAPPLICATION }}" > ./src/main/resources/application-db.properties
+    - run: cat ./src/main/resources/application.properties
+    - run: touch ./src/main/resources/application.properties
+    - run: echo "${{ secrets.OAUTHAPPLICATION }}" > ./src/main/resources/application-oauth.properties
+    - run: cat ./src/main/resources/application.properties
     - name: Set up JDK 11
       uses: actions/setup-java@v3
       with:
