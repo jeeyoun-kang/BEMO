@@ -35,3 +35,9 @@ jobs:
       # with:
         # arguments: build
       run : ./gradlew clean build
+    - name: Docker build
+      run : |
+        docker login -u ${{ secrets.USERNAME }} -p ${{ secrets.PASSWORD }}
+        docker build -t spring-cicd .
+        docker tag spring-cicd bemobemo/spring-cicd:${GITHUB_SHA::7}
+        docker push bemobemo/spring-cicd:${GITHUB_SHA::7}
