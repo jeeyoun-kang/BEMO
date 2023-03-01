@@ -25,7 +25,7 @@ jobs:
     steps:
       # (1) 기본 체크아웃
       - name: Checkout
-      - uses: actions/checkout@v3
+        uses: actions/checkout@v3
       - run: touch ./src/main/resources/application.properties
       - run: echo "${{ secrets.APPLICATION }}" > ./src/main/resources/application.properties
       - run: cat ./src/main/resources/application.properties
