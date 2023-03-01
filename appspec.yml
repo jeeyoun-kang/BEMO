@@ -9,7 +9,7 @@ files:
 permissions:
   - object: /
     pattern: "**"
-    owner: ubuntu
+    owner: ec2-user
     group: ubuntu
 
 hooks:
