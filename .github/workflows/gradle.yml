@@ -31,7 +31,8 @@ jobs:
           distribution: 'temurin'
 
 
-
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
       ## build Docker and Push Docker Hub
       - name: build with Gradle
         run: ./gradlew --exclude-task test
