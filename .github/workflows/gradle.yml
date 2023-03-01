@@ -50,6 +50,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.HOST_USERNAME }}
           port: 22
+          script_stop: true
           script: |
             sudo docker pull bemobemo/spring-cicd:latest
             
