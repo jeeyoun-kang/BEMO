@@ -40,7 +40,7 @@ jobs:
         run: |
           docker login -u ${{ secrets.USERNAME }} -p ${{ secrets.PASSWORD }}
           docker build -t spring-cicd .
-          docker push spring-cicd:bemobemo
+          docker push bemobemo/spring-cicd:latest
       - name: Run scripts in server
         uses: appleboy/ssh-action@master
         with:
@@ -48,7 +48,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.HOST_USERNAME }}
           script: |
-            sudo docker pull spring-cicd:bemobemo
+            sudo docker pull bemobemo/spring-cicd:latest
             
             echo "실행 중인 도커 확인.."
             RUNNING_SERVER=$(sudo docker ps --format 'table{{.Names}}' | grep AA)
