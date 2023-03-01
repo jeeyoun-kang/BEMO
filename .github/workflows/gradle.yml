@@ -98,4 +98,6 @@ jobs:
             --deployment-config-name CodeDeployDefault.AllAtOnce \
             --application-name my-codedeploy-app \
             --deployment-group-name my-codedeploy-deployment-group \
+            --file-exists-behavior OVERWRITE \
             --s3-location bucket=$S3_BUCKET_NAME,bundleType=zip,key=bemo.zip \
+            --region ap-northeast-2
