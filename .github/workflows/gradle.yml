@@ -54,9 +54,7 @@ jobs:
           script: |
             sudo docker pull bemobemo/spring-cicd:latest
             
-            echo "실행 중인 도커 확인.."
             RUNNING_SERVER=$(sudo docker ps --format 'table{{.Names}}' | grep AA)
-            echo "1"
             if [ -z "${RUNNING_SERVER}"]
             then 
               echo "BB 가 실행중입니다. BB -> AA 서버 교체를 진행합니다.."
