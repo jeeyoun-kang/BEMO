@@ -47,6 +47,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           host: ${{ secrets.HOST }}
           username: ${{ secrets.HOST_USERNAME }}
+          port: 22
           script: |
             sudo docker pull bemobemo/spring-cicd:latest
             
