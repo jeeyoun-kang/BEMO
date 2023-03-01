@@ -96,6 +96,6 @@ jobs:
       run: |
         aws deploy create-deployment \
             --deployment-config-name CodeDeployDefault.AllAtOnce \
-            --application-name my-codedeploy-deployment-group \
+            --application-name my-codedeploy-app \
             --deployment-group-name my-codedeploy-deployment-group \
             --s3-location bucket=$S3_BUCKET_NAME,bundleType=zip,key=bemo.zip \
