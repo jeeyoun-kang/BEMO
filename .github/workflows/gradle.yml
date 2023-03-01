@@ -49,18 +49,18 @@ jobs:
       # with:
         # arguments: build
       run : ./gradlew clean build
-   
-    # 디렉토리 생성
-    - name: Make Directory
-      run: mkdir -p deploy
-
-    # Jar 파일 복사
-    - name: Copy Jar
-      run: cp ./build/libs/*.jar ./deploy
-
-    - name: Make zip file
-      run: zip -r ./bemo.zip ./deploy
-      shell: bash
+#
+#    # 디렉토리 생성
+#    - name: Make Directory
+#      run: mkdir -p deploy
+#
+#    # Jar 파일 복사
+#    - name: Copy Jar
+#      run: cp ./build/libs/*.jar ./deploy
+#
+#    - name: Make zip file
+#      run: zip -r ./bemo.zip ./deploy
+#      shell: bash
 
 #      # appspec.yml 파일 복사
 #    - name: Copy appspec.yml
