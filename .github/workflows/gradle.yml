@@ -48,7 +48,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.HOST_USERNAME }}
           script: |
-            sudo docker pull ${{ secrets.DOCKER_REPO }}:latest
+            sudo docker pull bemobemo/spring-cicd:latest
             
             echo "실행 중인 도커 확인.."
             RUNNING_SERVER=$(sudo docker ps --format 'table{{.Names}}' | grep AA)
