@@ -35,7 +35,7 @@ jobs:
         run: chmod +x gradlew
       ## build Docker and Push Docker Hub
       - name: build with Gradle
-        run: ./gradlew --exclude-task test
+        run: ./gradlew clean build
       - name: build Docker
         run: |
           docker login -u ${{ secrets.USERNAME }} -p ${{ secrets.PASSWORD }}
