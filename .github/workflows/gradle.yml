@@ -14,8 +14,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-
-      - name: checkout
       - uses: actions/checkout@v3
       - run: touch ./src/main/resources/application.properties
       - run: echo "${{ secrets.APPLICATION }}" > ./src/main/resources/application.properties
