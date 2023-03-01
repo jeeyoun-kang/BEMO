@@ -8,11 +8,11 @@ files:
 permissions:
   - object: /
     pattern: "**"
-    owner: linux
-    group: linux
+    owner: ubuntu
+    group: ubuntu
 
 hooks:
   ApplicationStart:
     - location: deploy.sh
       timeout: 60
-      runas: linux
+      runas: ubuntu
