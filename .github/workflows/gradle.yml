@@ -49,12 +49,7 @@ jobs:
       # with:
         # arguments: build
       run : ./gradlew clean build
-    - name: Docker build
-      run : |
-        docker login -u ${{ secrets.USERNAME }} -p ${{ secrets.PASSWORD }}
-        docker build -t spring-cicd .
-        docker tag spring-cicd bemobemo/spring-cicd:${GITHUB_SHA::7}
-        docker push bemobemo/spring-cicd:${GITHUB_SHA::7}
+   
     # 디렉토리 생성
     - name: Make Directory
       run: mkdir -p deploy
@@ -98,6 +93,5 @@ jobs:
             --deployment-config-name CodeDeployDefault.AllAtOnce \
             --application-name my-codedeploy-app \
             --deployment-group-name my-codedeploy-deployment-group \
-            --file-exists-behavior OVERWRITE \
             --s3-location bucket=$S3_BUCKET_NAME,bundleType=zip,key=bemo.zip \
             --region ap-northeast-2
