@@ -10,7 +10,7 @@ permissions:
   - object: /
     pattern: "**"
     owner: ec2-user
-    group: ubuntu
+    group: ec2-user adm wheel systemd-journal docker
 
 hooks:
   AfterInstall:
