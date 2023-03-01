@@ -107,7 +107,7 @@ jobs:
       run: |
         aws deploy create-deployment \
         --application-name bemo \
-        --deployment-group-name bemo-group \
+        --deployment-group-name bemo \
         --file-exists-behavior OVERWRITE \
         --s3-location bucket=bemo-deploy,bundleType=zip,key=bemo.zip \ 
         --region ap-northeast-2
