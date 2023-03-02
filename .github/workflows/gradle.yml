@@ -45,12 +45,12 @@ jobs:
           java-version: '11'
 
       # (3) Gradle build (Test 제외)
-      - name: Grant execute permisson for gradlew # gradlew 실행 권한 부여
+      - name: Grant execute permission for gradlew
         run: chmod +x gradlew
+
       - name: Build with Gradle
-        uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
-        with:
-          arguments: clean build -x test
+        run: ./gradlew clean build
+
 
       - name: Make zip file #1
         run: zip -qq -r ./$GITHUB_SHA.zip .
