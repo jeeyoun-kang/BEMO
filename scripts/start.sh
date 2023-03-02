@@ -18,15 +18,13 @@ echo "$TIME_NOW > cp $REPOSITORY/*.jar $REPOSITORY/"
 
 cp $REPOSITORY/build/libs/*.jar $JAR_FILE      # 새로운 jar file 계속 덮어쓰기
 
-#echo "$TIME_NOW > 새 어플리케이션 배포" >> $DEPLOY_LOG
-#JAR_NAME=$(ls -tr $REPOSITORY/*.jar | tail -n 1)
+echo "$TIME_NOW > $JAR_NAME 에 실행권한 추가" >> $DEPLOY_LOG
+chmod +x $JAR_NAME
 
 echo "$TIME_NOW > JAR Name: $JAR_FILE" >> $DEPLOY_LOG
 echo "$TIME_NOW > $JAR_FILE 실행" >> $DEPLOY_LOG
 
 IDLE_PROFILE=$(find_idle_profile)
 
-echo "$TIME_NOW > $JAR_NAME 를 profile=$IDLE_PROFILE 로 실행합니다." >> $DEPLOY_LOG
+echo "$TIME_NOW > $JAR_FILE 를 profile=$IDLE_PROFILE 로 실행합니다." >> $DEPLOY_LOG
 nohup java -jar -Dspring.profiles.active=$IDLE_PROFILE $JAR_FILE > $APP_LOG 2> $ERROR_LOG &
-
-# nohup java -jar -Dspring.profiles.active=$IDLE_PROFILE $JAR_NAME > $APP_LOG 2>&1 &
