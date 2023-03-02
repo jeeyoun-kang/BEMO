@@ -9,10 +9,10 @@ function find_idle_profile()
 
     if [ ${RESPONSE_CODE} -ge 400 ] # 400 보다 크면 (즉, 40x/50x 에러 모두 포함)
     then
-        echo "TIME_NOW> RESPONSE ERROR" >> $DEPLOY_LOG
+        echo "$TIME_NOW> RESPONSE ERROR" >> $DEPLOY_LOG
     else
         CURRENT_PROFILE=$(sudo curl -s http://54.180.221.45/)
-        echo "TIME_NOW> 현재 프로필 $CURRENT_PROFILE" >> $DEPLOY_LOG
+        echo "$TIME_NOW> 현재 프로필 $CURRENT_PROFILE" >> $DEPLOY_LOG
     fi
     
 
