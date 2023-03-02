@@ -4,28 +4,30 @@ ABSPATH=$(readlink -f $0)
 ABSDIR=$(dirname $ABSPATH)
 source ${ABSDIR}/profile.sh
 
+DEPLOY_LOG="$PROJECT_ROOT/deploy.log"
+
 IDLE_PORT=$(find_idle_port)
 REPOSITORY=/home/ec2-user/app
 
-echo "> Build 파일 복사"
+echo "> Build 파일 복사" >> $DEPLOY_LOG
 echo "> cp $REPOSITORY/*.jar $REPOSITORY/"
 
 cp $REPOSITORY/zip/*.jar $REPOSITORY      # 새로운 jar file 계속 덮어쓰기
 
-echo "> 새 어플리케이션 배포"
+echo "> 새 어플리케이션 배포" >> $DEPLOY_LOG
 JAR_NAME=$(ls -tr $REPOSITORY/*.jar | tail -n 1)
 
-echo "> JAR Name: $JAR_NAME"
+echo "> JAR Name: $JAR_NAME" >> $DEPLOY_LOG
 
-echo "> $JAR_NAME 에 실행권한 추가"
+echo "> $JAR_NAME 에 실행권한 추가" >> $DEPLOY_LOG
 
 chmod +x $JAR_NAME
 
-echo "> $JAR_NAME 실행"
+echo "> $JAR_NAME 실행" >> $DEPLOY_LOG
 
 IDLE_PROFILE=$(find_idle_profile)
 
-echo "> $JAR_NAME 를 profile=$IDLE_PROFILE 로 실행합니다."
+echo "> $JAR_NAME 를 profile=$IDLE_PROFILE 로 실행합니다." >> $DEPLOY_LOG
 
 cd $REPOSITORY
 
