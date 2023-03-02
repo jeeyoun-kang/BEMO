@@ -39,7 +39,7 @@ dependencies {
 	implementation 'com.github.downgoon:marvin:1.5.5'
 	implementation 'com.github.downgoon:MarvinPlugins:1.5.5'
 	compileOnly group: 'org.springframework', name: 'spring-test'
-
+	
 	//multipartfile 라이브러리
 	compileOnly "org.springframework:spring-mock:2.0.8"
 }
