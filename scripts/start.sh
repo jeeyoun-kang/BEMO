@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
+REPOSITORY=/home/ec2-user/app
 ABSPATH=$(readlink -f $0)
 ABSDIR=$(dirname $ABSPATH)
 source ${ABSDIR}/profile.sh
 
-DEPLOY_LOG="$PROJECT_ROOT/deploy.log"
+DEPLOY_LOG="$REPOSITORY/deploy.log"
 
 IDLE_PORT=$(find_idle_port)
-REPOSITORY=/home/ec2-user/app
 
 echo "> Build 파일 복사" >> $DEPLOY_LOG
 echo "> cp $REPOSITORY/*.jar $REPOSITORY/"
