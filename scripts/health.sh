@@ -17,10 +17,10 @@ sleep 10
 for RETRY_COUNT in {1..10}
 do
   RESPONSE=$(curl -s http://54.180.221.45:${IDLE_PORT})
-  UP_COUNT=$(echo ${RESPONSE} | grep 'real' | wc -l)
+  UP_COUNT=$(echo ${RESPONSE} | grep 'html' | wc -l)
 
   if [ ${UP_COUNT} -ge 1 ]
-  then # $up_count >= 1 ("real" 문자열이 있는지 검증)
+  then # $up_count >= 1 ("html" 문자열이 있는지 검증)
       echo "> Health check 성공" >> $DEPLOY_LOG
       switch_proxy
       break
