@@ -6,10 +6,10 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.io.BufferedReader;
@@ -39,11 +39,20 @@ public class MainController {
     @Value("${search.apiURL2}")
     private String searchApiURL2;
     @Autowired
-    PostsService postsService;
+    private PostsService postsService;
+    private final Environment env;
 
+    public MainController(Environment env) {
+        this.env = env;
+    }
 
     @RequestMapping(value="/")
     public String main(Model model, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+        List<String> profile = Arrays.asList(env.getActiveProfiles());
+        List<String> realProfile = Arrays.asList("real1", "real2");
+        String defaultProfile = profile.isEmpty() ? "default" : profile.get(0);
+        model.addAttribute("port",profile.stream().filter(realProfile::contains).findAny().orElse(defaultProfile));
+
         if (principalDetails != null) {
             model.addAttribute("userinfo", principalDetails.getUsername());
         }

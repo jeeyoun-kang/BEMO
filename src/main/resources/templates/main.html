@@ -16,6 +16,7 @@
 
 </head>
 <body>
+<th:block id="port" th:name="port" th:value="${port}"></th:block>
 
 <div class="nav-header">
     <div class="nav-brand">
@@ -209,6 +210,7 @@
         charSet="utf-8"></script>
 <script type="text/javascript" src="/js/main.js"></script>
 <script>
+
     let pages = 0;//현재 인덱스 번호
     let positionValue = 0;//images 위치값
     const IMAGE_WIDTH = 242;//한번 이동 시 IMAGE_WIDTH만큼 이동한다.
