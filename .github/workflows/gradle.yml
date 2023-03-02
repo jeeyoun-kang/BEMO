@@ -29,12 +29,15 @@ jobs:
       - run: touch ./src/main/resources/application.properties
       - run: echo "${{ secrets.APPLICATION }}" > ./src/main/resources/application.properties
       - run: cat ./src/main/resources/application.properties
-      - run: touch ./src/main/resources/application.properties
+      - run: touch ./src/main/resources/application-db.properties
       - run: echo "${{ secrets.DBAPPLICATION }}" > ./src/main/resources/application-db.properties
       - run: cat ./src/main/resources/application.properties
-      - run: touch ./src/main/resources/application.properties
+      - run: touch ./src/main/resources/applicatio-oauth.properties
       - run: echo "${{ secrets.OAUTHAPPLICATION }}" > ./src/main/resources/application-oauth.properties
-      - run: cat ./src/main/resources/application.properties
+      - run: touch ./src/main/resources/application-real1.properties
+      - run: echo "${{ secrets.APPLICATION_REAL1 }}" > ./src/main/resources/application-real1.properties
+      - run: touch ./src/main/resources/application-real2.properties
+      - run: echo "${{ secrets.APPLICATION_REAL2 }}" > ./src/main/resources/application-real2.properties
 
 
       # (2) JDK 11 세팅
