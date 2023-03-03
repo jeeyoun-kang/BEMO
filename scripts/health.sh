@@ -12,12 +12,12 @@ IDLE_PORT=$(find_idle_port)
 
 echo "$TIME_NOW> Health Check Start!" >> $DEPLOY_LOG
 echo "$TIME_NOW> IDLE_PORT: $IDLE_PORT" >> $DEPLOY_LOG
-echo "$TIME_NOW> curl -s http://54.180.221.45:$IDLE_PORT/" >> $DEPLOY_LOG
+echo "$TIME_NOW> curl -s http://43.201.158.62:$IDLE_PORT/" >> $DEPLOY_LOG
 sleep 10
 
 for RETRY_COUNT in {1..10}
 do
-  RESPONSE=$(curl -s http://54.180.221.45:${IDLE_PORT})
+  RESPONSE=$(curl -s http://43.201.158.62:${IDLE_PORT})
   UP_COUNT=$(echo ${RESPONSE} | grep 'html' | wc -l)
 
   if [ ${UP_COUNT} -ge 1 ]
