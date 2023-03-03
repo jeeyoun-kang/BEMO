@@ -79,7 +79,12 @@ jobs:
 
       # (5) 빌드 결과물을 S3 버킷에 업로드
       - name: Upload to S3 #3
-        run: aws s3 cp --region ap-northeast-2 s3://$S3_BUCKET_NAME/bemo.zip
+        run: |
+          aws deploy push \
+            --application-name ${{ env.CODE_DEPLOY_APPLICATION_NAME }} \
+            --ignore-hidden-files \
+            --s3-location s3://$S3_BUCKET_NAME/bemo.zip \
+            --source .
 
       # (6) S3 버킷에 있는 파일을 대상으로 CodeDeploy 실행
       - name: Deploy to AWS EC2 from S3
