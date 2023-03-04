@@ -21,7 +21,7 @@ hooks:
     - location: scripts/start.sh
       timeout: 300
       runas: root
-#  ValidateService:
-#    - location: scripts/health.sh
-#      timeout: 300
-#      runas: root
+  ValidateService:
+    - location: scripts/health.sh
+      timeout: 300
+      runas: root
