@@ -38,10 +38,11 @@ dependencies {
 	//이미지 리사이징
 	implementation 'com.github.downgoon:marvin:1.5.5'
 	implementation 'com.github.downgoon:MarvinPlugins:1.5.5'
-	compileOnly group: 'org.springframework', name: 'spring-test'
+
+	implementation group: 'org.springframework', name: 'spring-test'
+//Thanks for using https://jar-download.com
 	
-	//multipartfile 라이브러리
-	compileOnly "org.springframework:spring-mock:2.0.8"
+
 }
 
 tasks.named('test') {
