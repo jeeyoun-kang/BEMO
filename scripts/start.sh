@@ -7,8 +7,8 @@ ABSDIR=$(dirname $ABSPATH)
 source ${ABSDIR}/profile.sh
 TIME_NOW=$(date +%c)
 
-APP_LOG="$PROJECT_ROOT/application.log"
-ERROR_LOG="$PROJECT_ROOT/error.log"
+APP_LOG="$REPOSITORY/application.log"
+ERROR_LOG="$REPOSITORY/error.log"
 DEPLOY_LOG="$REPOSITORY/deploy.log"
 
 IDLE_PORT=$(find_idle_port)
