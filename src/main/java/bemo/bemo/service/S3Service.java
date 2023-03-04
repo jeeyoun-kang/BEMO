@@ -14,7 +14,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
-import org.springframework.mock.web.MockMultipartFile;
 import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
 import javax.imageio.ImageWriteParam;
@@ -42,7 +41,7 @@ public class S3Service {
         String fileFormatName = multipartFile.getContentType().substring(multipartFile.getContentType().lastIndexOf("/") + 1);
 
 
-        MultipartFile resizedFile = resizeImage(fileName,fileFormatName,multipartFile,250);
+        // resizedFile = resizeImage(fileName,fileFormatName,multipartFile,250);
         //파일 형식 구하기
         String ext = fileName.split("\\.")[1];
         String contentType = "";
@@ -67,7 +66,8 @@ public class S3Service {
             ObjectMetadata metadata = new ObjectMetadata();
             metadata.setContentType(contentType);
 
-            amazonS3.putObject(new PutObjectRequest(bucket, fileName, resizedFile.getInputStream(), metadata)
+            //amazonS3.putObject(new PutObjectRequest(bucket, fileName, resizedFile.getInputStream(), metadata)
+            amazonS3.putObject(new PutObjectRequest(bucket, fileName, multipartFile.getInputStream(), metadata)
                     .withCannedAcl(CannedAccessControlList.PublicRead));
         } catch (AmazonServiceException e) {
             e.printStackTrace();
@@ -100,35 +100,35 @@ public class S3Service {
 
     }
 
-    MultipartFile resizeImage(String fileName, String fileFormatName, MultipartFile originalImage, int targetWidth) {
-        try {
-            // MultipartFile -> BufferedImage Convert
-            BufferedImage image = ImageIO.read(originalImage.getInputStream());
-            // newWidth : newHeight = originWidth : originHeight
-            int originWidth = image.getWidth();
-            int originHeight = image.getHeight();
-
-            // origin 이미지가 resizing될 사이즈보다 작을 경우 resizing 작업 안 함
-            if(originWidth < targetWidth)
-                return originalImage;
-
-            MarvinImage imageMarvin = new MarvinImage(image);
-
-            Scale scale = new Scale();
-            scale.load();
-            scale.setAttribute("newWidth", targetWidth);
-            scale.setAttribute("newHeight", targetWidth * originHeight / originWidth);
-            scale.process(imageMarvin.clone(), imageMarvin, null, null, false);
-
-            BufferedImage imageNoAlpha = imageMarvin.getBufferedImageNoAlpha();
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ImageIO.write(imageNoAlpha, fileFormatName, baos);
-            baos.flush();
-
-            return new MockMultipartFile(fileName, baos.toByteArray());
-
-        } catch (IOException e) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "파일 리사이즈에 실패했습니다.");
-        }
-    }
+//    MultipartFile resizeImage(String fileName, String fileFormatName, MultipartFile originalImage, int targetWidth) {
+//        try {
+//            // MultipartFile -> BufferedImage Convert
+//            BufferedImage image = ImageIO.read(originalImage.getInputStream());
+//            // newWidth : newHeight = originWidth : originHeight
+//            int originWidth = image.getWidth();
+//            int originHeight = image.getHeight();
+//
+//            // origin 이미지가 resizing될 사이즈보다 작을 경우 resizing 작업 안 함
+//            if(originWidth < targetWidth)
+//                return originalImage;
+//
+//            MarvinImage imageMarvin = new MarvinImage(image);
+//
+//            Scale scale = new Scale();
+//            scale.load();
+//            scale.setAttribute("newWidth", targetWidth);
+//            scale.setAttribute("newHeight", targetWidth * originHeight / originWidth);
+//            scale.process(imageMarvin.clone(), imageMarvin, null, null, false);
+//
+//            BufferedImage imageNoAlpha = imageMarvin.getBufferedImageNoAlpha();
+//            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//            ImageIO.write(imageNoAlpha, fileFormatName, baos);
+//            baos.flush();
+//
+//            return MultipartFile(fileName, baos.toByteArray());
+//
+//        } catch (IOException e) {
+//            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "파일 리사이즈에 실패했습니다.");
+//        }
+//    }
 }
