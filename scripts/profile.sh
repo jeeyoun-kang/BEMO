@@ -12,7 +12,7 @@ function find_idle_profile()
         echo "$TIME_NOW> RESPONSE ERROR" >> $DEPLOY_LOG
         break
     else
-        CURRENT_PROFILE=$(sudo curl -s http://54.180.221.45/)
+        CURRENT_PROFILE=$(sudo curl -s http://43.201.158.62/)
         CHECK_USER=$(echo ${CURRENT_PROFILE} | grep 'real1' | wc -l)
         echo "$TIME_NOW> 현재 프로필 $CURRENT_PROFILE" >> $DEPLOY_LOG
     fi
