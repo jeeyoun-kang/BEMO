@@ -19,10 +19,10 @@
 <div class="nav-header">
     <div class="nav-brand">
         <img src="/img/bemo.ico">
-        <a style="visibility: hidden">[[port]]</a>
+        <a style="visibility: hidden" th:text="port"></a>
         <script>
+            let allPort = [[${allPort}]];
             let port = [[${port}]];
-            console.log(port);
         </script>
     </div>
     <i class="fa fa-bars fa-3x"></i>

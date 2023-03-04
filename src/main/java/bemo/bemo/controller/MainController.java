@@ -51,9 +51,8 @@ public class MainController {
         List<String> profile = Arrays.asList(env.getActiveProfiles());
         List<String> realProfile = Arrays.asList("real1", "real2");
         String defaultProfile = profile.isEmpty() ? "default" : profile.get(0);
-        System.out.println("profile "+profile);
-//        model.addAttribute("port",profile.stream().filter(realProfile::contains).findAny().orElse(defaultProfile));
-        model.addAttribute("port",profile);
+        model.addAttribute("port",profile.stream().filter(realProfile::contains).findAny().orElse(defaultProfile));
+        model.addAttribute("allPort",profile);
 
         if (principalDetails != null) {
             model.addAttribute("userinfo", principalDetails.getUsername());
