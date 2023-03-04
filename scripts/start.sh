@@ -18,7 +18,7 @@ echo "$TIME_NOW > cp $REPOSITORY/*.jar $REPOSITORY/"
 
 cp $REPOSITORY/build/libs/*.jar $JAR_FILE      # 새로운 jar file 계속 덮어쓰기
 
-echo "$TIME_NOW > $JAR_NAME 에 실행권한 추가" >> $DEPLOY_LOG
+echo "$TIME_NOW > $JAR_FILE 에 실행권한 추가" >> $DEPLOY_LOG
 chmod +x $JAR_NAME
 
 echo "$TIME_NOW > JAR Name: $JAR_FILE" >> $DEPLOY_LOG
