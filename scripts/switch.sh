@@ -14,6 +14,6 @@ function switch_proxy() {
     echo "$TIME_NOW> Port 전환" >> $DEPLOY_LOG
     echo "set \$service_url http://43.201.158.62:${IDLE_PORT};" | sudo tee /etc/nginx/conf.d/service-url.inc
 
-    sudo docker exec -d nginx nginx -s reload
-    echo "> docker exec -it nginx nginx -s reload" >> $DEPLOY_LOG
+    sudo service nginx reload
+    echo "> service nginx reload" >> $DEPLOY_LOG
 }
