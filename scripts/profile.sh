@@ -24,6 +24,7 @@ function find_idle_profile()
       IDLE_PROFILE=real1
     fi
 
+    echo "$TIME_NOW> 비어있는 프로필 $IDLE_PROFILE" >> $DEPLOY_LOG
     echo "${IDLE_PROFILE}"
 }
 # 쉬고 있는 profile의 port 찾기
