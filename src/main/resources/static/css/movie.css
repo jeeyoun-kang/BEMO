@@ -1,15 +1,11 @@
 
-html {
-    height: 100vh;
+html,
+body{
+    height: 100%;
+    width:100%;
+    overflow-x:hidden;
 }
 
-.movie_image{
-    position:relative;
-    width: 50%;
-    float: left;
-    left: 100px;
-    top:100px;
-}
 .shadow2 .review_title:hover{
     color:green;
 }
@@ -71,8 +67,22 @@ html {
     /* move the element down by 5px (it will stay in place because it's attached to the element that also moves up 5px) */
 }
 
+/*@media all and (max-width: 760px) {*/
+/*}*/
+
+/*@media all and (min-width: 1024px) {*/
+/*}*/
+
+.movie_image{
+    position:relative;
+    width: 50%;
+    float: left;
+    left: 10%;
+    top:100px;
+}
+
 .review_btn {
-    left: 330px;
+    left: 40%;
     padding: 20px 40px;
     background: none;
     border: none;

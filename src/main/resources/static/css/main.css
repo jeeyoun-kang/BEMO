@@ -1,7 +1,10 @@
 
 *{font-family: 'Jua', sans-serif;}
-html{
-    height: 100vh;
+html,
+body{
+    height: 100%;
+    width:100%;
+    overflow-x:hidden;
 }
 h2{
     text-align: center;
@@ -31,8 +34,8 @@ h2{
 
 .window {
     position: relative;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
 }
 
 .popup {
@@ -186,10 +189,6 @@ h2{
 .movies .review_title:hover{
     color:green;
 }
-.movies{
-    padding-left: 20%;
-    padding-right: 20%;
-}
 
 
 
@@ -243,47 +242,136 @@ h2{
     float:left;
 }
 
-.movies .slide{
-    width:960px; height:230px;/**사진보다 크면 다음 사진까지 표시되어 img와 slide크기를 맞춘다.**/
-    overflow: hidden;
-    margin: auto;
+
+@media all and (max-width: 760px) {
+    .movies{
+        padding-right: 1%;
+        padding-left: 1%;
+        margin: 0 auto;
+
+    }
+
+    .movies .slide {
+
+        width: 500px;
+        height: 230px; /**사진보다 크면 다음 사진까지 표시되어 img와 slide크기를 맞춘다.**/
+        overflow: hidden;
+        margin: auto;
+    }
+
+    .movies .images {
+
+        display: flex; /**좌우 슬라이드를 위해 flex로 사진을 가로정렬한다.**/
+        height: 230px; /**slide와 images의 높이가 다르면 부자연스럽게 표시돼 slide의 높이에 맞게 높이를 바꾼다.**/
+        transition: transform 0.5s;
+        /**어떤 속성에 대해 애니메이션 효과를 주는 속성이다.
+        tranform속성에 0.5초의 듀레이션(동작의 시작해서 끝나는 시간)을 준다.**/
+
+    }
 }
 
-.movies .images {
 
-    display: flex; /**좌우 슬라이드를 위해 flex로 사진을 가로정렬한다.**/
-    height:230px; /**slide와 images의 높이가 다르면 부자연스럽게 표시돼 slide의 높이에 맞게 높이를 바꾼다.**/
-    transition: transform 0.5s;
-    /**어떤 속성에 대해 애니메이션 효과를 주는 속성이다.
-    tranform속성에 0.5초의 듀레이션(동작의 시작해서 끝나는 시간)을 준다.**/
+@media all and (min-width: 1024px) {
+    .movies .slide{
+        text-align: center;
+        margin: 0 auto;
+        width:960px; height:230px;/**사진보다 크면 다음 사진까지 표시되어 img와 slide크기를 맞춘다.**/
+        overflow: hidden;
+    }
+
+    .movies .images {
+        display: flex; /**좌우 슬라이드를 위해 flex로 사진을 가로정렬한다.**/
+        height:230px; /**slide와 images의 높이가 다르면 부자연스럽게 표시돼 slide의 높이에 맞게 높이를 바꾼다.**/
+        transition: transform 0.5s;
+        /**어떤 속성에 대해 애니메이션 효과를 주는 속성이다.
+        tranform속성에 0.5초의 듀레이션(동작의 시작해서 끝나는 시간)을 준다.**/
+
+    }
+
+    .movies .arrow1{
+        box-sizing: border-box;
+        position:relative;
+        bottom: -10px;
+        left:45%;
+        /*right:-450px;*/
+        width: 30px; height: 30px;
+        border-style: solid;
+        border-color: grey;
+        border-width: 0px 1px 1px 0px;
+        transform: rotate(135deg);
+        transition: border-width 150ms ease-in-out;
+
+
+    }
+    .movies .arrow2{
+        box-sizing: border-box;
+        position:relative;
+        bottom: 20px;
+        left:55%;
+        /*left: 600px;*/
+
+        width: 30px; height: 30px;
+        border-style: solid;
+        border-color: grey;
+        border-width: 0px 1px 1px 0px;
+        transform: rotate(-45deg);
+        transition: border-width 150ms ease-in-out;
+
+    }
 
 }
+@media all and (min-width: 1440px) {
+    .movies .slide{
+        text-align: center;
+        width:960px; height:230px;/**사진보다 크면 다음 사진까지 표시되어 img와 slide크기를 맞춘다.**/
+        overflow: hidden;
+        margin: 0 auto;
+    }
 
-.movies .arrow1{
-    box-sizing: border-box;
-    position:relative;
-    bottom: 120px; right: 50px;
-    width: 30px; height: 30px;
-    border-style: solid;
-    border-color: grey;
-    border-width: 0px 1px 1px 0px;
-    transform: rotate(135deg);
-    transition: border-width 150ms ease-in-out;
+    .movies .images {
+        display: flex; /**좌우 슬라이드를 위해 flex로 사진을 가로정렬한다.**/
+        height:230px; /**slide와 images의 높이가 다르면 부자연스럽게 표시돼 slide의 높이에 맞게 높이를 바꾼다.**/
+        transition: transform 0.5s;
+        /**어떤 속성에 대해 애니메이션 효과를 주는 속성이다.
+        tranform속성에 0.5초의 듀레이션(동작의 시작해서 끝나는 시간)을 준다.**/
+
+    }
+    .movies{
+        padding-left: 5%;
+        padding-right: 5%;
+        margin: 0 auto;
+    }
+
+    .movies .arrow1{
+        box-sizing: border-box;
+        position:relative;
+        bottom: 120px;
+        left:10%;
+        width: 30px; height: 30px;
+        border-style: solid;
+        border-color: grey;
+        border-width: 0px 1px 1px 0px;
+        transform: rotate(135deg);
+        transition: border-width 150ms ease-in-out;
 
 
+    }
+    .movies .arrow2{
+        box-sizing: border-box;
+        position:relative;
+        bottom: 150px;
+        left:90%;
+        width: 30px; height: 30px;
+        border-style: solid;
+        border-color: grey;
+        border-width: 0px 1px 1px 0px;
+        transform: rotate(-45deg);
+        transition: border-width 150ms ease-in-out;
+
+    }
 }
-.movies .arrow2{
-    box-sizing: border-box;
-    position:relative;
-    bottom: 150px; left: 1050px;
-    width: 30px; height: 30px;
-    border-style: solid;
-    border-color: grey;
-    border-width: 0px 1px 1px 0px;
-    transform: rotate(-45deg);
-    transition: border-width 150ms ease-in-out;
 
-}
+
 .movies .arrow1:hover{
     border-bottom-width: 4px;
     border-right-width: 4px;
