@@ -238,9 +238,8 @@
 
 <h2>CI/CD</h2>
 
-master 브랜치에 push가 발생하면 , Github actions가 실행되고 생성한 스크립트 설정 파일에 따라 프로젝트 파일을 압축해 빌드 후 빌드 결과물을 S3에 업로드를 합니다.
-
- S3 버킷에 있는 파일을 대상으로 CodeDeploy에게 배포를 요청하고 CodeDeploy는 S3로부터 zip파일을 받아 EC2에 배포를 진행합니다.
+- master 브랜치에 push가 발생하면 , Github actions가 실행되고 생성한 스크립트 설정 파일에 따라 프로젝트 파일을 압축해 빌드 후 빌드 결과물을 S3에 업로드를 합니다.
+-  S3 버킷에 있는 파일을 대상으로 CodeDeploy에게 배포를 요청하고 CodeDeploy는 S3로부터 zip파일을 받아 EC2에 배포를 진행합니다
 
 ### 무중단 배포
 
