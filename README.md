@@ -1,17 +1,17 @@
-<br>
-
-
-# BEMO, 영화 추천 및 리뷰 웹서비스
-
-<br>
 
 
 
-## [BEMO 접속하기](http://behindmovie.site)
+#  <img width="40" alt="bemo_icon" src="https://user-images.githubusercontent.com/59076085/227764662-3c13074b-23be-41f3-bc68-cbbc2c13c4c4.png"> BEMO, 영화 추천 및 리뷰 웹서비스 <img width="40" alt="bemo_icon" src="https://user-images.githubusercontent.com/59076085/227764662-3c13074b-23be-41f3-bc68-cbbc2c13c4c4.png">
 
 <br>
 
-# 목차 
+
+
+# 🚀 [BEMO 접속하기](http://behindmovie.site)
+
+<br>
+
+## 📃목차 
 
  - [Project Members](#project-members) 
  - [소개](#소개) 
@@ -35,7 +35,7 @@
  - [Trouble Shooting](#trouble-shooting)
  - [UI reference license](#ui-reference-license)
 
-## Project Members
+## 🌻Project Members
 
 <table>
    <tr>
@@ -49,6 +49,7 @@
     <td align="center"><b>Web Developer</b></td>
     <td align="center"><b>Web Developer</b></td>
 </table>
+
 
 ## 소개
 
@@ -266,7 +267,7 @@ Nginx와 스크립트를 통해 배포 진행 시 연결하는 포트를 다르�
   - SecurityFilterChain과 WebSecurityCustomizer 를 빈으로 등록해 구현하였습니다.
 - DB를 설계하는 과정에서 여러 개로 분산된 데이터베이스에 원하는 데이터를 저장 및 추출하는 과정에서 문제가 발생하였습니다.
   -  [회원 가입 및 로그인을 위한 테이블 설계](https://rastalion.me/%ED%9A%8C%EC%9B%90-%EA%B0%80%EC%9E%85-%EB%B0%8F-%EB%A1%9C%EA%B7%B8%EC%9D%B8%EC%9D%84-%EC%9C%84%ED%95%9C-%ED%85%8C%EC%9D%B4%EB%B8%94-%EC%84%A4%EA%B3%84/)를 보고 정규화의 필요성에 대해 알게되고 정규화된 DB를 구축해 문제를 해결하였습니다.
-  -   테이블당 Repository를 각각 만들어준 후에 Dto를 통하여 입력된 유저 데이터를 Service에 넘겨주고, Service에서 Dto에 담긴 데이터를 토대로 new Entity하여 Repository에 save하도록 구현하였습니다.
+  -  테이블당 Repository를 각각 만들어준 후에 Dto를 통하여 입력된 유저 데이터를 Service에 넘겨주고, Service에서 Dto에 담긴 데이터를 토대로 new Entity하여 Repository에 save하도록 구현하였습니다.
 
 ---
 
@@ -281,4 +282,3 @@ Copyright (c) 2023 by Ian Lunn (https://codepen.io/IanLunn/pen/AxBReL)
 Copyright (c) 2023 by Peter Wiebe (https://codepen.io/pjwiebe/pen/VmmxpM)
 
 Copyright (c) 2023 by Austin (https://codepen.io/AustinAuth/pen/xxmbZX)
-
