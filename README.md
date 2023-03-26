@@ -13,27 +13,27 @@
 
 # 목차 
 
- - [Project Members](#Project Members) 
+ - [Project Members](#project-members) 
  - [소개](#소개) 
  - [개발 환경](#개발-환경)
  - [사용 기술](#사용-기술)
  - [시스템 아키텍처](#시스템-아키텍처) 
  - [E-R 다이어그램](#e-r-다이어그램)
- - [API 명세서](#API-명세서)
+ - [API 명세서](#api-명세서)
  - [프로젝트 목적](#프로젝트-목적)
  - [화면 구성](#화면-구성)
  - [핵심 기능](#핵심-기능)
-   - [로그인 / 회원가입](#로그인-/-회원가입)
+   - [로그인/회원가입](#로그인회원가입)
    - [프로필](#프로필)
    - [게시글 CRUD](#게시글-crud)
-   - [영화 / 해시태그 검색](#영화-/-해시태그 검색)
+   - [영화/해시태그 검색](#영화해시태그-검색)
    - [영화 상세 페이지](#영화-상세-페이지)
    - [영화 메인 페이지](#영화-메인-페이지)
  - [CI/CD](#cicd)
    - [무중단 배포](#무중단-배포)
  - [도메인 적용](#도메인-적용)
- - [Trouble Shooting](#Trouble Shooting)
- - [UI reference license](#UI reference license)
+ - [Trouble Shooting](#trouble-shooting)
+ - [UI reference license](#ui-reference-license)
 
 ## Project Members
 
@@ -154,7 +154,7 @@
 
 ## 핵심 기능
 
-### 로그인 / 회원가입
+### 로그인/회원가입
 
 - 회원가입 시에 입력된 정보를 DB에 저장하도록 구현하였습니다.
 - Spring Security (SecurityFilterChain, WebSecurityCustomizer) 를 이용하여 사용자 인증, 접근, 세션 관리를 구현하였습니다.
@@ -197,7 +197,7 @@
 - 자신이 작성한 게시글만 삭제가 가능하도록 Spring Security를 이용해 구현하였습니다.
 
 
-### 영화 / 해시태그 검색
+### 영화/해시태그 검색
 
 - Naver open api 를 이용해 해당 영화의 이미지와 이름의 데이터를 파싱해 구현하였습니다.
   - [영화 검색](https://github.com/jeeyoun-kang/BEMO/blob/6e77b51efc5920c632cc30ea93a024282234143c/src/main/java/bemo/bemo/controller/SearchController.java#L107)
