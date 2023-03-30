@@ -1,6 +1,3 @@
-
-
-
 #  <img width="40" alt="bemo_icon" src="https://user-images.githubusercontent.com/59076085/227764662-3c13074b-23be-41f3-bc68-cbbc2c13c4c4.png"> BEMO, 영화 추천 및 리뷰 웹서비스 <img width="40" alt="bemo_icon" src="https://user-images.githubusercontent.com/59076085/227764662-3c13074b-23be-41f3-bc68-cbbc2c13c4c4.png">
 
 <br>
@@ -8,6 +5,8 @@
 
 
 # 🚀 [BEMO 접속하기](http://behindmovie.site)
+
+**유지비용으로 인해 사이트를 임시 폐쇄합니다.**
 
 <br>
 
@@ -49,6 +48,7 @@
     <td align="center"><b>Web Developer</b></td>
     <td align="center"><b>Web Developer</b></td>
 </table>
+
 
 
 ## 소개
@@ -239,7 +239,7 @@
 <h2>CI/CD</h2>
 
 - master 브랜치에 push가 발생하면 , Github actions가 실행되고 생성한 스크립트 설정 파일에 따라 프로젝트 파일을 압축해 빌드 후 빌드 결과물을 S3에 업로드를 합니다.
--  S3 버킷에 있는 파일을 대상으로 CodeDeploy에게 배포를 요청하고 CodeDeploy는 S3로부터 zip파일을 받아 EC2에 배포를 진행합니다
+- S3 버킷에 있는 파일을 대상으로 CodeDeploy에게 배포를 요청하고 CodeDeploy는 S3로부터 zip파일을 받아 EC2에 배포를 진행합니다
 
 ### 무중단 배포
 
