@@ -273,8 +273,10 @@ h2{
 
 @media all and (min-width: 1024px) {
     .movies .slide{
-        text-align: center;
         margin: 0 auto;
+
+        text-align: center;
+
         width:960px; height:230px;/**사진보다 크면 다음 사진까지 표시되어 img와 slide크기를 맞춘다.**/
         overflow: hidden;
     }
@@ -322,10 +324,11 @@ h2{
 }
 @media all and (min-width: 1440px) {
     .movies .slide{
+        margin: 0 auto;
         text-align: center;
         width:960px; height:230px;/**사진보다 크면 다음 사진까지 표시되어 img와 slide크기를 맞춘다.**/
         overflow: hidden;
-        margin: 0 auto;
+
     }
 
     .movies .images {
