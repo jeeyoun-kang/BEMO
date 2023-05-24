@@ -257,7 +257,7 @@ Nginx와 스크립트를 통해 배포 진행 시 연결하는 포트를 다르�
 ## Trouble Shooting
 
 - 게시글을 업로드할 때 Ajax를 이용해 File을 다른 데이터들을 함께 JSON형식으로 컨트롤러로 전송되지 않는 문제가 발생했습니다.
-  - [FormData를 이용해 File과 다른 데이터들을 key로 구분시킨 뒤 append를 시켜 multipart/form-data의 형식으로 전송해 문제를 해결하였습니다.](https://github.com/jeeyoun-kang/BEMO/blob/6e77b51efc5920c632cc30ea93a024282234143c/src/main/resources/static/js/review.js#L77)
+  - [Blob을 이용해 file은 multipart/form-data, 그 외의 데이터는 application/json 형식으로 따로 전송해 문제를 해결하였습니다.](https://github.com/jeeyoun-kang/BEMO/blob/6e77b51efc5920c632cc30ea93a024282234143c/src/main/resources/static/js/review.js#L79)
 - 게시글의 파일을 업로드하는 과정에서 원본 이미지를 AWS S3에 그대로 업로드 할 경우 이미지 호출 시 화면에 보여지는 이미지 크기 대비 큰 이미지를 호출해 트래픽이 발생했습니다.
   - [Marvin 라이브러리를 이용해 이미지를 리사이징한 뒤  S3에 업로드하는 형식으로 해결하였습니다.](https://github.com/jeeyoun-kang/BEMO/blob/6e77b51efc5920c632cc30ea93a024282234143c/src/main/java/bemo/bemo/service/S3Service.java#L45)
 - 해시태그를 검색할 때 해당 해시태그가 태그된 영화를 띄우게 구현했지만 같은 영화가 중복되게 화면에 띄워지는 문제가 발생하였습니다.
