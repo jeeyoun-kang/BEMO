@@ -121,7 +121,7 @@
 
 ## 시스템 아키텍처
 
-![architecture drawio](https://user-images.githubusercontent.com/59076085/223635932-e928fe62-0250-4983-b775-a3497bcbd774.png)
+![bemo_architecture](https://github.com/jeeyoun-kang/BEMO/assets/59076085/b48c6086-d523-49d2-ae74-4b06caf687cc)
 
 
 
