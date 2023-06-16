@@ -18,7 +18,6 @@
  - [사용 기술](#사용-기술)
  - [시스템 아키텍처](#시스템-아키텍처) 
  - [E-R 다이어그램](#e-r-다이어그램)
- - [API 명세서](#api-명세서)
  - [프로젝트 목적](#프로젝트-목적)
  - [화면 구성](#화면-구성)
  - [핵심 기능](#핵심-기능)
@@ -128,11 +127,6 @@
 ## E-R 다이어그램
 
 ![bemo_er](https://user-images.githubusercontent.com/59076085/227763346-93bf3e10-2c66-44f4-b01e-1149311cc23a.png)
-
-
-## API 명세서
-
-### [Api 명세서 보기](https://app.swaggerhub.com/apis-docs/jeeyoun-kang/BEMO_API/1.0.0)
 
 
 
