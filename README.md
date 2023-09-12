@@ -224,13 +224,14 @@
 - master 브랜치에 push가 발생하면 , Github actions가 실행되고 생성한 workflow 설정 파일에 따라 프로젝트 파일을 압축해 빌드 후 빌드 결과물을 S3에 업로드
   - gradle.yml 파일을 통해 빌드 후 zip 파일로 압축, 빌드결과물 S3에 업로드해 실행하고, CodeDeploy와 연결해 자동배포 설정
 - S3 버킷에 있는 파일을 대상으로 CodeDeploy에게 배포를 요청하고  S3로부터 zip파일을 받아 압축 해제 후 설정 스크립트에 따라 EC2에 배포를 진행
-  - CodeDeploy는 appspec.yml와 deploy.sh에 의해 Flow가 작동해 스크립트들(stop.sh,start.sh,health.sh)이 실행하고, 배포를 진행
+  - CodeDeploy는 appspec.yml와 deploy.sh에 의해 Flow가 작동해 스크립트들이 실행되고, 배포를 진행
 
 ### 무중단 배포
 
 Nginx를 이용해서 EC2 내부에 포드를 2개(8081,8082)로 나눠서 무중단 배포를 진행
 
-- appsepec.yml로 인해 설정 스크립트가 실행되고, switch.sh에 의해서 배포 업데이트 시 Nginx가 Reload 되고 포드가 바뀌게 설정
+- appsepec.yml로 인해 무중단 배포 설정 스크립트가 실행되고, switch.sh에 의해서 배포 업데이트 시 Nginx가 Reload 되고 포드가 바뀌게 설정
+- [스크립트 파일](https://github.com/jeeyoun-kang/BEMO/tree/master/scripts)
 
 
 ### 도메인 적용
