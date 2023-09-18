@@ -53,6 +53,7 @@
 
 
 
+
 ## 소개
 
 **BEMO**는 JAVA, Spring boot를 기반으로 만든 영화 추천 및 리뷰 웹 서비스입니다. <br>
@@ -127,7 +128,7 @@
 
 ## 시퀀스 다이어그램
 
-| ![bemo_login_diagram](https://github.com/jeeyoun-kang/BEMO/assets/59076085/b2d4e8e5-2869-4b33-b37f-4c7f8ffd4664) | ![bemo_crud_diagram](https://github.com/jeeyoun-kang/BEMO/assets/59076085/eacb14e8-4662-4da4-a871-c86c121f78ed) |
+| [![bemo_login_diagram](https://github.com/jeeyoun-kang/BEMO/assets/59076085/b2d4e8e5-2869-4b33-b37f-4c7f8ffd4664)](https://github.com/jeeyoun-kang/BEMO/assets/59076085/b2d4e8e5-2869-4b33-b37f-4c7f8ffd4664) | [![bemo_crud_diagram](https://github.com/jeeyoun-kang/BEMO/assets/59076085/eacb14e8-4662-4da4-a871-c86c121f78ed)](https://github.com/jeeyoun-kang/BEMO/assets/59076085/eacb14e8-4662-4da4-a871-c86c121f78ed) |
 | :----------------------------------------------------------: | :----------------------------------------------------------: |
 |                            로그인                            |                            게시글                            |
 
