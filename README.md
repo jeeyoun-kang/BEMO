@@ -17,6 +17,7 @@
  - [개발 환경](#개발-환경)
  - [사용 기술](#사용-기술)
  - [시스템 아키텍처](#시스템-아키텍처) 
+ - [시퀀스 다이어그램](#시퀀스-다이어그램)
  - [E-R 다이어그램](#e-r-다이어그램)
  - [프로젝트 목적](#프로젝트-목적)
  - [화면 구성](#화면-구성)
@@ -47,6 +48,7 @@
     <td align="center"><b>Web Developer</b></td>
     <td align="center"><b>Web Developer</b></td>
 </table>
+
 
 
 
@@ -122,6 +124,14 @@
 ## 시스템 아키텍처
 
 ![bemo_architecture](https://github.com/jeeyoun-kang/BEMO/assets/59076085/b48c6086-d523-49d2-ae74-4b06caf687cc)
+
+## 시퀀스 다이어그램
+
+| ![bemo_login_diagram](https://github.com/jeeyoun-kang/BEMO/assets/59076085/b2d4e8e5-2869-4b33-b37f-4c7f8ffd4664) | ![bemo_crud_diagram](https://github.com/jeeyoun-kang/BEMO/assets/59076085/eacb14e8-4662-4da4-a871-c86c121f78ed) |
+| :----------------------------------------------------------: | :----------------------------------------------------------: |
+|                            로그인                            |                            게시글                            |
+
+
 
 
 
